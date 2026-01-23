@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Browse Pets - Pet Adoption Portal</title>
+  <meta name="description" content="Browse pets available for adoption. Filter by species and location, search by name or breed, and apply online." />
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Nunito:wght@700;800;900;1000&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="siteHeader"></div>
+
+  <main class="main">
+    <div class="container">
+      <section class="section">
+        <div class="section-header">
+          <h1 class="section-title">Browse Pets</h1>
+          <p class="section-subtitle">Filter and search verified adoption profiles. Total available: <strong id="petCount">0</strong></p>
+        </div>
+
+        <div class="card card-pad">
+          <div class="grid grid-3" style="align-items:end;">
+            <div class="field">
+              <label for="filterSpecies">Species</label>
+              <select id="filterSpecies">
+                <option value="all">All</option>
+                <option value="Dog">Dog</option>
+                <option value="Cat">Cat</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="filterLocation">Location</label>
+              <select id="filterLocation">
+                <option value="all">All</option>
+                <option value="Riverdale">Riverdale</option>
+                <option value="Laketown">Laketown</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="filterSearch">Search</label>
+              <input id="filterSearch" type="text" placeholder="Search by name, breed, or city" />
+            </div>
+          </div>
+
+          <p class="helper" style="margin-top:10px;">Tip: Click <strong>Details</strong> to see full temperament notes and care information before applying.</p>
+        </div>
+
+        <div style="height:16px;"></div>
+
+        <div class="pet-grid" id="petGrid" aria-label="Pet listing"></div>
+      </section>
+
+      <section class="section">
+        <div class="section-header">
+          <h2 class="section-title">Adoption Safety Notes</h2>
+          <p class="section-subtitle">For your safety and the pet’s wellbeing, follow these guidelines.</p>
+        </div>
+
+        <div class="grid grid-3">
+          <div class="card card-pad">
+            <span class="badge"><i class="fa-solid fa-id-card"></i> Verify identity</span>
+            <p style="margin:10px 0 0;color:var(--muted);font-weight:750;">Meet only at verified shelters. Avoid third-party handoffs and suspicious payment requests.</p>
+          </div>
+          <div class="card card-pad">
+            <span class="badge"><i class="fa-solid fa-house"></i> Home check</span>
+            <p style="margin:10px 0 0;color:var(--muted);font-weight:750;">Ensure your home environment and housing rules are compatible with the pet before applying.</p>
+          </div>
+          <div class="card card-pad">
+            <span class="badge"><i class="fa-solid fa-stethoscope"></i> Ongoing care</span>
+            <p style="margin:10px 0 0;color:var(--muted);font-weight:750;">Budget for vet visits, nutrition, grooming, training, and emergency medical needs.</p>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <div id="siteFooter"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>

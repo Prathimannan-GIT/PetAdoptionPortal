@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shelter Dashboard - Pet Adoption Portal</title>
+  <meta name="description" content="Shelter management panel to add/edit/remove pets and approve or reject adoption applications." />
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Nunito:wght@700;800;900;1000&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="siteHeader"></div>
+
+  <main class="main">
+    <div class="container">
+      <section class="section">
+        <div class="section-header">
+          <h1 class="section-title">Shelter Dashboard</h1>
+          <p class="section-subtitle">Manage animals, upload image URLs, and handle adoption applications responsibly.</p>
+        </div>
+
+        <div id="shelterRoot" aria-label="Shelter dashboard content"></div>
+
+        <div style="height:16px;"></div>
+
+        <div class="card card-pad">
+          <span class="badge"><i class="fa-solid fa-shield-heart"></i> Shelter responsibility</span>
+          <p style="margin:10px 0 0;color:var(--muted);font-weight:750;">Only publish accurate profiles and verify adopters. Approving an application will mark the pet as adopted and remove it from public listings.</p>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <div id="siteFooter"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>

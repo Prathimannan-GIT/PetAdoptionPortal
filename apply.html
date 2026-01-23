@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Adoption Application - Pet Adoption Portal</title>
+  <meta name="description" content="Submit a pet adoption application with clear validation and user-friendly error messages." />
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Nunito:wght@700;800;900;1000&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="siteHeader"></div>
+
+  <main class="main">
+    <div class="container">
+      <section class="section">
+        <div class="section-header">
+          <h1 class="section-title">Adoption Application</h1>
+          <p class="section-subtitle">Applying for: <strong id="applyPetName">Selected Pet</strong> • Please fill every required field.</p>
+        </div>
+
+        <div class="grid grid-2">
+          <div class="card card-pad">
+            <span class="badge"><i class="fa-solid fa-file-signature"></i> Application Form</span>
+            <h2 style="margin:10px 0 6px;font-family:var(--font-display);font-weight:1000;">Tell us about your home</h2>
+            <p style="margin:0;color:var(--muted);font-weight:750;">The shelter uses this information to ensure safety and long-term fit.</p>
+
+            <div style="height:14px;"></div>
+
+            <form class="form" id="applyForm" novalidate>
+              <div class="grid grid-2">
+                <div class="field">
+                  <label for="fullName">Full Name *</label>
+                  <input id="fullName" name="fullName" required placeholder="Your full name" />
+                </div>
+                <div class="field">
+                  <label for="email">Email *</label>
+                  <input id="email" name="email" type="email" required placeholder="you@example.com" />
+                </div>
+              </div>
+
+              <div class="grid grid-2">
+                <div class="field">
+                  <label for="phone">Phone *</label>
+                  <input id="phone" name="phone" required placeholder="+1 (555) 000-0000" />
+                </div>
+                <div class="field">
+                  <label for="city">City *</label>
+                  <input id="city" name="city" required placeholder="Your city" />
+                </div>
+              </div>
+
+              <div class="field">
+                <label for="address">Address *</label>
+                <input id="address" name="address" required placeholder="Street, area, and zip" />
+              </div>
+
+              <div class="grid grid-2">
+                <div class="field">
+                  <label for="housing">Housing Type *</label>
+                  <select id="housing" name="housing" required>
+                    <option value="">Select</option>
+                    <option>Apartment</option>
+                    <option>Independent House</option>
+                    <option>Farm / Large Property</option>
+                    <option>Shared Housing</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label for="experience">Pet Experience *</label>
+                  <select id="experience" name="experience" required>
+                    <option value="">Select</option>
+                    <option>First-time adopter</option>
+                    <option>Some experience</option>
+                    <option>Experienced caretaker</option>
+                    <option>Rescue / foster background</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="field">
+                <label for="message">Why do you want to adopt? *</label>
+                <textarea id="message" name="message" required placeholder="Share your routine, commitment level, and how you'll care for the pet."></textarea>
+                <p class="helper">Your message should be honest, detailed, and respectful.</p>
+              </div>
+
+              <div class="card" style="padding:14px;border-radius:16px;box-shadow:none;">
+                <span class="badge"><i class="fa-solid fa-triangle-exclamation"></i> Responsibility disclaimer</span>
+                <p style="margin:10px 0 0;color:var(--muted);font-weight:750;">By applying, you confirm you can provide safe shelter, nutrition, healthcare, and long-term care. The shelter may request a meet-and-greet and additional checks.</p>
+              </div>
+
+              <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end;">
+                <a class="btn btn-secondary" href="adopt.html"><i class="fa-solid fa-arrow-left"></i> Back</a>
+                <button class="btn btn-primary" type="submit"><i class="fa-solid fa-paper-plane"></i> Submit Application</button>
+              </div>
+            </form>
+          </div>
+
+          <div class="card card-pad">
+            <span class="badge"><i class="fa-solid fa-shield-heart"></i> Trust & Safety</span>
+            <h2 style="margin:10px 0 6px;font-family:var(--font-display);font-weight:1000;">What happens next?</h2>
+            <p style="margin:0;color:var(--muted);font-weight:750;">After submission, the shelter reviews your details. You can track the status on your dashboard.</p>
+
+            <div style="height:12px;"></div>
+
+            <div class="grid" style="gap:12px;">
+              <div class="card" style="padding:14px;border-radius:16px;box-shadow:none;">
+                <strong><i class="fa-solid fa-clock"></i> Review timeline</strong>
+                <p style="margin:6px 0 0;color:var(--muted);font-weight:750;">Most shelters respond within 24–72 hours depending on volume.</p>
+              </div>
+              <div class="card" style="padding:14px;border-radius:16px;box-shadow:none;">
+                <strong><i class="fa-solid fa-user-check"></i> Meet & verification</strong>
+                <p style="margin:6px 0 0;color:var(--muted);font-weight:750;">If approved, you’ll be invited for a meet-and-greet. Bring ID and follow shelter rules.</p>
+              </div>
+              <div class="card" style="padding:14px;border-radius:16px;box-shadow:none;">
+                <strong><i class="fa-solid fa-heart"></i> Post-adoption support</strong>
+                <p style="margin:6px 0 0;color:var(--muted);font-weight:750;">Many shelters offer transition support and care tips. Ask questions early.</p>
+              </div>
+            </div>
+
+            <div style="margin-top:14px;display:flex;gap:12px;flex-wrap:wrap;">
+              <a class="btn btn-secondary" href="privacy.html"><i class="fa-solid fa-lock"></i> Data Use</a>
+              <a class="btn btn-secondary" href="terms.html"><i class="fa-solid fa-file-lines"></i> Terms</a>
+              <a class="btn btn-primary" href="dashboard.html"><i class="fa-solid fa-gauge"></i> Dashboard</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <div id="siteFooter"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>

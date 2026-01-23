@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Panel - Pet Adoption Portal</title>
+  <meta name="description" content="Admin control panel to approve shelters, manage users, and monitor adoptions. Frontend simulation using localStorage." />
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Nunito:wght@700;800;900;1000&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="siteHeader"></div>
+
+  <main class="main">
+    <div class="container">
+      <section class="section">
+        <div class="section-header">
+          <h1 class="section-title">Admin Panel</h1>
+          <p class="section-subtitle">Approve shelters, block misuse, and monitor application flow. Stored locally for demo.</p>
+        </div>
+
+        <div id="adminRoot" aria-label="Admin panel content"></div>
+
+        <div style="height:16px;"></div>
+
+        <div class="card card-pad">
+          <span class="badge"><i class="fa-solid fa-circle-info"></i> Demo admin</span>
+          <p style="margin:10px 0 0;color:var(--muted);font-weight:750;">Use the demo admin credentials from the login page to access this panel. Real systems use server-side authorization and audit logs.</p>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <div id="siteFooter"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>

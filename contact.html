@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact - Pet Adoption Portal</title>
+  <meta name="description" content="Contact Pet Adoption Portal support and connect via social media. Includes form validation and safety reporting." />
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Nunito:wght@700;800;900;1000&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="siteHeader"></div>
+
+  <main class="main">
+    <div class="container">
+      <section class="section">
+        <div class="section-header">
+          <h1 class="section-title">Contact & Support</h1>
+          <p class="section-subtitle">Need help with an application, shelter approval, or reporting misuse? Reach out here.</p>
+        </div>
+
+        <div class="grid grid-2">
+          <div class="card card-pad">
+            <span class="badge"><i class="fa-solid fa-envelope"></i> Message Support</span>
+            <h2 style="margin:10px 0 6px;font-family:var(--font-display);font-weight:1000;">Send a message</h2>
+            <p style="margin:0;color:var(--muted);font-weight:750;">Clear details help us respond faster. Required fields prevent empty submissions.</p>
+
+            <div style="height:14px;"></div>
+
+            <form class="form" id="contactForm" novalidate>
+              <div class="grid grid-2">
+                <div class="field">
+                  <label for="contactName">Name *</label>
+                  <input id="contactName" name="name" required placeholder="Your name" />
+                </div>
+                <div class="field">
+                  <label for="contactEmail">Email *</label>
+                  <input id="contactEmail" name="email" type="email" required placeholder="you@example.com" />
+                </div>
+              </div>
+
+              <div class="grid grid-2">
+                <div class="field">
+                  <label for="contactTopic">Topic *</label>
+                  <select id="contactTopic" name="topic" required>
+                    <option value="">Select</option>
+                    <option>Adoption application</option>
+                    <option>Shelter approval</option>
+                    <option>Pet listing issue</option>
+                    <option>Report misuse</option>
+                    <option>Other</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label for="contactPhone">Phone</label>
+                  <input id="contactPhone" name="phone" placeholder="Optional" />
+                </div>
+              </div>
+
+              <div class="field">
+                <label for="contactMessage">Message *</label>
+                <textarea id="contactMessage" name="message" required placeholder="Explain the issue with relevant details."></textarea>
+              </div>
+
+              <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end;">
+                <a class="btn btn-secondary" href="adopt.html"><i class="fa-solid fa-paw"></i> Browse Pets</a>
+                <button class="btn btn-primary" type="submit"><i class="fa-solid fa-paper-plane"></i> Send</button>
+              </div>
+            </form>
+          </div>
+
+          <div class="card card-pad">
+            <span class="badge"><i class="fa-solid fa-phone"></i> Direct Contact</span>
+            <h2 style="margin:10px 0 6px;font-family:var(--font-display);font-weight:1000;">Support channels</h2>
+            <p style="margin:0;color:var(--muted);font-weight:750;">For urgent shelter verification or misuse reports, contact us directly.</p>
+
+            <div style="height:14px;"></div>
+
+            <div class="grid" style="gap:12px;">
+              <div class="card" style="padding:14px;border-radius:16px;box-shadow:none;">
+                <strong><i class="fa-solid fa-envelope"></i> Email</strong>
+                <p style="margin:6px 0 0;color:var(--muted);font-weight:750;">support@petportal.org</p>
+              </div>
+              <div class="card" style="padding:14px;border-radius:16px;box-shadow:none;">
+                <strong><i class="fa-solid fa-phone"></i> Phone</strong>
+                <p style="margin:6px 0 0;color:var(--muted);font-weight:750;">+1 (555) 901-2277</p>
+              </div>
+              <div class="card" style="padding:14px;border-radius:16px;box-shadow:none;">
+                <strong><i class="fa-solid fa-clock"></i> Hours</strong>
+                <p style="margin:6px 0 0;color:var(--muted);font-weight:750;">Mon–Sat: 9 AM – 7 PM</p>
+              </div>
+            </div>
+
+            <div style="height:14px;"></div>
+
+            <div class="card" style="padding:14px;border-radius:16px;box-shadow:none;">
+              <span class="badge"><i class="fa-solid fa-shield"></i> Safety reminder</span>
+              <p style="margin:10px 0 0;color:var(--muted);font-weight:750;">Never share OTPs, passwords, or payment details. Meet pets only at verified shelters.</p>
+            </div>
+
+            <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap;">
+              <a class="btn btn-secondary" href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i> Instagram</a>
+              <a class="btn btn-secondary" href="#" aria-label="Facebook"><i class="fa-brands fa-facebook"></i> Facebook</a>
+              <a class="btn btn-secondary" href="#" aria-label="Twitter"><i class="fa-brands fa-x-twitter"></i> Twitter</a>
+              <a class="btn btn-secondary" href="#" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <div id="siteFooter"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login - Pet Adoption Portal</title>
+  <meta name="description" content="Secure login for users, shelters, and admins. Role-based dashboard simulation using JavaScript." />
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Nunito:wght@700;800;900;1000&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="siteHeader"></div>
+
+  <main class="main">
+    <div class="container">
+      <section class="section">
+        <div class="section-header">
+          <h1 class="section-title">Login</h1>
+          <p class="section-subtitle">Access your role-based dashboard (User / Shelter / Admin). No backend — simulated securely via localStorage.</p>
+        </div>
+
+        <div class="grid grid-2">
+          <div class="card card-pad">
+            <span class="badge"><i class="fa-solid fa-right-to-bracket"></i> Sign in</span>
+            <h2 style="margin:10px 0 6px;font-family:var(--font-display);font-weight:1000;">Welcome back</h2>
+            <p style="margin:0;color:var(--muted);font-weight:750;">Enter your email and password. Password rules apply for registered accounts.</p>
+
+            <div style="height:14px;"></div>
+
+            <form class="form" id="loginForm" novalidate>
+              <div class="field">
+                <label for="loginEmail">Email *</label>
+                <input id="loginEmail" name="email" type="email" required placeholder="you@example.com" />
+              </div>
+
+              <div class="field">
+                <label for="loginPassword">Password *</label>
+                <input id="loginPassword" name="password" type="password" required placeholder="Your password" />
+                <p class="helper">Password must match your registration. Demo passwords are provided for testing.</p>
+              </div>
+
+              <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end;">
+                <a class="btn btn-secondary" href="register.html"><i class="fa-solid fa-user-plus"></i> Register</a>
+                <button class="btn btn-primary" type="submit"><i class="fa-solid fa-lock"></i> Login</button>
+              </div>
+            </form>
+          </div>
+
+          <div class="card card-pad">
+            <span class="badge"><i class="fa-solid fa-flask"></i> Demo access</span>
+            <h2 style="margin:10px 0 6px;font-family:var(--font-display);font-weight:1000;">Use demo credentials</h2>
+            <p style="margin:0;color:var(--muted);font-weight:750;">Click a demo button to view ready-made credentials.</p>
+
+            <div style="height:14px;"></div>
+
+            <div class="grid" style="gap:12px;">
+              <button class="btn btn-secondary" type="button" id="demoUser"><i class="fa-solid fa-user"></i> Demo User</button>
+              <button class="btn btn-secondary" type="button" id="demoShelter"><i class="fa-solid fa-building"></i> Demo Shelter</button>
+              <button class="btn btn-secondary" type="button" id="demoAdmin"><i class="fa-solid fa-shield"></i> Demo Admin</button>
+            </div>
+
+            <div style="height:16px;"></div>
+
+            <div class="card" style="padding:14px;border-radius:16px;box-shadow:none;">
+              <span class="badge"><i class="fa-solid fa-shield-heart"></i> Safety note</span>
+              <p style="margin:10px 0 0;color:var(--muted);font-weight:750;">This is a frontend-only simulation. In a real production platform, passwords are hashed and sessions are server-managed.</p>
+            </div>
+
+            <div style="margin-top:14px;display:flex;gap:12px;flex-wrap:wrap;">
+              <a class="btn btn-primary" href="adopt.html"><i class="fa-solid fa-paw"></i> Browse Pets</a>
+              <a class="btn btn-secondary" href="contact.html"><i class="fa-solid fa-headset"></i> Support</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <div id="siteFooter"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>

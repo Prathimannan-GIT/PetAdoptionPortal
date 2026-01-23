@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pet Adoption Portal - Find Your New Best Friend</title>
+  <meta name="description" content="A trustworthy, modern pet adoption portal connecting families with verified shelters. Browse pets, apply online, and track adoption status." />
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Nunito:wght@700;800;900;1000&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="siteHeader"></div>
+
+  <main class="main">
+    <div class="container">
+      <section class="hero" aria-label="Hero">
+        <div class="hero-inner">
+          <div>
+            <span class="badge"><i class="fa-solid fa-shield-heart"></i> Verified shelters • Responsible adoption</span>
+            <h1>Adopt with confidence. <br />Give a pet a safe home.</h1>
+            <p>Browse verified pet profiles, submit adoption applications with clear guidelines, and track your status in one place.</p>
+            <div class="hero-actions">
+              <a class="btn btn-primary" href="adopt.html"><i class="fa-solid fa-paw"></i> Browse Pets</a>
+              <a class="btn btn-secondary" href="register.html"><i class="fa-solid fa-user-plus"></i> Create Account</a>
+              <a class="btn btn-secondary" href="about.html"><i class="fa-solid fa-heart"></i> Our Mission</a>
+            </div>
+          </div>
+          <div class="hero-stats" id="heroStats" aria-label="Platform stats"></div>
+        </div>
+      </section>
+
+      <section class="section" aria-label="Adoption highlights">
+        <div class="section-header">
+          <h2 class="section-title">How Adoption Works</h2>
+          <p class="section-subtitle">A simple, transparent flow that protects animals and adopters.</p>
+        </div>
+
+        <div class="grid grid-3">
+          <div class="card card-pad">
+            <span class="badge"><i class="fa-solid fa-magnifying-glass"></i> Step 1</span>
+            <h3 style="margin:10px 0 6px;font-family:var(--font-display);font-weight:1000;">Browse verified pets</h3>
+            <p style="margin:0;color:var(--muted);font-weight:750;">Use filters for location, species, and search. Every profile includes temperament notes and care details.</p>
+          </div>
+          <div class="card card-pad">
+            <span class="badge"><i class="fa-solid fa-file-signature"></i> Step 2</span>
+            <h3 style="margin:10px 0 6px;font-family:var(--font-display);font-weight:1000;">Apply online</h3>
+            <p style="margin:0;color:var(--muted);font-weight:750;">Submit your application with required fields and a short message. No empty submissions allowed.</p>
+          </div>
+          <div class="card card-pad">
+            <span class="badge"><i class="fa-solid fa-hand-holding-heart"></i> Step 3</span>
+            <h3 style="margin:10px 0 6px;font-family:var(--font-display);font-weight:1000;">Shelter review & meet</h3>
+            <p style="margin:0;color:var(--muted);font-weight:750;">Shelters approve or reject based on safety and fit. Meet the pet in-person before final placement.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" aria-label="Featured pets">
+        <div class="section-header">
+          <h2 class="section-title">Featured Pets</h2>
+          <p class="section-subtitle">These profiles are available right now. Click details to learn more.</p>
+        </div>
+        <div class="pet-grid" id="featuredPets"></div>
+        <div style="margin-top:16px;display:flex;justify-content:center;">
+          <a class="btn btn-primary" href="adopt.html"><i class="fa-solid fa-paw"></i> View All Pets</a>
+        </div>
+      </section>
+
+      <section class="section" aria-label="Success stories">
+        <div class="section-header">
+          <h2 class="section-title">Success Stories</h2>
+          <p class="section-subtitle">A few words from adopters and shelter teams using the portal.</p>
+        </div>
+
+        <div class="grid grid-3" id="successStories">
+          <div class="card card-pad">
+            <span class="badge"><i class="fa-solid fa-heart"></i> Adoption</span>
+            <h3 style="margin:10px 0 6px;font-family:var(--font-display);font-weight:1000;">Smooth & trustworthy</h3>
+            <p style="margin:0;color:var(--muted);font-weight:750;">“The application was clear and the shelter followed up quickly. We felt supported the whole time.”</p>
+            <p style="margin:12px 0 0;font-weight:900;">— Neha & Family</p>
+          </div>
+          <div class="card card-pad">
+            <span class="badge"><i class="fa-solid fa-shield-heart"></i> Shelter</span>
+            <h3 style="margin:10px 0 6px;font-family:var(--font-display);font-weight:1000;">Better screening</h3>
+            <p style="margin:0;color:var(--muted);font-weight:750;">“Applicant details are complete. We can keep decisions consistent and documented.”</p>
+            <p style="margin:12px 0 0;font-weight:900;">— Green Paws Rescue</p>
+          </div>
+          <div class="card card-pad">
+            <span class="badge"><i class="fa-solid fa-hand-holding-heart"></i> Community</span>
+            <h3 style="margin:10px 0 6px;font-family:var(--font-display);font-weight:1000;">Responsible adoption</h3>
+            <p style="margin:0;color:var(--muted);font-weight:750;">“The responsibility disclaimer sets expectations early. That improves outcomes for pets.”</p>
+            <p style="margin:12px 0 0;font-weight:900;">— Volunteer Coordinator</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" aria-label="Call to action">
+        <div class="card card-pad" style="text-align:center;">
+          <span class="badge"><i class="fa-solid fa-paw"></i> Ready to adopt?</span>
+          <h2 style="margin:10px 0 6px;font-family:var(--font-display);font-weight:1000;">Start with a profile that matches your home</h2>
+          <p style="margin:0;color:var(--muted);font-weight:750;">Use the filters, read the care notes, then submit an application when you’re confident you can commit.</p>
+          <div style="margin-top:14px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+            <a class="btn btn-primary" href="adopt.html"><i class="fa-solid fa-magnifying-glass"></i> Browse Pets</a>
+            <a class="btn btn-secondary" href="login.html"><i class="fa-solid fa-right-to-bracket"></i> Login</a>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <div id="siteFooter"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>

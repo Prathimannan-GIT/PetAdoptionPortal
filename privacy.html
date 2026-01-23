@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Privacy Policy - Pet Adoption Portal</title>
+  <meta name="description" content="Privacy policy explaining how Pet Adoption Portal uses data for adoption processing and safety." />
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Nunito:wght@700;800;900;1000&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="siteHeader"></div>
+
+  <main class="main">
+    <div class="container">
+      <section class="section">
+        <div class="section-header">
+          <h1 class="section-title">Privacy Policy</h1>
+          <p class="section-subtitle">How we collect, use, and protect information on the Pet Adoption Portal (frontend simulation).</p>
+        </div>
+
+        <div class="card card-pad">
+          <span class="badge"><i class="fa-solid fa-lock"></i> Data usage</span>
+          <p style="margin:10px 0 0;color:var(--muted);font-weight:750;">This project is a frontend-only demo. Data is stored locally in your browser via <strong>localStorage</strong> to simulate accounts, pets, and applications. In a real production deployment, all sensitive data would be processed securely on a server.</p>
+        </div>
+
+        <div style="height:16px;"></div>
+
+        <div class="grid grid-2">
+          <div class="card card-pad">
+            <h2 style="margin:0 0 8px;font-family:var(--font-display);font-weight:1000;">Information we collect</h2>
+            <ul class="footer-list" style="color:var(--muted);">
+              <li><strong>Account details</strong>: name, email, phone, city (as provided during registration)</li>
+              <li><strong>Application details</strong>: housing type, experience, address, and a message to the shelter</li>
+              <li><strong>Shelter details</strong>: shelter name, city, contact information</li>
+              <li><strong>Pet profiles</strong>: pet details and image URLs submitted by shelters</li>
+            </ul>
+          </div>
+
+          <div class="card card-pad">
+            <h2 style="margin:0 0 8px;font-family:var(--font-display);font-weight:1000;">How we use information</h2>
+            <ul class="footer-list" style="color:var(--muted);">
+              <li><strong>Adoption processing</strong>: share application details with the relevant shelter</li>
+              <li><strong>Status updates</strong>: show pending/approved/rejected states</li>
+              <li><strong>Safety</strong>: enable shelter verification workflows (admin approval)</li>
+              <li><strong>Service improvements</strong>: improve clarity, UI and workflow (demo scope)</li>
+            </ul>
+          </div>
+        </div>
+
+        <div style="height:16px;"></div>
+
+        <div class="grid grid-2">
+          <div class="card card-pad">
+            <h2 style="margin:0 0 8px;font-family:var(--font-display);font-weight:1000;">Data retention</h2>
+            <p style="margin:0;color:var(--muted);font-weight:750;">In this demo, data persists in your browser until you clear site storage. If you want to reset the demo, clear browser storage for this folder origin.</p>
+          </div>
+          <div class="card card-pad">
+            <h2 style="margin:0 0 8px;font-family:var(--font-display);font-weight:1000;">Security measures</h2>
+            <p style="margin:0;color:var(--muted);font-weight:750;">This demo does not implement server security. For real systems we recommend encryption in transit, password hashing, role-based server authorization, audit logs, and rate limiting.</p>
+          </div>
+        </div>
+
+        <div style="height:16px;"></div>
+
+        <div class="card card-pad">
+          <span class="badge"><i class="fa-solid fa-scale-balanced"></i> Your rights</span>
+          <p style="margin:10px 0 0;color:var(--muted);font-weight:750;">You can review the information you submit through forms and delete it by clearing localStorage data in your browser. For questions, use our <a href="contact.html" style="text-decoration:underline;">Contact</a> page.</p>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <div id="siteFooter"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>

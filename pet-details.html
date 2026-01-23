@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pet Details - Pet Adoption Portal</title>
+  <meta name="description" content="Detailed pet profile including story, traits, compatibility, and adoption action links." />
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Nunito:wght@700;800;900;1000&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="siteHeader"></div>
+
+  <main class="main">
+    <div class="container">
+      <section class="section">
+        <div class="section-header">
+          <h1 class="section-title">Pet Profile</h1>
+          <p class="section-subtitle">Read details carefully. Meet the pet at the shelter before final adoption approval.</p>
+        </div>
+
+        <div id="petDetails" aria-label="Pet details"></div>
+      </section>
+
+      <section class="section">
+        <div class="card card-pad">
+          <span class="badge"><i class="fa-solid fa-circle-info"></i> Need help choosing?</span>
+          <h2 style="margin:10px 0 6px;font-family:var(--font-display);font-weight:1000;">Talk to shelter support</h2>
+          <p style="margin:0;color:var(--muted);font-weight:750;">If you’re unsure about compatibility, contact the shelter via our support channel for guidance.</p>
+          <div style="margin-top:14px;display:flex;gap:12px;flex-wrap:wrap;">
+            <a class="btn btn-primary" href="contact.html"><i class="fa-solid fa-headset"></i> Contact Support</a>
+            <a class="btn btn-secondary" href="adopt.html"><i class="fa-solid fa-paw"></i> Browse More Pets</a>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <div id="siteFooter"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
