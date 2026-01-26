@@ -516,28 +516,24 @@
             </nav>
 
             <div class="nav-actions">
-              <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme" type="button">
-                <i class="fa-solid fa-moon" id="themeIcon"></i>
-              </button>
               ${auth ? `
                 <span class="badge" title="Logged in">
                   <i class="fa-solid fa-user"></i>
                   ${escapeHtml(auth.name || 'Account')}
                   <span style="opacity:0.7">(${escapeHtml(auth.role)})</span>
                 </span>
-                <button class="btn btn-secondary" type="button" id="logoutBtn">
-                  <i class="fa-solid fa-right-from-bracket"></i> Logout
-                </button>
+                <a href="${ROUTES.dashboard}" class="btn btn-primary">Dashboard</a>
+                <button id="logoutBtn" class="btn btn-secondary">Logout</button>
               ` : `
-                <a class="btn btn-secondary" href="${ROUTES.login}">
+                <a href="${ROUTES.login}" class="btn btn-secondary">
                   <i class="fa-solid fa-right-to-bracket"></i> Login
                 </a>
-                <a class="btn btn-primary" href="${ROUTES.register}">
+                <a href="${ROUTES.register}" class="btn btn-primary">
                   <i class="fa-solid fa-user-plus"></i> Register
                 </a>
               `}
               <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme" type="button">
-                <i class="fa-solid fa-moon"></i>
+                <i class="fa-solid fa-moon" id="themeIcon"></i>
               </button>
               <button class="mobile-toggle" id="mobileToggle" aria-label="Open menu" type="button">
                 <span></span><span></span><span></span>
