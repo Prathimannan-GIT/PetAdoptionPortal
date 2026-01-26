@@ -1215,6 +1215,111 @@ tr:hover td { background: rgba(34, 197, 94, 0.06); }
     flex-wrap: wrap;
 }
 
+/* ULTRA AGGRESSIVE MOBILE FIXES - Must come first */
+@media screen and (max-width: 720px) {
+    html, body {
+        overflow-x: hidden !important;
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+    
+    /* Force everything to center */
+    * {
+        box-sizing: border-box !important;
+    }
+    
+    /* Override ALL text alignment */
+    body *, body *::before, body *::after {
+        text-align: center !important;
+    }
+    
+    /* Override ALL flex containers */
+    body [style*="flex"], body [class*="flex"], body [style*="display: flex"] {
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+        text-align: center !important;
+        width: 100% !important;
+    }
+    
+    /* Override ALL grid containers */
+    body [class*="grid"] {
+        grid-template-columns: 1fr !important;
+        text-align: center !important;
+        width: 100% !important;
+    }
+    
+    /* Force ALL containers to full width */
+    body .container, body .main, body .section, body .card, body .card-pad {
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 100% !important;
+        margin: 0 auto !important;
+        padding: 16px !important;
+        text-align: center !important;
+    }
+    
+    /* Force ALL headings to center */
+    body h1, body h2, body h3, body h4, body h5, body h6 {
+        text-align: center !important;
+        width: 100% !important;
+        margin: 16px 0 !important;
+        padding: 0 !important;
+    }
+    
+    /* Force ALL paragraphs to center */
+    body p {
+        text-align: center !important;
+        width: 100% !important;
+        margin: 8px 0 !important;
+        padding: 0 !important;
+    }
+    
+    /* Force ALL divs to center */
+    body div {
+        text-align: center !important;
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+    
+    /* Force ALL spans to center */
+    body span {
+        text-align: center !important;
+        display: block !important;
+        width: 100% !important;
+        margin: 4px 0 !important;
+    }
+    
+    /* Force ALL strong elements to center */
+    body strong {
+        text-align: center !important;
+        display: block !important;
+        width: 100% !important;
+        margin: 4px 0 !important;
+    }
+    
+    /* Override inline styles specifically */
+    body [style*="justify-content: space-between"] {
+        flex-direction: column !important;
+        justify-content: center !important;
+        align-items: center !important;
+        text-align: center !important;
+    }
+    
+    body [style*="display: flex"] {
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+        text-align: center !important;
+    }
+    
+    /* Hide horizontal overflow */
+    body * {
+        overflow-x: hidden !important;
+    }
+}
+
 /* Responsive */
 @media (max-width: 980px) {
     .grid-3 { grid-template-columns: 1fr; }
