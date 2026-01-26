@@ -514,7 +514,7 @@ img { max-width: 100%; display: block; }
 }
 
 .theme-toggle {
-    display: none;
+    display: none; /* Hidden by default, only show on mobile */
     width: 44px;
     height: 44px;
     background: var(--surface);
@@ -1224,18 +1224,91 @@ tr:hover td { background: rgba(34, 197, 94, 0.06); }
         padding: 0 !important;
     }
     
-    /* Force everything to center */
+    /* Fix header alignment */
+    body .site-header,
+    body .navbar {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        width: 100% !important;
+        padding: 10px 16px !important;
+    }
+    
+    /* Fix brand alignment */
+    body .brand {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: flex-start !important;
+        text-align: left !important;
+        gap: 8px !important;
+        flex: 1 !important;
+    }
+    
+    body .brand-badge {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        flex-shrink: 0 !important;
+    }
+    
+    body .brand span {
+        text-align: left !important;
+        display: block !important;
+        width: auto !important;
+        margin: 0 !important;
+    }
+    
+    /* Fix nav actions */
+    body .nav-actions {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: flex-end !important;
+        gap: 8px !important;
+        flex-shrink: 0 !important;
+    }
+    
+    /* Show mobile toggle and theme toggle */
+    body .mobile-toggle,
+    body .theme-toggle {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+    
+    /* Show mobile menu when open */
+    body .nav-links.open {
+        display: flex !important;
+        position: absolute !important;
+        top: 70px !important;
+        left: 16px !important;
+        right: 16px !important;
+        z-index: 1000 !important;
+        background: rgba(255, 255, 255, 0.95) !important;
+        border-radius: 12px !important;
+        padding: 16px !important;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1) !important;
+    }
+    
+    /* Don't override header alignment */
+    body .site-header *,
+    body .navbar * {
+        text-align: inherit !important;
+    }
+    
+    /* Force everything else to center */
     * {
         box-sizing: border-box !important;
     }
     
-    /* Override ALL text alignment */
-    body *, body *::before, body *::after {
+    /* Override ALL text alignment except header */
+    body .main *, body .section *, body .card * {
         text-align: center !important;
     }
     
-    /* Override ALL flex containers */
-    body [style*="flex"], body [class*="flex"], body [style*="display: flex"] {
+    /* Override ALL flex containers except header */
+    body .main [style*="flex"], 
+    body .section [style*="flex"], 
+    body .card [style*="flex"] {
         flex-direction: column !important;
         align-items: center !important;
         justify-content: center !important;
@@ -1276,15 +1349,15 @@ tr:hover td { background: rgba(34, 197, 94, 0.06); }
         padding: 0 !important;
     }
     
-    /* Force ALL divs to center */
-    body div {
+    /* Force ALL divs to center except header */
+    body .main div, body .section div, body .card div {
         text-align: center !important;
         width: 100% !important;
         max-width: 100% !important;
     }
     
     /* Force ALL spans to center */
-    body span {
+    body .main span, body .section span, body .card span {
         text-align: center !important;
         display: block !important;
         width: 100% !important;
@@ -1292,7 +1365,7 @@ tr:hover td { background: rgba(34, 197, 94, 0.06); }
     }
     
     /* Force ALL strong elements to center */
-    body strong {
+    body .main strong, body .section strong, body .card strong {
         text-align: center !important;
         display: block !important;
         width: 100% !important;
