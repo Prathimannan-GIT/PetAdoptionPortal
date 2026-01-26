@@ -6,6 +6,12 @@
   <title>Browse Pets - Pet Adoption Portal</title>
   <meta name="description" content="Browse pets available for adoption. Filter by species and location, search by name or breed, and apply online." />
 
+  <!-- Favicon for all devices -->
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+  <link rel="manifest" href="site.webmanifest" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Nunito:wght@700;800;900;1000&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
@@ -16,7 +22,7 @@
   <main class="main">
     <div class="container">
       <section class="section">
-        <div class="section-header">
+        <div class="section-header" style="text-align: center;">
           <h1 class="section-title">Browse Pets</h1>
           <p class="section-subtitle">Filter and search verified adoption profiles. Total available: <strong id="petCount">0</strong></p>
         </div>
@@ -56,12 +62,12 @@
       </section>
 
       <section class="section">
-        <div class="section-header">
+        <div class="section-header" style="text-align: center;">
           <h2 class="section-title">Adoption Safety Notes</h2>
-          <p class="section-subtitle">For your safety and the pet’s wellbeing, follow these guidelines.</p>
+          <p class="section-subtitle">For your safety and the pet's wellbeing, follow these guidelines.</p>
         </div>
 
-        <div class="grid grid-3">
+        <div class="grid grid-3" style="text-align: center;">
           <div class="card card-pad">
             <span class="badge"><i class="fa-solid fa-id-card"></i> Verify identity</span>
             <p style="margin:10px 0 0;color:var(--muted);font-weight:750;">Meet only at verified shelters. Avoid third-party handoffs and suspicious payment requests.</p>
@@ -73,6 +79,227 @@
           <div class="card card-pad">
             <span class="badge"><i class="fa-solid fa-stethoscope"></i> Ongoing care</span>
             <p style="margin:10px 0 0;color:var(--muted);font-weight:750;">Budget for vet visits, nutrition, grooming, training, and emergency medical needs.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 1: Adoption Guide -->
+      <section class="section">
+        <div class="section-header" style="text-align: center;">
+          <h2 class="section-title">Complete Adoption Guide</h2>
+          <p class="section-subtitle">Everything you need to know about adopting your perfect companion</p>
+        </div>
+
+        <div class="grid grid-3">
+          <div class="card card-pad" style="text-align: center;">
+            <div style="font-size: 2.5rem; color: var(--primary); margin-bottom: 12px;">
+              <i class="fa-solid fa-search"></i>
+            </div>
+            <h3 style="margin:10px 0 6px;font-family:var(--font-display);font-weight:1000;">Find Your Match</h3>
+            <p style="margin:0;color:var(--muted);font-weight:750;">Research breeds that match your lifestyle and living situation</p>
+            <div style="margin-top: 12px;">
+              <span class="badge" style="font-size: 0.75rem;">🏠 Space check</span>
+              <span class="badge" style="font-size: 0.75rem;">⏰ Time commitment</span>
+            </div>
+          </div>
+
+          <div class="card card-pad" style="text-align: center;">
+            <div style="font-size: 2.5rem; color: var(--primary); margin-bottom: 12px;">
+              <i class="fa-solid fa-filter"></i>
+            </div>
+            <h3 style="margin:10px 0 6px;font-family:var(--font-display);font-weight:1000;">Use Filters</h3>
+            <p style="margin:0;color:var(--muted);font-weight:750;">Narrow down options by species, age, location, and traits</p>
+            <div style="margin-top: 12px;">
+              <span class="badge" style="font-size: 0.75rem;">🐕 Species filter</span>
+              <span class="badge" style="font-size: 0.75rem;">📍 Location search</span>
+            </div>
+          </div>
+
+          <div class="card card-pad" style="text-align: center;">
+            <div style="font-size: 2.5rem; color: var(--primary); margin-bottom: 12px;">
+              <i class="fa-solid fa-heart"></i>
+            </div>
+            <h3 style="margin:10px 0 6px;font-family:var(--font-display);font-weight:1000;">Read Profiles</h3>
+            <p style="margin:0;color:var(--muted);font-weight:750;">Review temperament, health, and care requirements</p>
+            <div style="margin-top: 12px;">
+              <span class="badge" style="font-size: 0.75rem;">📋 Complete info</span>
+              <span class="badge" style="font-size: 0.75rem;">🏥 Health status</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 2: Adoption Process -->
+      <section class="section">
+        <div class="section-header" style="text-align: center;">
+          <h2 class="section-title">Step-by-Step Process</h2>
+          <p class="section-subtitle">From application to bringing your pet home</p>
+        </div>
+
+        <div class="card card-pad" style="background: linear-gradient(135deg, var(--primary-light), var(--secondary-light));">
+          <div style="text-align: center; margin-bottom: 20px;">
+            <div style="font-size: 3rem; color: var(--primary); margin-bottom: 12px;">
+              <i class="fa-solid fa-file-alt"></i>
+            </div>
+            <h3 style="margin:0;font-family:var(--font-display);font-weight:1000;">Simple 3-Step Process</h3>
+            <p style="margin:8px 0 0;color:var(--muted);font-weight:750;">Complete application → Meet your pet → Welcome home!</p>
+          </div>
+          
+          <div class="grid grid-3" style="text-align: center;">
+            <div>
+              <div style="font-size: 2rem; color: var(--secondary); margin-bottom: 8px;">
+                <i class="fa-solid fa-edit"></i>
+              </div>
+              <h4 style="margin:0;font-family:var(--font-display);font-weight:900;">Apply Online</h4>
+              <p style="margin:4px 0 0;color:var(--muted);font-weight:750; font-size: 0.85rem;">24-48 hour review</p>
+            </div>
+            <div>
+              <div style="font-size: 2rem; color: var(--secondary); margin-bottom: 8px;">
+                <i class="fa-solid fa-comments"></i>
+              </div>
+              <h4 style="margin:0;font-family:var(--font-display);font-weight:900;">Shelter Review</h4>
+              <p style="margin:4px 0 0;color:var(--muted);font-weight:750; font-size: 0.85rem;">Best match evaluation</p>
+            </div>
+            <div>
+              <div style="font-size: 2rem; color: var(--secondary); margin-bottom: 8px;">
+                <i class="fa-solid fa-home"></i>
+              </div>
+              <h4 style="margin:0;font-family:var(--font-display);font-weight:900;">Adopt & Welcome</h4>
+              <p style="margin:4px 0 0;color:var(--muted);font-weight:750; font-size: 0.85rem;">Start your new life!</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 3: Preparation Guide -->
+      <section class="section">
+        <div class="section-header" style="text-align: center;">
+          <h2 class="section-title">Preparation Guide</h2>
+          <p class="section-subtitle">Essential preparations for a successful transition</p>
+        </div>
+
+        <div class="grid grid-2">
+          <div class="card card-pad">
+            <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 16px;">
+              <div style="font-size: 2rem; color: var(--primary); background: var(--primary-light); width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                <i class="fa-solid fa-home"></i>
+              </div>
+              <div>
+                <h3 style="margin:0;font-family:var(--font-display);font-weight:1000;">Home Setup</h3>
+                <p style="margin:4px 0 0;color:var(--muted);font-weight:750; font-size: 0.9rem;">Create a safe, welcoming space</p>
+              </div>
+            </div>
+            <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+              <span class="badge" style="font-size: 0.75rem;">🔒 Pet-proof home</span>
+              <span class="badge" style="font-size: 0.75rem;">🛏️ Essential supplies</span>
+              <span class="badge" style="font-size: 0.75rem;">🏥 Vet ready</span>
+              <span class="badge" style="font-size: 0.75rem;">🛌️ Cozy spot</span>
+            </div>
+          </div>
+
+          <div class="card card-pad">
+            <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 16px;">
+              <div style="font-size: 2rem; color: var(--primary); background: var(--primary-light); width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                <i class="fa-solid fa-hospital"></i>
+              </div>
+              <div>
+                <h3 style="margin:0;font-family:var(--font-display);font-weight:1000;">Health Planning</h3>
+                <p style="margin:4px 0 0;color:var(--muted);font-weight:750; font-size: 0.9rem;">Establish veterinary care</p>
+              </div>
+            </div>
+            <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+              <span class="badge" style="font-size: 0.75rem;">📅 First week checkup</span>
+              <span class="badge" style="font-size: 0.75rem;">💊 Vaccination schedule</span>
+              <span class="badge" style="font-size: 0.75rem;">🛡️ Pet insurance</span>
+              <span class="badge" style="font-size: 0.75rem;">📋 Emergency contacts</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="card card-pad" style="margin-top: 16px; text-align: center; background: linear-gradient(135deg, #fff3cd, #ffeaa7);">
+          <div style="font-size: 2rem; margin-bottom: 12px;">💡</div>
+          <h3 style="margin:0;font-family:var(--font-display);font-weight:1000;">Pro Preparation Tip</h3>
+          <p style="margin:8px 0 0;color:var(--muted);font-weight:750;">Schedule time off work for the first week. This investment pays off with a smoother transition!</p>
+        </div>
+      </section>
+
+      <!-- Section 4: Post-Adoption Support -->
+      <section class="section">
+        <div class="section-header" style="text-align: center;">
+          <h2 class="section-title">Post-Adoption Support</h2>
+          <p class="section-subtitle">Resources and guidance for successful pet ownership</p>
+        </div>
+
+        <div class="grid grid-3">
+          <div class="card card-pad" style="text-align: center;">
+            <div style="font-size: 2.5rem; color: var(--primary); margin-bottom: 12px;">
+              <i class="fa-solid fa-graduation-cap"></i>
+            </div>
+            <h3 style="margin:10px 0 6px;font-family:var(--font-display);font-weight:1000;">Training Resources</h3>
+            <p style="margin:0;color:var(--muted);font-weight:750;">Videos, guides, and expert advice</p>
+            <div style="margin-top: 12px;">
+              <span class="badge" style="font-size: 0.75rem;">📚 Online courses</span>
+              <span class="badge" style="font-size: 0.75rem;">🎓 Local classes</span>
+            </div>
+          </div>
+
+          <div class="card card-pad" style="text-align: center;">
+            <div style="font-size: 2.5rem; color: var(--primary); margin-bottom: 12px;">
+              <i class="fa-solid fa-users"></i>
+            </div>
+            <h3 style="margin:10px 0 6px;font-family:var(--font-display);font-weight:1000;">Community Support</h3>
+            <p style="margin:0;color:var(--muted);font-weight:750;">Connect with other pet owners</p>
+            <div style="margin-top: 12px;">
+              <span class="badge" style="font-size: 0.75rem;">💬 Online forums</span>
+              <span class="badge" style="font-size: 0.75rem;">🤝 Mentorship program</span>
+            </div>
+          </div>
+
+          <div class="card card-pad" style="text-align: center;">
+            <div style="font-size: 2.5rem; color: var(--primary); margin-bottom: 12px;">
+              <i class="fa-solid fa-life-ring"></i>
+            </div>
+            <h3 style="margin:10px 0 6px;font-family:var(--font-display);font-weight:1000;">Ongoing Help</h3>
+            <p style="margin:0;color:var(--muted);font-weight:750;">24/7 support for challenges</p>
+            <div style="margin-top: 12px;">
+              <span class="badge" style="font-size: 0.75rem;">🆘 Expert advice</span>
+              <span class="badge" style="font-size: 0.75rem;">📞 Quick response</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 5: Success Stories -->
+      <section class="section">
+        <div class="section-header" style="text-align: center;">
+          <h2 class="section-title">Success Stories</h2>
+          <p class="section-subtitle">Real stories from families who found their perfect companions</p>
+        </div>
+
+        <div class="card card-pad" style="background: linear-gradient(135deg, var(--secondary-light), var(--primary-light));">
+          <div style="text-align: center; margin-bottom: 20px;">
+            <div style="font-size: 3rem; color: var(--primary); margin-bottom: 12px;">
+              <i class="fa-solid fa-star"></i>
+            </div>
+            <h3 style="margin:0;font-family:var(--font-display);font-weight:1000;">Life-Changing Adoptions</h3>
+            <p style="margin:8px 0 0;color:var(--muted);font-weight:750;">Every adoption creates ripples of joy and love</p>
+          </div>
+          
+          <div class="grid grid-2" style="text-align: center;">
+            <div>
+              <div style="font-size: 2rem; color: var(--secondary); margin-bottom: 8px;">
+                👨‍👩‍👧‍👦
+              </div>
+              <h4 style="margin:0;font-family:var(--font-display);font-weight:900;">Thompson Family</h4>
+              <p style="margin:4px 0 0;color:var(--muted);font-weight:750; font-size: 0.85rem;">Bonded senior cats brought family closer</p>
+            </div>
+            <div>
+              <div style="font-size: 2rem; color: var(--secondary); margin-bottom: 8px;">
+                👴
+              </div>
+              <h4 style="margin:0;font-family:var(--font-display);font-weight:900;">Robert & Max</h4>
+              <p style="margin:4px 0 0;color:var(--muted);font-weight:750; font-size: 0.85rem;">Retired teacher found new purpose</p>
+            </div>
           </div>
         </div>
       </section>

@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blog Details - Pet Adoption Portal</title>
+  <meta name="description" content="Read detailed articles about pet care, adoption stories, training tips, and rescue experiences." />
+
+  <!-- Favicon for all devices -->
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+  <link rel="manifest" href="site.webmanifest" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Nunito:wght@700;800;900;1000&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="siteHeader"></div>
+
+  <main class="main">
+    <div class="container">
+      <!-- Blog Article -->
+      <article class="blog-article" id="blogArticle">
+        <!-- Content will be dynamically loaded based on URL parameter -->
+      </article>
+
+      <!-- Related Posts -->
+      <section class="section" aria-label="Related posts">
+        <div class="section-header">
+          <h2 class="section-title">Related Articles</h2>
+          <p class="section-subtitle">More stories and tips you might enjoy</p>
+        </div>
+
+        <div class="related-posts" id="relatedPosts">
+          <!-- Related posts will be dynamically loaded -->
+        </div>
+      </section>
+
+      <!-- Comments Section -->
+      <section class="section" aria-label="Comments">
+        <div class="section-header">
+          <h2 class="section-title">Comments</h2>
+          <p class="section-subtitle">Share your thoughts and experiences</p>
+        </div>
+
+        <div class="comments-section">
+          <!-- Comment Form -->
+          <div class="comment-form">
+            <h3>Leave a Comment</h3>
+            <form id="commentForm">
+              <div class="form-grid">
+                <div class="field">
+                  <label for="commentName">Name</label>
+                  <input type="text" id="commentName" required />
+                </div>
+                <div class="field">
+                  <label for="commentEmail">Email</label>
+                  <input type="email" id="commentEmail" required />
+                </div>
+              </div>
+              <div class="field">
+                <label for="commentMessage">Comment</label>
+                <textarea id="commentMessage" rows="4" required></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary"><i class="fa-solid fa-paper-plane"></i> Post Comment</button>
+            </form>
+          </div>
+
+          <!-- Comments List -->
+          <div class="comments-list" id="commentsList">
+            <!-- Comments will be dynamically loaded -->
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <div id="siteFooter"></div>
+
+  <script src="script.js"></script>
+  <script>
+    // Blog details functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      // Sample blog posts data
+      const blogPosts = {
+        'max-journey': {
+          title: "From Shelter to Service: Max's Incredible Journey",
+          category: "adoption",
+          date: "March 15, 2026",
+          author: "Sarah Johnson",
+          authorRole: "Adoption Coordinator",
+          image: "placeholder-hero.svg",
+          content: `
+            <p>Max arrived at our shelter as a timid, frightened dog with uncertain prospects. Today, he's a certified service animal bringing independence and joy to his new family. This is the story of transformation, patience, and the incredible bond between humans and animals.</p>
+            
+            <h3>The Beginning</h3>
+            <p>When Max first came through our doors, he was a shadow of the dog he would become. Found abandoned on the streets, he was underweight, fearful of human touch, and showed signs of neglect. Our veterinary team worked tirelessly to address his health issues, while our behavior specialists began the slow process of building trust.</p>
+            
+            <blockquote>"Some animals need more time than others, but every pet deserves a chance to show who they can become with love and patience." - Dr. Emily Chen, Shelter Veterinarian</blockquote>
+            
+            <h3>The Turning Point</h3>
+            <p>The breakthrough came when Max met Lisa, a volunteer who worked specifically with fearful dogs. Through consistent, gentle interaction and positive reinforcement, Max began to emerge from his shell. The first time he wagged his tail, the entire shelter celebrated.</p>
+            
+            <h3>Service Training Discovery</h3>
+            <p>During his rehabilitation, Max showed remarkable intelligence and an intuitive ability to sense human emotions. Our training director recognized his potential and began service animal training. Max excelled, learning to respond to anxiety cues and provide comfort during stressful situations.</p>
+            
+            <h3>Forever Home</h3>
+            <p>Six months after his arrival, Max was matched with the Thompson family, whose daughter Emma lives with anxiety. The connection was immediate. Max now serves as Emma's emotional support animal, helping her navigate school and social situations with confidence.</p>
+            
+            <h3>The Impact</h3>
+            <p>Max's story exemplifies why we never give up on any animal. With patience, proper care, and understanding, even the most traumatized pets can become invaluable companions. Max not only found his forever home but now helps others heal and thrive.</p>
+          `
+        },
+        'essential-commands': {
+          title: "5 Essential Commands Every Dog Should Know",
+          category: "training",
+          date: "March 12, 2026",
+          author: "Michael Torres",
+          authorRole: "Animal Behaviorist",
+          image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRazh0eA4zBX1WnVqk_BOV5EuQRyYZjhOc1XQ&s",
+          content: `
+            <p>Training your dog isn't just about obedience—it's about building a strong bond and ensuring their safety. These five essential commands form the foundation for a well-behaved, confident companion.</p>
+            
+            <h3>1. "Sit" - The Foundation Command</h3>
+            <p>"Sit" is often the first command dogs learn, and for good reason. It's a natural position that serves as a building block for more complex commands. Use positive reinforcement with treats and praise, and practice in short, frequent sessions.</p>
+            
+            <h3>2. "Stay" - Safety First</h3>
+            <p>The "stay" command can literally save your dog's life. Start with short durations and gradually increase the time and distance. Always reward your dog for staying put, even if it's just for a few seconds initially.</p>
+            
+            <h3>3. "Come" - The Recall Command</h3>
+            <p>A reliable recall is crucial for off-leash safety. Make coming to you always a positive experience. Never call your dog to punish them—this will undermine the command's effectiveness.</p>
+            
+            <h3>4. "Leave It" - Impulse Control</h3>
+            <p>This command helps your dog ignore potentially dangerous items on walks or in the home. Practice with low-value items first, then gradually work up to more tempting objects.</p>
+            
+            <h3>5. "Heel" - Walking Etiquette</h3>
+            <p>Teaching your dog to walk nicely on a leash makes walks enjoyable for both of you. Start in a distraction-free environment and reward your dog for staying close to your side.</p>
+            
+            <h3>Training Tips</h3>
+            <ul>
+              <li>Keep sessions short (5-10 minutes)</li>
+              <li>Use high-value treats for motivation</li>
+              <li>Be consistent with commands and rewards</li>
+              <li>End sessions on a positive note</li>
+              <li>Practice in different environments</li>
+            </ul>
+          `
+        },
+        'cat-environment': {
+          title: "Creating the Perfect Indoor Environment for Cats",
+          category: "care",
+          date: "March 10, 2026",
+          author: "Dr. Emily Chen",
+          authorRole: "Veterinarian",
+          image: "placeholder-pet.svg",
+          content: `
+            <p>Cats are natural explorers and hunters, even when living indoors. Creating an environment that satisfies their instincts is key to a happy, healthy feline companion.</p>
+            
+            <h3>Vertical Space</h3>
+            <p>Cats feel safest when they can observe their territory from above. Install cat trees, shelves, or perches at various heights. This gives them vertical territory and helps reduce conflicts in multi-cat households.</p>
+            
+            <h3>Hiding Spots</h3>
+            <p>Provide cozy hiding places where your cat can retreat when feeling stressed. Cardboard boxes, cat caves, or even paper bags make excellent temporary hideaways.</p>
+            
+            <h3>Scratching Opportunities</h3>
+            <p>Scratching is natural and necessary for cats. Offer various scratching posts and pads in different locations and materials. Place them near furniture you want to protect.</p>
+            
+            <h3>Window Access</h3>
+            <p>Cats love watching birds and outdoor activity. Create comfortable perches near windows or install window shelves. Consider bird feeders outside for entertainment.</p>
+            
+            <h3>Interactive Play</h3>
+            <p>Schedule daily play sessions to satisfy hunting instincts. Use wand toys, laser pointers (safely), and puzzle feeders to keep your cat mentally stimulated.</p>
+          `
+        }
+      };
+
+      // Sample comments data
+      const comments = {
+        'max-journey': [
+          {
+            name: "Emily Rodriguez",
+            date: "March 16, 2026",
+            message: "This story brought tears to my eyes! Max's transformation is incredible. It's amazing what love and patience can accomplish."
+          },
+          {
+            name: "David Chen",
+            date: "March 16, 2026",
+            message: "As a service dog trainer, I can attest to the incredible bond between service animals and their handlers. Max's story is truly inspiring!"
+          }
+        ]
+      };
+
+      // Get post ID from URL
+      const urlParams = new URLSearchParams(window.location.search);
+      const postId = urlParams.get('id') || 'max-journey';
+      
+      const post = blogPosts[postId];
+      if (!post) {
+        document.getElementById('blogArticle').innerHTML = '<p>Article not found.</p>';
+        return;
+      }
+
+      // Render blog post
+      document.getElementById('blogArticle').innerHTML = `
+        <header class="article-header">
+          <div class="article-meta">
+            <span class="category ${post.category}">${getCategoryName(post.category)}</span>
+            <span class="date">${post.date}</span>
+          </div>
+          <h1>${post.title}</h1>
+          <div class="article-author">
+            <img src="placeholder-pet.svg" alt="${post.author}" />
+            <div>
+              <strong>${post.author}</strong>
+              <span>${post.authorRole}</span>
+            </div>
+          </div>
+        </header>
+        
+        <div class="article-image">
+          <img src="${post.image}" alt="${post.title}" />
+        </div>
+        
+        <div class="article-content">
+          ${post.content}
+        </div>
+        
+        <footer class="article-footer">
+          <div class="article-tags">
+            <span class="tag"><i class="fa-solid fa-tag"></i> ${getCategoryName(post.category)}</span>
+            <span class="tag"><i class="fa-solid fa-heart"></i> Adoption Success</span>
+            <span class="tag"><i class="fa-solid fa-paw"></i> Rescue Stories</span>
+          </div>
+          <div class="article-share">
+            <h4>Share this story:</h4>
+            <div class="share-buttons">
+              <a href="#" class="share-btn"><i class="fa-brands fa-facebook"></i></a>
+              <a href="#" class="share-btn"><i class="fa-brands fa-twitter"></i></a>
+              <a href="#" class="share-btn"><i class="fa-brands fa-instagram"></i></a>
+              <a href="#" class="share-btn"><i class="fa-solid fa-link"></i></a>
+            </div>
+          </div>
+        </footer>
+      `;
+
+      // Render related posts
+      const relatedPosts = Object.entries(blogPosts)
+        .filter(([id, p]) => id !== postId && p.category === post.category)
+        .slice(0, 3);
+
+      document.getElementById('relatedPosts').innerHTML = relatedPosts.map(([id, p]) => `
+        <article class="related-post">
+          <div class="related-image">
+            <img src="${p.image}" alt="${p.title}" />
+          </div>
+          <div class="related-content">
+            <h4><a href="blog-details.html?id=${id}">${p.title}</a></h4>
+            <p>${p.content.substring(0, 150)}...</p>
+            <a href="blog-details.html?id=${id}" class="read-more">Read More →</a>
+          </div>
+        </article>
+      `).join('');
+
+      // Render comments
+      const postComments = comments[postId] || [];
+      document.getElementById('commentsList').innerHTML = postComments.map(comment => `
+        <div class="comment">
+          <div class="comment-avatar">
+            <img src="placeholder-pet.svg" alt="${comment.name}" />
+          </div>
+          <div class="comment-content">
+            <div class="comment-header">
+              <strong>${comment.name}</strong>
+              <span class="comment-date">${comment.date}</span>
+            </div>
+            <p>${comment.message}</p>
+          </div>
+        </div>
+      `).join('');
+
+      // Comment form submission
+      document.getElementById('commentForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const name = document.getElementById('commentName').value;
+        const email = document.getElementById('commentEmail').value;
+        const message = document.getElementById('commentMessage').value;
+        
+        // Add new comment to the list
+        const newComment = document.createElement('div');
+        newComment.className = 'comment';
+        newComment.innerHTML = `
+          <div class="comment-avatar">
+            <img src="placeholder-pet.svg" alt="${name}" />
+          </div>
+          <div class="comment-content">
+            <div class="comment-header">
+              <strong>${name}</strong>
+              <span class="comment-date">Just now</span>
+            </div>
+            <p>${message}</p>
+          </div>
+        `;
+        
+        document.getElementById('commentsList').insertBefore(newComment, document.getElementById('commentsList').firstChild);
+        
+        // Show success message
+        if (window.PetPortal && window.PetPortal.showModal) {
+          window.PetPortal.showModal('Comment Posted!', 'Thank you for sharing your thoughts!');
+        }
+        
+        // Reset form
+        this.reset();
+      });
+
+      function getCategoryName(category) {
+        const names = {
+          adoption: 'Adoption',
+          care: 'Pet Care',
+          training: 'Training',
+          stories: 'Success Stories',
+          health: 'Health'
+        };
+        return names[category] || category;
+      }
+    });
+  </script>
+</body>
+</html>

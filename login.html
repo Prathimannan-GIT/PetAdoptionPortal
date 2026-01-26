@@ -6,17 +6,27 @@
   <title>Login - Pet Adoption Portal</title>
   <meta name="description" content="Secure login for users, shelters, and admins. Role-based dashboard simulation using JavaScript." />
 
+  <!-- Favicon for all devices -->
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+  <link rel="manifest" href="site.webmanifest" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Nunito:wght@700;800;900;1000&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 </head>
-<body>
-  <div id="siteHeader"></div>
-
+<body class="login-page">
   <main class="main">
     <div class="container">
       <section class="section">
         <div class="section-header">
+          <div class="login-brand">
+            <a href="index.html" class="brand" aria-label="Pet Adoption Portal">
+              <span class="brand-badge"><i class="fa-solid fa-paw"></i></span>
+              <span>Pet Adoption Portal</span>
+            </a>
+          </div>
           <h1 class="section-title">Login</h1>
           <p class="section-subtitle">Access your role-based dashboard (User / Shelter / Admin). No backend — simulated securely via localStorage.</p>
         </div>
@@ -28,6 +38,23 @@
             <p style="margin:0;color:var(--muted);font-weight:750;">Enter your email and password. Password rules apply for registered accounts.</p>
 
             <div style="height:14px;"></div>
+
+            <!-- Social Login Buttons -->
+            <div class="social-login">
+              <button class="btn btn-social btn-google" type="button">
+                <i class="fa-brands fa-google"></i> Continue with Google
+              </button>
+              <button class="btn btn-social btn-facebook" type="button">
+                <i class="fa-brands fa-facebook-f"></i> Continue with Facebook
+              </button>
+              <button class="btn btn-social btn-apple" type="button">
+                <i class="fa-brands fa-apple"></i> Continue with Apple
+              </button>
+            </div>
+
+            <div class="divider">
+              <span>OR</span>
+            </div>
 
             <form class="form" id="loginForm" novalidate>
               <div class="field">
@@ -41,7 +68,7 @@
                 <p class="helper">Password must match your registration. Demo passwords are provided for testing.</p>
               </div>
 
-              <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end;">
+              <div class="button-group">
                 <a class="btn btn-secondary" href="register.html"><i class="fa-solid fa-user-plus"></i> Register</a>
                 <button class="btn btn-primary" type="submit"><i class="fa-solid fa-lock"></i> Login</button>
               </div>
@@ -68,7 +95,7 @@
               <p style="margin:10px 0 0;color:var(--muted);font-weight:750;">This is a frontend-only simulation. In a real production platform, passwords are hashed and sessions are server-managed.</p>
             </div>
 
-            <div style="margin-top:14px;display:flex;gap:12px;flex-wrap:wrap;">
+            <div class="button-group">
               <a class="btn btn-primary" href="adopt.html"><i class="fa-solid fa-paw"></i> Browse Pets</a>
               <a class="btn btn-secondary" href="contact.html"><i class="fa-solid fa-headset"></i> Support</a>
             </div>
@@ -77,8 +104,6 @@
       </section>
     </div>
   </main>
-
-  <div id="siteFooter"></div>
 
   <script src="script.js"></script>
 </body>

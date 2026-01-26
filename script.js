@@ -18,6 +18,7 @@
 
   const ROUTES = {
     home: 'index.html',
+    home2: 'home2.html',
     login: 'login.html',
     register: 'register.html',
     dashboard: 'dashboard.html',
@@ -27,9 +28,15 @@
     shelter: 'shelter-dashboard.html',
     admin: 'admin.html',
     about: 'about.html',
+    services: 'services.html',
+    pricing: 'pricing.html',
+    blog: 'blog.html',
+    blogDetails: 'blog-details.html',
     contact: 'contact.html',
     privacy: 'privacy.html',
-    terms: 'terms.html'
+    terms: 'terms.html',
+    notFound: '404.html',
+    comingSoon: 'coming-soon.html'
   };
 
   const DEMO_ADMIN = {
@@ -85,23 +92,45 @@
   }
 
   function normalizeImageUrl(url) {
-    try {
-      const u = new URL(url, location.href);
-      if (u.hostname.endsWith('images.unsplash.com')) {
-        if (!u.searchParams.has('auto')) u.searchParams.set('auto', 'format');
-        if (!u.searchParams.has('fit')) u.searchParams.set('fit', 'crop');
-        if (!u.searchParams.has('w')) u.searchParams.set('w', '1400');
-        if (!u.searchParams.has('q')) u.searchParams.set('q', '80');
-      }
-      return u.toString();
-    } catch {
-      return url;
+    if (!url || url.trim() === '') {
+      // Use placeholder images for missing/broken images
+      return 'placeholder-pet.svg';
+    }
+    if (url.startsWith('http://') || url.startsWith('https://')) return url;
+    if (url.startsWith('data:')) return url;
+    return url;
+  }
+
+  function fallbackImageDataUri(type = 'pet') {
+    if (type === 'hero') {
+      const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f7fbff"/><stop offset="0.55" stop-color="#f3fff6"/><stop offset="1" stop-color="#f7fbff"/></linearGradient><linearGradient id="a" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#22c55e" stop-opacity="0.85"/><stop offset="1" stop-color="#0ea5e9" stop-opacity="0.85"/></linearGradient></defs><rect width="1200" height="800" fill="url(#g)"/><g opacity="0.18"><path d="M0 560 C 160 480, 360 640, 560 560 S 920 480, 1200 560" fill="none" stroke="url(#a)" stroke-width="14"/></g><g><text x="70" y="130" fill="#0b1b2c" font-family="Inter, Arial, sans-serif" font-size="44" font-weight="900">Pet Adoption Portal</text><text x="70" y="180" fill="#245" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="700" opacity="0.75">Find Your Perfect Companion</text></g></svg>`;
+      return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
+    } else {
+      const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f7fbff"/><stop offset="0.55" stop-color="#f3fff6"/><stop offset="1" stop-color="#f7fbff"/></linearGradient></defs><rect width="400" height="300" fill="url(#g)"/><g transform="translate(50 80)"><rect x="0" y="0" width="300" height="140" rx="20" fill="#ffffff" opacity="0.86" stroke="#0ea5e9" stroke-opacity="0.25"/><g transform="translate(40 35)" fill="none" stroke="#0b1b2c" stroke-opacity="0.7" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"><path d="M60 80c-9 5-15 14-15 25 0 17 17 31 40 31s40-14 40-31c0-11-6-20-15-25-7-4-14-2-25 4-11-6-18-8-25-4z"/><circle cx="60" cy="33" r="10"/><circle cx="87" cy="23" r="10"/><circle cx="114" cy="23" r="10"/><circle cx="141" cy="33" r="10"/></g></g></svg>`;
+      return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
     }
   }
 
-  function fallbackImageDataUri() {
-    const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f7fbff"/><stop offset="0.55" stop-color="#f3fff6"/><stop offset="1" stop-color="#f7fbff"/></linearGradient><linearGradient id="a" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#22c55e" stop-opacity="0.85"/><stop offset="1" stop-color="#0ea5e9" stop-opacity="0.85"/></linearGradient></defs><rect width="1200" height="800" fill="url(#g)"/><g opacity="0.18"><path d="M0 560 C 160 480, 360 640, 560 560 S 920 480, 1200 560" fill="none" stroke="url(#a)" stroke-width="14"/></g><g><text x="70" y="130" fill="#0b1b2c" font-family="Inter, Arial, sans-serif" font-size="44" font-weight="900">Pet Adoption Portal</text><text x="70" y="180" fill="#245" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="700" opacity="0.75">Image unavailable — showing safe fallback</text></g><g transform="translate(70 250)"><rect x="0" y="0" width="520" height="280" rx="26" fill="#ffffff" opacity="0.86" stroke="#0ea5e9" stroke-opacity="0.25"/><g transform="translate(62 70)" fill="none" stroke="#0b1b2c" stroke-opacity="0.7" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"><path d="M120 160c-18 10-30 28-30 50 0 34 34 62 80 62s80-28 80-62c0-22-12-40-30-50-15-8-28-5-50 8-22-13-35-16-50-8z"/><circle cx="120" cy="66" r="20"/><circle cx="175" cy="46" r="20"/><circle cx="230" cy="46" r="20"/><circle cx="285" cy="66" r="20"/></g></g></svg>`;
-    return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
+  function initMediaFallbacks() {
+    const images = document.querySelectorAll('img');
+    images.forEach(img => {
+      // Add error handler for fallback
+      img.addEventListener('error', function() {
+        if (!this.dataset.fallbackApplied) {
+          this.dataset.fallbackApplied = 'true';
+          const isHero = this.classList.contains('hero-image') || this.closest('.hero');
+          this.src = fallbackImageDataUri(isHero ? 'hero' : 'pet');
+          this.style.objectFit = 'cover';
+        }
+      });
+      
+      // Check if image is already broken
+      if (!this.complete || this.naturalHeight === 0) {
+        const isHero = this.classList.contains('hero-image') || this.closest('.hero');
+        this.src = fallbackImageDataUri(isHero ? 'hero' : 'pet');
+        this.style.objectFit = 'cover';
+      }
+    });
   }
 
   /* -------------------- Modal -------------------- */
@@ -251,6 +280,16 @@
     return null;
   }
 
+  /* -------------------- Reset Functions -------------------- */
+  
+  function resetPetData() {
+    // Clear existing pets from localStorage
+    localStorage.removeItem(LS.PETS);
+    // Re-run seed to create fresh pet data
+    ensureSeed();
+    showModal('Pet Data Reset', 'Pet data has been reset. Refresh the page to see changes.');
+  }
+
   /* -------------------- Seed Data -------------------- */
 
   function ensureSeed() {
@@ -353,31 +392,6 @@
           createdAt: isoNow()
         },
         {
-          id: 'pet-103',
-          name: 'Coco',
-          species: 'Dog',
-          breed: 'Shih Tzu',
-          gender: 'Female',
-          ageMonths: 30,
-          size: 'Small',
-          color: 'Cream',
-          vaccinated: true,
-          neutered: false,
-          energy: 'Gentle',
-          goodWithKids: true,
-          goodWithPets: true,
-          shelterId: 'shelter-1',
-          location: 'Riverdale',
-          status: 'available',
-          story: 'Coco is a sweet companion who loves short walks, soft toys, and staying close to her people.',
-          traits: ['Quiet at home', 'Great with visitors', 'Enjoys grooming'],
-          images: [
-            'https://images.unsplash.com/photo-1558944351-cf7b4f4c3d20',
-            'https://images.unsplash.com/photo-1537151625747-768eb6cf92b'
-          ],
-          createdAt: isoNow()
-        },
-        {
           id: 'pet-104',
           name: 'Pepper',
           species: 'Cat',
@@ -426,31 +440,6 @@
             'https://images.unsplash.com/photo-1507146426996-ef05306b995a'
           ],
           createdAt: isoNow()
-        },
-        {
-          id: 'pet-106',
-          name: 'Nala',
-          species: 'Cat',
-          breed: 'Tabby',
-          gender: 'Female',
-          ageMonths: 16,
-          size: 'Small',
-          color: 'Brown Tabby',
-          vaccinated: true,
-          neutered: true,
-          energy: 'Balanced',
-          goodWithKids: true,
-          goodWithPets: true,
-          shelterId: 'shelter-1',
-          location: 'Riverdale',
-          status: 'available',
-          story: 'Nala is affectionate but independent. She loves sunny spots, gentle attention, and slow introductions.',
-          traits: ['Gentle purr', 'Easy routine', 'Calm with guests'],
-          images: [
-            'https://images.unsplash.com/photo-1595433562696-19c7c0f7c3db',
-            'https://images.unsplash.com/photo-1547045662-5a75f8c1b3b3'
-          ],
-          createdAt: isoNow()
         }
       );
     }
@@ -475,8 +464,11 @@
 
     const nav = [
       { href: ROUTES.home, label: 'Home', icon: 'fa-house' },
+      { href: ROUTES.home2, label: 'Home 2', icon: 'fa-star' },
       { href: ROUTES.adopt, label: 'Adopt', icon: 'fa-paw' },
-      { href: ROUTES.about, label: 'About', icon: 'fa-heart' },
+      { href: ROUTES.services, label: 'Services', icon: 'fa-heart' },
+      { href: ROUTES.blog, label: 'Blog', icon: 'fa-newspaper' },
+      { href: ROUTES.about, label: 'About', icon: 'fa-info-circle' },
       { href: ROUTES.contact, label: 'Contact', icon: 'fa-envelope' }
     ];
 
@@ -492,11 +484,30 @@
             </a>
 
             <nav class="nav-links" id="navLinks" aria-label="Primary">
-              ${nav.map(l => `
-                <a href="${l.href}" class="${isActive(l.href) ? 'active' : ''}">
-                  <i class="fa-solid ${l.icon}"></i> ${l.label}
-                </a>
-              `).join('')}
+              ${nav.map(l => {
+                if (l.dropdown) {
+                  return `
+                    <div class="dropdown ${isActive(l.href) ? 'active' : ''}" data-dropdown>
+                      <a href="${l.href}" class="dropdown-toggle ${isActive(l.href) ? 'active' : ''}">
+                        <i class="fa-solid ${l.icon}"></i> ${l.label}
+                      </a>
+                      <div class="dropdown-menu">
+                        ${l.dropdown.map(item => `
+                          <a href="${item.href}" class="${isActive(item.href) ? 'active' : ''}">
+                            <i class="fa-solid ${item.icon}"></i> ${item.label}
+                          </a>
+                        `).join('')}
+                      </div>
+                    </div>
+                  `;
+                } else {
+                  return `
+                    <a href="${l.href}" class="${isActive(l.href) ? 'active' : ''}">
+                      <i class="fa-solid ${l.icon}"></i> ${l.label}
+                    </a>
+                  `;
+                }
+              }).join('')}
               ${auth ? `
                 <a href="${ROUTES.dashboard}" class="${isActive(ROUTES.dashboard) ? 'active' : ''}">
                   <i class="fa-solid fa-gauge"></i> Dashboard
@@ -505,6 +516,9 @@
             </nav>
 
             <div class="nav-actions">
+              <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme" type="button">
+                <i class="fa-solid fa-moon" id="themeIcon"></i>
+              </button>
               ${auth ? `
                 <span class="badge" title="Logged in">
                   <i class="fa-solid fa-user"></i>
@@ -525,6 +539,9 @@
               <button class="mobile-toggle" id="mobileToggle" aria-label="Open menu" type="button">
                 <span></span><span></span><span></span>
               </button>
+              <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme" type="button">
+                <i class="fa-solid fa-moon"></i>
+              </button>
             </div>
           </div>
         </div>
@@ -536,13 +553,16 @@
         <div class="container">
           <div class="footer-grid">
             <div class="card card-pad">
-              <h3 class="footer-title">Pet Adoption Portal</h3>
+              <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">
+                <span class="brand-badge" style="width:32px;height:32px;font-size:0.9rem;"><i class="fa-solid fa-paw"></i></span>
+                <h3 class="footer-title" style="margin:0;">Pet Adoption Portal</h3>
+              </div>
               <p style="margin:0;color:var(--muted);font-weight:750;">A trustworthy adoption platform connecting families with verified shelters. Transparent applications and responsible adoption guidance.</p>
               <div style="margin-top:12px" class="social" aria-label="Social links">
-                <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
-                <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook"></i></a>
-                <a href="#" aria-label="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
-                <a href="#" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+                <a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                <a href="https://facebook.com" target="_blank" rel="noopener" aria-label="Facebook"><i class="fa-brands fa-facebook"></i></a>
+                <a href="https://twitter.com" target="_blank" rel="noopener" aria-label="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+                <a href="https://wa.me/15559012277" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
               </div>
             </div>
 
@@ -596,6 +616,42 @@
       });
     }
 
+    // Dropdown functionality
+    const dropdowns = $$('[data-dropdown]');
+    dropdowns.forEach(dropdown => {
+      const toggle = dropdown.querySelector('.dropdown-toggle');
+      const menu = dropdown.querySelector('.dropdown-menu');
+      
+      if (toggle && menu) {
+        // Click to toggle
+        toggle.addEventListener('click', (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          
+          // Close other dropdowns
+          dropdowns.forEach(other => {
+            if (other !== dropdown) other.classList.remove('open');
+          });
+          
+          dropdown.classList.toggle('open');
+        });
+        
+        // Close on outside click
+        document.addEventListener('click', (e) => {
+          if (!dropdown.contains(e.target)) {
+            dropdown.classList.remove('open');
+          }
+        });
+        
+        // Close on escape key
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape') {
+            dropdown.classList.remove('open');
+          }
+        });
+      }
+    });
+
     const logoutBtn = $('#logoutBtn');
     if (logoutBtn) {
       logoutBtn.addEventListener('click', () => {
@@ -603,6 +659,32 @@
         showModal('Logged out', 'You have been safely logged out.');
         setTimeout(() => (location.href = ROUTES.home), 650);
       });
+    }
+
+    // Theme toggle functionality
+    const themeToggle = $('#themeToggle');
+    const themeIcon = $('#themeIcon');
+    
+    // Load saved theme or default to light
+    const savedTheme = localStorage.getItem('pap_theme') || 'light';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+    updateThemeIcon(savedTheme);
+    
+    if (themeToggle && themeIcon) {
+      themeToggle.addEventListener('click', () => {
+        const currentTheme = document.documentElement.getAttribute('data-theme');
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        
+        document.documentElement.setAttribute('data-theme', newTheme);
+        localStorage.setItem('pap_theme', newTheme);
+        updateThemeIcon(newTheme);
+      });
+    }
+    
+    function updateThemeIcon(theme) {
+      if (themeIcon) {
+        themeIcon.className = theme === 'dark' ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
+      }
     }
   }
 
@@ -1622,6 +1704,82 @@
     });
   }
 
+  function initHome2() {
+    // Initialize carousel
+    const carousel = $('#featuredCarousel');
+    const prevBtn = $('#carouselPrev');
+    const nextBtn = $('#carouselNext');
+    
+    if (carousel && prevBtn && nextBtn) {
+      const pets = listPets({}).slice(0, 6);
+      carousel.innerHTML = pets.map(pet => `
+        <div class="carousel-item">
+          <div class="pet-card">
+            <div class="pet-media">
+              <img src="${normalizeImageUrl(pet.images?.[0] || '')}" alt="${escapeHtml(pet.name)}" />
+            </div>
+            <div class="pet-body">
+              <div class="pet-title">
+                <h3>${escapeHtml(pet.name)}</h3>
+                <span class="pill"><i class="fa-solid fa-location-dot"></i> ${escapeHtml(pet.location)}</span>
+              </div>
+              <div class="pet-meta">
+                <span><i class="fa-solid fa-paw"></i> ${escapeHtml(pet.species)}</span>
+                <span><i class="fa-solid fa-cake-candles"></i> ${escapeHtml(ageLabel(pet.ageMonths))}</span>
+              </div>
+              <div class="pet-actions">
+                <a class="btn btn-secondary" href="${ROUTES.pet}?id=${encodeURIComponent(pet.id)}"><i class="fa-solid fa-circle-info"></i> Details</a>
+                <a class="btn btn-primary" href="${ROUTES.apply}?petId=${encodeURIComponent(pet.id)}"><i class="fa-solid fa-file-signature"></i> Apply</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      `).join('');
+      
+      let currentIndex = 0;
+      const itemWidth = 316; // 300px + 16px gap
+      const visibleItems = Math.floor(carousel.parentElement.offsetWidth / itemWidth);
+      const maxIndex = Math.max(0, pets.length - visibleItems);
+      
+      const updateCarousel = () => {
+        carousel.style.transform = `translateX(-${currentIndex * itemWidth}px)`;
+        prevBtn.style.opacity = currentIndex === 0 ? '0.5' : '1';
+        nextBtn.style.opacity = currentIndex >= maxIndex ? '0.5' : '1';
+      };
+      
+      prevBtn.addEventListener('click', () => {
+        if (currentIndex > 0) {
+          currentIndex--;
+          updateCarousel();
+        }
+      });
+      
+      nextBtn.addEventListener('click', () => {
+        if (currentIndex < maxIndex) {
+          currentIndex++;
+          updateCarousel();
+        }
+      });
+      
+      updateCarousel();
+    }
+    
+    // Initialize newsletter form
+    const newsletterForm = $('#newsletterForm');
+    if (newsletterForm) {
+      newsletterForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const email = newsletterForm.querySelector('input[type="email"]').value;
+        if (validateEmail(email)) {
+          showModal('Success!', 'Thank you for subscribing to our newsletter!');
+          newsletterForm.reset();
+        } else {
+          showModal('Invalid Email', 'Please enter a valid email address.');
+        }
+      });
+    }
+  }
+
   function initContact() {
     const form = $('#contactForm');
     if (!form) return;
@@ -1645,8 +1803,41 @@
     });
   }
 
+  function initBackToTop() {
+    // Create back to top button
+    const backToTop = document.createElement('button');
+    backToTop.className = 'back-to-top';
+    backToTop.setAttribute('aria-label', 'Back to top');
+    backToTop.innerHTML = '<i class="fa-solid fa-arrow-up"></i>';
+    document.body.appendChild(backToTop);
+
+    // Show/hide button based on scroll position
+    const toggleBackToTop = () => {
+      if (window.pageYOffset > 300) {
+        backToTop.classList.add('visible');
+      } else {
+        backToTop.classList.remove('visible');
+      }
+    };
+
+    // Scroll to top when clicked
+    backToTop.addEventListener('click', () => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+
+    // Listen for scroll events
+    window.addEventListener('scroll', toggleBackToTop);
+    
+    // Initial check
+    toggleBackToTop();
+  }
+
   function initRoute() {
     initIndex();
+    initHome2();
     initLogin();
     initRegister();
     initDashboard();
@@ -1661,17 +1852,74 @@
   function boot() {
     ensureSeed();
     renderLayout();
-    initButtonPulse();
-    initMediaFallbacks();
     initRoute();
+    initMediaFallbacks();
+    initButtonPulse();
+    initThemeToggle();
+    initBackToTop();
   }
 
   document.addEventListener('DOMContentLoaded', boot);
+
+  // Theme toggle functionality
+  function initThemeToggle() {
+    const themeToggle = $('#themeToggle');
+    if (!themeToggle) return;
+
+    // Load saved theme or default to light
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+    updateThemeIcon(savedTheme);
+
+    themeToggle.addEventListener('click', () => {
+      const currentTheme = document.documentElement.getAttribute('data-theme');
+      const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+      
+      document.documentElement.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+      updateThemeIcon(newTheme);
+    });
+  }
+
+  function updateThemeIcon(theme) {
+    const themeToggle = $('#themeToggle');
+    if (!themeToggle) return;
+    
+    const icon = themeToggle.querySelector('i');
+    if (icon) {
+      icon.className = theme === 'light' ? 'fa-solid fa-moon' : 'fa-solid fa-sun';
+    }
+  }
+
+  // Back to top button functionality
+  function initBackToTop() {
+    const backToTopBtn = document.createElement('button');
+    backToTopBtn.className = 'back-to-top hidden';
+    backToTopBtn.innerHTML = '<i class="fa-solid fa-arrow-up"></i>';
+    backToTopBtn.setAttribute('aria-label', 'Back to top');
+    document.body.appendChild(backToTopBtn);
+
+    window.addEventListener('scroll', () => {
+      if (window.pageYOffset > 300) {
+        backToTopBtn.classList.remove('hidden');
+      } else {
+        backToTopBtn.classList.add('hidden');
+      }
+    });
+
+    backToTopBtn.addEventListener('click', () => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+  }
 
   // Minimal public API
   window.PetPortal = {
     showModal,
     getAuth: () => getAuth(),
-    logout: () => logout()
+    logout: () => logout(),
+    resetPetData: () => resetPetData()
   };
 })();

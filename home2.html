@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Home 2 - Pet Adoption Portal</title>
+  <meta name="description" content="Discover your perfect companion through our innovative adoption matching system. Connect with verified shelters and find pets that fit your lifestyle." />
+
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Nunito:wght@700;800;900;1000&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="siteHeader"></div>
+
+  <main class="main">
+    <div class="container">
+      <!-- Hero Section 2 - Different Layout -->
+      <section class="section" aria-label="Hero Alternative">
+        <div class="hero-alt">
+          <div class="hero-alt-content">
+            <div class="hero-alt-text">
+              <span class="badge"><i class="fa-solid fa-star"></i> Premium Matchmaking</span>
+              <h1>Find Your Perfect Pet Match</h1>
+              <p>Our smart matching system connects you with pets that complement your lifestyle, home environment, and personality.</p>
+              <div class="hero-alt-actions">
+                <a class="btn btn-primary" href="adopt.html"><i class="fa-solid fa-heart"></i> Start Matching</a>
+                <a class="btn btn-secondary" href="register.html"><i class="fa-solid fa-sparkles"></i> Create Profile</a>
+              </div>
+            </div>
+            <div class="hero-alt-visual">
+              <div class="match-stats">
+                <div class="match-stat">
+                  <strong>94%</strong>
+                  <span>Success Rate</span>
+                </div>
+                <div class="match-stat">
+                  <strong>2,847</strong>
+                  <span>Happy Matches</span>
+                </div>
+                <div class="match-stat">
+                  <strong>48hrs</strong>
+                  <span>Avg. Match Time</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Featured Pets Carousel -->
+      <section class="section" aria-label="Featured carousel">
+        <div class="section-header">
+          <h2 class="section-title">Featured Companions</h2>
+          <p class="section-subtitle">Hand-picked pets looking for their forever homes this week</p>
+        </div>
+        
+        <div class="carousel-container">
+          <div class="carousel-nav">
+            <button class="carousel-btn prev" id="carouselPrev"><i class="fa-solid fa-chevron-left"></i></button>
+            <button class="carousel-btn next" id="carouselNext"><i class="fa-solid fa-chevron-right"></i></button>
+          </div>
+          <div class="carousel-track" id="featuredCarousel"></div>
+        </div>
+      </section>
+
+      <!-- Why Adopt With Us -->
+      <section class="section" aria-label="Why choose us">
+        <div class="section-header">
+          <h2 class="section-title">Why Adopt With Us</h2>
+          <p class="section-subtitle">We're revolutionizing the adoption experience with technology and care</p>
+        </div>
+
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fa-solid fa-brain"></i>
+            </div>
+            <h3>Smart Matching</h3>
+            <p>Our AI-powered system analyzes your lifestyle, home environment, and preferences to suggest perfect matches.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fa-solid fa-shield-halved"></i>
+            </div>
+            <h3>Verified Shelters</h3>
+            <p>Every partner shelter is thoroughly vetted to ensure ethical practices and quality animal care.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fa-solid fa-hand-holding-heart"></i>
+            </div>
+            <h3>Lifetime Support</h3>
+            <p>Get access to training resources, veterinary discounts, and community support throughout your pet's life.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fa-solid fa-clock"></i>
+            </div>
+            <h3>Quick Process</h3>
+            <p>Streamlined application process with same-day responses from most shelters and digital paperwork.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Success Stories -->
+      <section class="section" aria-label="Success stories">
+        <div class="section-header">
+          <h2 class="section-title">Happy Tails</h2>
+          <p class="section-subtitle">Real stories from families who found their perfect match</p>
+        </div>
+
+        <div class="stories-container">
+          <div class="story-card featured">
+            <div class="story-image">
+              <img src="https://images.unsplash.com/photo-1601758228041-f3b2795255f1" alt="Happy adoption story" />
+            </div>
+            <div class="story-content">
+              <span class="badge"><i class="fa-solid fa-heart"></i> Featured Story</span>
+              <h3>Max Found His Forever Home</h3>
+              <p>"The matching system was incredible! It understood we needed an energetic dog for our active family. Max has been with us for 6 months now and he's perfect."</p>
+              <div class="story-author">
+                <strong>The Johnson Family</strong>
+                <span>Adopted Max, Golden Retriever</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="stories-grid">
+            <div class="story-card small">
+              <h4>Luna's Journey</h4>
+              <p>"From shelter anxiety to confident queen of the house. The transition support was amazing."</p>
+              <span>— Sarah K., Cat Parent</span>
+            </div>
+            <div class="story-card small">
+              <h4>Charlie's New Start</h4>
+              <p>"The vetting process gave us confidence. Charlie is thriving in his new home!"</p>
+              <span>— Mike & Lisa, Dog Parents</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Partner Shelters -->
+      <section class="section" aria-label="Partner shelters">
+        <div class="section-header">
+          <h2 class="section-title">Trusted Shelter Partners</h2>
+          <p class="section-subtitle">Working with the best rescue organizations across the country</p>
+        </div>
+
+        <div class="shelters-showcase">
+          <div class="shelter-partner">
+            <div class="shelter-badge">
+              <i class="fa-solid fa-award"></i>
+            </div>
+            <h3>Green Paws Rescue</h3>
+            <p>5-Star Rating • 247 Adoptions</p>
+            <div class="shelter-specialties">
+              <span class="badge">Dogs</span>
+              <span class="badge">Training</span>
+              <span class="badge">Medical Care</span>
+            </div>
+          </div>
+          <div class="shelter-partner">
+            <div class="shelter-badge">
+              <i class="fa-solid fa-certificate"></i>
+            </div>
+            <h3>Sunny Tails Haven</h3>
+            <p>4.9 Rating • 189 Adoptions</p>
+            <div class="shelter-specialties">
+              <span class="badge">Cats</span>
+              <span class="badge">Kittens</span>
+              <span class="badge">Senior Care</span>
+            </div>
+          </div>
+          <div class="shelter-partner">
+            <div class="shelter-badge">
+              <i class="fa-solid fa-medal"></i>
+            </div>
+            <h3>Pawsitive Future</h3>
+            <p>4.8 Rating • 156 Adoptions</p>
+            <div class="shelter-specialties">
+              <span class="badge">Mixed Breeds</span>
+              <span class="badge">Behavior</span>
+              <span class="badge">Foster Program</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CTA Banner -->
+      <section class="section" aria-label="Call to action">
+        <div class="cta-banner">
+          <div class="cta-content">
+            <span class="badge"><i class="fa-solid fa-rocket"></i> Ready to Start?</span>
+            <h2>Begin Your Adoption Journey Today</h2>
+            <p>Join thousands of happy families who found their perfect companions through our platform.</p>
+            <div class="cta-actions">
+              <a class="btn btn-primary" href="register.html"><i class="fa-solid fa-user-plus"></i> Create Free Account</a>
+              <a class="btn btn-secondary" href="adopt.html"><i class="fa-solid fa-search"></i> Browse Available Pets</a>
+            </div>
+          </div>
+          <div class="cta-visual">
+            <div class="cta-steps">
+              <div class="step">
+                <span class="step-number">1</span>
+                <span>Create Profile</span>
+              </div>
+              <div class="step">
+                <span class="step-number">2</span>
+                <span>Get Matches</span>
+              </div>
+              <div class="step">
+                <span class="step-number">3</span>
+                <span>Meet & Adopt</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Newsletter Signup -->
+      <section class="section" aria-label="Newsletter">
+        <div class="newsletter-section">
+          <div class="newsletter-content">
+            <h2>Stay Connected</h2>
+            <p>Get weekly updates on new pets, adoption tips, and heartwarming success stories.</p>
+            <form class="newsletter-form" id="newsletterForm">
+              <div class="newsletter-input-group">
+                <input type="email" placeholder="Enter your email" required />
+                <button class="btn btn-primary" type="submit"><i class="fa-solid fa-paper-plane"></i> Subscribe</button>
+              </div>
+              <p class="helper">Join 15,000+ pet lovers. Unsubscribe anytime.</p>
+            </form>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <div id="siteFooter"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
