@@ -536,11 +536,11 @@
                   <i class="fa-solid fa-user-plus"></i> Register
                 </a>
               `}
-              <button class="mobile-toggle" id="mobileToggle" aria-label="Open menu" type="button">
-                <span></span><span></span><span></span>
-              </button>
               <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme" type="button">
                 <i class="fa-solid fa-moon"></i>
+              </button>
+              <button class="mobile-toggle" id="mobileToggle" aria-label="Open menu" type="button">
+                <span></span><span></span><span></span>
               </button>
             </div>
           </div>

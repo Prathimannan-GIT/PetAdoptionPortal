@@ -514,33 +514,33 @@ img { max-width: 100%; display: block; }
 }
 
 .theme-toggle {
-  display: none;
-  width: 44px;
-  height: 44px;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  cursor: pointer;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.1rem;
-  color: var(--text);
-  transition: all var(--t-fast);
+    display: none;
+    width: 44px;
+    height: 44px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    color: var(--text);
+    transition: all var(--t-fast);
 }
 
 .theme-toggle:hover {
-  background: var(--primary);
-  color: white;
-  border-color: var(--primary);
-  transform: translateY(-1px);
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+    transform: translateY(-1px);
 }
 
 .theme-toggle i {
-  transition: transform var(--t-fast);
+    transition: transform var(--t-fast);
 }
 
 [data-theme="dark"] .theme-toggle i {
-  transform: rotate(180deg);
+    transform: rotate(180deg);
 }
 
 .mobile-toggle {
@@ -1225,46 +1225,159 @@ tr:hover td { background: rgba(34, 197, 94, 0.06); }
     .cta-banner { grid-template-columns: 1fr; text-align: center; }
 }
 
+/* MOBILE ALIGNMENT FIXES - Override all conflicting styles */
 @media (max-width: 720px) {
-    /* Ensure all sections are properly centered on mobile */
-    .section {
-        text-align: center;
+    /* Force center alignment for all sections */
+    body .section,
+    body .section-header,
+    body .section-title,
+    body .section-subtitle {
+        text-align: center !important;
     }
     
-    .section-header {
-        text-align: center;
-        margin-bottom: 32px;
+    /* Force center alignment for all cards */
+    body .card,
+    body .card-pad,
+    body .service-card,
+    body .blog-card,
+    body .testimonial-card,
+    body .feature-card {
+        text-align: center !important;
     }
     
-    .section-title {
-        text-align: center;
-        font-size: 1.8rem;
-        line-height: 1.3;
+    /* Force center alignment for all grid items */
+    body .grid > div,
+    body .grid-2 > div,
+    body .grid-3 > div,
+    body .grid-4 > div {
+        text-align: center !important;
     }
     
-    .section-subtitle {
-        text-align: center;
-        font-size: 1rem;
-        line-height: 1.5;
+    /* Force center alignment for headings */
+    body h1, body h2, body h3, body h4, body h5, body h6 {
+        text-align: center !important;
     }
     
-    /* Fix cards on mobile */
-    .card {
-        text-align: center;
-        margin-bottom: 20px;
+    /* Force center alignment for paragraphs in cards */
+    body .card p,
+    body .service-card p,
+    body .blog-card p,
+    body .testimonial-card p {
+        text-align: center !important;
     }
     
-    .card-pad {
-        padding: 20px;
+    /* Force center alignment for hero sections */
+    body .hero,
+    body .hero-inner,
+    body .hero h1,
+    body .hero p {
+        text-align: center !important;
     }
     
-    /* Fix grid items on mobile */
-    .grid > div {
-        text-align: center;
+    /* Force center alignment for pet cards */
+    body .pet-card,
+    body .pet-title,
+    body .pet-title h3,
+    body .pet-meta,
+    body .pet-actions {
+        text-align: center !important;
+        justify-content: center !important;
+    }
+    
+    /* Force center alignment for buttons */
+    body .button-group,
+    body .hero-actions,
+    body .cta-actions {
+        justify-content: center !important;
+        text-align: center !important;
+    }
+    
+    /* Force center alignment for footer */
+    body .footer-grid,
+    body .footer-title,
+    body .footer-list,
+    body .social {
+        text-align: center !important;
+        justify-content: center !important;
+    }
+    
+    /* Force center alignment for badges and pills */
+    body .badge,
+    body .pill,
+    body .tag {
+        text-align: center !important;
+        display: inline-block !important;
+    }
+    
+    /* Force center alignment for stats and features */
+    body .stats-grid,
+    body .features-grid,
+    body .services-grid {
+        grid-template-columns: 1fr !important;
+        text-align: center !important;
+    }
+    
+    /* Force center alignment for forms */
+    body .form-group,
+    body .field {
+        text-align: left !important;
+    }
+    
+    body .field label {
+        text-align: left !important;
+        display: block !important;
+    }
+    
+    /* Force center alignment for lists */
+    body ul, body ol {
+        text-align: left !important;
+        padding-left: 20px !important;
+    }
+    
+    /* Force center alignment for specific elements */
+    body .carousel-item,
+    body .newsletter-form,
+    body .pagination,
+    body .breadcrumb,
+    body .alert,
+    body .modal {
+        text-align: center !important;
+    }
+    
+    /* Fix flex containers in cards */
+    body .card [style*="display: flex"] {
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 12px !important;
+    }
+    
+    /* Fix specific budget planning cards */
+    body .card [style*="justify-content: space-between"] {
+        justify-content: center !important;
+        text-align: center !important;
+    }
+    
+    /* Fix any remaining alignment issues */
+    body .main {
+        text-align: center !important;
+    }
+    
+    body .content {
+        text-align: center !important;
+    }
+    
+    /* Ensure proper spacing */
+    body .section {
+        margin-bottom: 40px !important;
+        padding: 20px 0 !important;
+    }
+    
+    body .card {
+        margin-bottom: 20px !important;
     }
     
     /* Fix navigation */
-    .nav-links {
+    body .nav-links {
         display: none;
         position: absolute;
         left: 18px;
@@ -1482,6 +1595,72 @@ tr:hover td { background: rgba(34, 197, 94, 0.06); }
         text-align: left;
         max-width: 95%;
         margin: 20px auto;
+    }
+    
+    /* Additional fixes for specific elements */
+    .container {
+        padding: 0 16px !important;
+    }
+    
+    /* Fix any remaining alignment issues */
+    * {
+        box-sizing: border-box;
+    }
+    
+    /* Fix text alignment for all elements inside sections */
+    .section * {
+        text-align: inherit;
+    }
+    
+    .section > * {
+        text-align: center !important;
+    }
+    
+    /* Fix specific page elements */
+    .main {
+        text-align: center !important;
+    }
+    
+    .content {
+        text-align: center !important;
+    }
+    
+    /* Fix any flex containers */
+    .flex {
+        justify-content: center !important;
+        align-items: center !important;
+    }
+    
+    /* Fix any remaining grid containers */
+    [class*="grid"] {
+        justify-items: center !important;
+    }
+    
+    /* Fix images */
+    img {
+        max-width: 100% !important;
+        height: auto !important;
+        display: block !important;
+        margin: 0 auto !important;
+    }
+    
+    /* Fix icons */
+    .fa-solid, .fa-brands {
+        display: inline-block !important;
+        text-align: center !important;
+    }
+    
+    /* Fix any remaining text elements */
+    span, div, p {
+        max-width: 100% !important;
+        word-wrap: break-word !important;
+    }
+    
+    /* Fix mobile toggle and theme toggle */
+    .mobile-toggle, .theme-toggle {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
     }
     
     /* Fix dropdown overflow in mobile */
