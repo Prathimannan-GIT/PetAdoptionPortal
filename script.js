@@ -115,7 +115,7 @@
     const images = document.querySelectorAll('img');
     images.forEach(img => {
       // Add error handler for fallback
-      img.addEventListener('error', function() {
+      img.addEventListener('error', function () {
         if (!this.dataset.fallbackApplied) {
           this.dataset.fallbackApplied = 'true';
           const isHero = this.classList.contains('hero-image') || this.closest('.hero');
@@ -123,7 +123,7 @@
           this.style.objectFit = 'cover';
         }
       });
-      
+
       // Check if image is already broken
       if (!this.complete || this.naturalHeight === 0) {
         const isHero = this.classList.contains('hero-image') || this.closest('.hero');
@@ -281,7 +281,7 @@
   }
 
   /* -------------------- Reset Functions -------------------- */
-  
+
   function resetPetData() {
     // Clear existing pets from localStorage
     localStorage.removeItem(LS.PETS);
@@ -361,7 +361,7 @@
           story: 'Milo is confident, affectionate, and eager to learn. He loves fetch and settles quickly once he trusts you.',
           traits: ['Great leash manners', 'Food motivated', 'Friendly with visitors'],
           images: [
-            'https://images.unsplash.com/photo-1558788353-f76d92427f16',
+            'images/pic.jpg',
             'https://images.unsplash.com/photo-1548199973-03cce0bbc87b'
           ],
           createdAt: isoNow()
@@ -386,7 +386,7 @@
           story: 'Luna is a gentle lap cat who enjoys window watching and quiet corners. She thrives in calm homes.',
           traits: ['Indoor-only', 'Litter trained', 'Prefers a single-pet home'],
           images: [
-            'https://images.unsplash.com/photo-1518791841217-8f162f1e1131',
+            'images/pic2.jpg',
             'https://images.unsplash.com/photo-1516972810927-80185027ca84'
           ],
           createdAt: isoNow()
@@ -411,8 +411,8 @@
           story: 'Pepper is confident and affectionate. He loves interactive toys and following you from room to room.',
           traits: ['Talkative', 'Food motivated', 'Enjoys playtime'],
           images: [
-            'https://images.unsplash.com/photo-1543852786-1cf6624b9987',
-            'https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba'
+            'https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba',
+            'https://images.unsplash.com/photo-1543852786-1cf6624b9987'
           ],
           createdAt: isoNow()
         },
@@ -440,8 +440,17 @@
             'https://images.unsplash.com/photo-1507146426996-ef05306b995a'
           ],
           createdAt: isoNow()
-        }
+        },
+
       );
+    }
+
+    // Auto-fix: Remove Bella (p-106) if she exists (cleanup)
+    const currentPets = read(LS.PETS, []);
+    const bellaIndex = currentPets.findIndex(p => p.id === 'pet-106');
+    if (bellaIndex !== -1) {
+      currentPets.splice(bellaIndex, 1);
+      write(LS.PETS, currentPets);
     }
 
     if (!Array.isArray(apps)) write(LS.APPS, []);
@@ -459,11 +468,18 @@
     const footerHost = $('#siteFooter');
     if (!headerHost || !footerHost) return;
 
-    const auth = getAuth();
     const path = currentFile();
+    // Hide header and footer on login page as per request
+    if (path === ROUTES.login) {
+      headerHost.innerHTML = '';
+      footerHost.innerHTML = '';
+      return;
+    }
+
+    const auth = getAuth();
 
     const nav = [
-      { href: ROUTES.home, label: 'Home', icon: 'fa-house' },
+      { href: ROUTES.home, label: 'Home 1', icon: 'fa-house' },
       { href: ROUTES.home2, label: 'Home 2', icon: 'fa-star' },
       { href: ROUTES.adopt, label: 'Adopt', icon: 'fa-paw' },
       { href: ROUTES.services, label: 'Services', icon: 'fa-heart' },
@@ -480,39 +496,34 @@
           <div class="navbar">
             <a class="brand" href="${ROUTES.home}" aria-label="Pet Adoption Portal">
               <span class="brand-badge"><i class="fa-solid fa-paw"></i></span>
-              <span>Pet Adoption Portal</span>
+              <span style="font-family: var(--font-display); font-weight: 1000;">Pet Adoption Portal</span>
             </a>
 
             <nav class="nav-links" id="navLinks" aria-label="Primary">
-              ${nav.map(l => {
-                if (l.dropdown) {
-                  return `
-                    <div class="dropdown ${isActive(l.href) ? 'active' : ''}" data-dropdown>
-                      <a href="${l.href}" class="dropdown-toggle ${isActive(l.href) ? 'active' : ''}">
-                        <i class="fa-solid ${l.icon}"></i> ${l.label}
-                      </a>
-                      <div class="dropdown-menu">
-                        ${l.dropdown.map(item => `
-                          <a href="${item.href}" class="${isActive(item.href) ? 'active' : ''}">
-                            <i class="fa-solid ${item.icon}"></i> ${item.label}
-                          </a>
-                        `).join('')}
-                      </div>
-                    </div>
-                  `;
-                } else {
-                  return `
-                    <a href="${l.href}" class="${isActive(l.href) ? 'active' : ''}">
-                      <i class="fa-solid ${l.icon}"></i> ${l.label}
-                    </a>
-                  `;
-                }
-              }).join('')}
-              ${auth ? `
-                <a href="${ROUTES.dashboard}" class="${isActive(ROUTES.dashboard) ? 'active' : ''}">
-                  <i class="fa-solid fa-gauge"></i> Dashboard
+              ${nav.map(l => `
+                <a href="${l.href}" class="${isActive(l.href) ? 'active' : ''}">
+                  <i class="fa-solid ${l.icon}"></i> ${l.label}
                 </a>
-              ` : ''}
+              `).join('')}
+              
+              <!-- Mobile-only Auth Section -->
+              <div class="mobile-only-auth" style="margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--border); display: flex; flex-direction: column; gap: 12px;">
+                ${auth ? `
+                  <a href="${ROUTES.dashboard}" class="${isActive(ROUTES.dashboard) ? 'active' : ''}">
+                    <i class="fa-solid fa-gauge"></i> Dashboard
+                  </a>
+                  <button id="mobileLogoutBtn" class="btn btn-secondary" style="width: 100%; justify-content: center;">
+                    <i class="fa-solid fa-right-from-bracket"></i> Logout
+                  </button>
+                ` : `
+                  <a href="${ROUTES.login}" class="btn btn-secondary" style="width: 100%; justify-content: center;">
+                    <i class="fa-solid fa-right-to-bracket"></i> Login
+                  </a>
+                  <a href="${ROUTES.register}" class="btn btn-primary" style="width: 100%; justify-content: center;">
+                    <i class="fa-solid fa-user-plus"></i> Register
+                  </a>
+                `}
+              </div>
             </nav>
 
             <div class="nav-actions">
@@ -520,22 +531,16 @@
                 <span class="badge" title="Logged in">
                   <i class="fa-solid fa-user"></i>
                   ${escapeHtml(auth.name || 'Account')}
-                  <span style="opacity:0.7">(${escapeHtml(auth.role)})</span>
                 </span>
-                <a href="${ROUTES.dashboard}" class="btn btn-primary">Dashboard</a>
-                <button id="logoutBtn" class="btn btn-secondary">Logout</button>
+                <button id="logoutBtn" class="btn btn-secondary btn-sm">Logout</button>
               ` : `
-                <a href="${ROUTES.login}" class="btn btn-secondary">
-                  <i class="fa-solid fa-right-to-bracket"></i> Login
-                </a>
-                <a href="${ROUTES.register}" class="btn btn-primary">
-                  <i class="fa-solid fa-user-plus"></i> Register
-                </a>
+                <a href="${ROUTES.login}" class="btn btn-secondary">Login</a>
+                <a href="${ROUTES.register}" class="btn btn-primary">Register</a>
               `}
-              <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme" type="button">
-                <i class="fa-solid fa-moon" id="themeIcon"></i>
+              <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                <i class="fa-solid fa-moon"></i>
               </button>
-              <button class="mobile-toggle" id="mobileToggle" aria-label="Open menu" type="button">
+              <button class="mobile-toggle" id="mobileToggle" aria-label="Open menu">
                 <span></span><span></span><span></span>
               </button>
             </div>
@@ -545,144 +550,174 @@
     `;
 
     footerHost.innerHTML = `
-      <footer class="site-footer">
+      <footer class="site-footer" style="font-family: var(--font-display);">
         <div class="container">
-          <div class="footer-grid">
-            <div class="card card-pad">
-              <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">
-                <span class="brand-badge" style="width:32px;height:32px;font-size:0.9rem;"><i class="fa-solid fa-paw"></i></span>
-                <h3 class="footer-title" style="margin:0;">Pet Adoption Portal</h3>
+          <div class="footer-top">
+            <div class="footer-brand">
+              <div style="display:flex;align-items:center;gap:12px;margin-bottom:20px;">
+                <span class="brand-badge" style="background: linear-gradient(135deg, var(--primary), var(--primary-2));"><i class="fa-solid fa-paw"></i></span>
+                <h3 style="margin:0;font-weight:1000;color:var(--text);">Pet Adoption Portal</h3>
               </div>
-              <p style="margin:0;color:var(--muted);font-weight:750;">A trustworthy adoption platform connecting families with verified shelters. Transparent applications and responsible adoption guidance.</p>
-              <div style="margin-top:12px" class="social" aria-label="Social links">
-                <a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
-                <a href="https://facebook.com" target="_blank" rel="noopener" aria-label="Facebook"><i class="fa-brands fa-facebook"></i></a>
-                <a href="https://twitter.com" target="_blank" rel="noopener" aria-label="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
-                <a href="https://wa.me/15559012277" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+              <p style="color:var(--muted);font-weight:500;line-height:1.6;margin-bottom:24px;">
+                Connecting loving families with pets in need. Every adoption creates a forever home and changes a life forever.
+              </p>
+              <div class="footer-stats" style="display:flex;gap:24px;margin-bottom:24px;">
+                <div style="text-align:center;">
+                  <div style="font-size:1.5rem;font-weight:900;color:var(--primary);">10K+</div>
+                  <div style="font-size:0.85rem;color:var(--muted);font-weight:500;">Pets Adopted</div>
+                </div>
+                <div style="text-align:center;">
+                  <div style="font-size:1.5rem;font-weight:900;color:var(--primary-2);">500+</div>
+                  <div style="font-size:0.85rem;color:var(--muted);font-weight:500;">Partner Shelters</div>
+                </div>
+                <div style="text-align:center;">
+                  <div style="font-size:1.5rem;font-weight:900;color:var(--warning);">98%</div>
+                  <div style="font-size:0.85rem;color:var(--muted);font-weight:500;">Success Rate</div>
+                </div>
+              </div>
+              <div class="social-links">
+                <h4 style="margin:0 0 16px;font-weight:900;color:var(--text);">Follow Our Journey</h4>
+                <div class="social" style="display:flex;gap:12px;">
+                  <a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram" class="social-icon instagram">
+                    <i class="fa-brands fa-instagram"></i>
+                  </a>
+                  <a href="https://facebook.com" target="_blank" rel="noopener" aria-label="Facebook" class="social-icon facebook">
+                    <i class="fa-brands fa-facebook"></i>
+                  </a>
+                  <a href="https://twitter.com" target="_blank" rel="noopener" aria-label="Twitter" class="social-icon twitter">
+                    <i class="fa-brands fa-x-twitter"></i>
+                  </a>
+                  <a href="https://wa.me/15559012277" target="_blank" rel="noopener" aria-label="WhatsApp" class="social-icon whatsapp">
+                    <i class="fa-brands fa-whatsapp"></i>
+                  </a>
+                  <a href="https://youtube.com" target="_blank" rel="noopener" aria-label="YouTube" class="social-icon youtube">
+                    <i class="fa-brands fa-youtube"></i>
+                  </a>
+                </div>
               </div>
             </div>
 
-            <div class="card card-pad">
-              <h3 class="footer-title">Quick Links</h3>
-              <ul class="footer-list">
-                <li><a href="${ROUTES.home}">Home</a></li>
-                <li><a href="${ROUTES.adopt}">Browse Pets</a></li>
-                <li><a href="${ROUTES.dashboard}">Dashboard</a></li>
-                <li><a href="${ROUTES.about}">About</a></li>
+            <div class="footer-section">
+              <h4 style="margin:0 0 20px;font-weight:900;color:var(--text);display:flex;align-items:center;gap:8px;">
+                <i class="fa-solid fa-compass" style="color:var(--primary);font-size:0.9rem;"></i>
+                Explore
+              </h4>
+              <ul style="list-style:none;padding:0;margin:0;display:grid;gap:12px;">
+                <li><a href="${ROUTES.home}" style="display:flex;align-items:center;gap:8px;color:var(--muted);text-decoration:none;font-weight:500;transition:color var(--t-fast);"><i class="fa-solid fa-house" style="font-size:0.8rem;color:var(--primary);"></i> Home</a></li>
+                <li><a href="${ROUTES.adopt}" style="display:flex;align-items:center;gap:8px;color:var(--muted);text-decoration:none;font-weight:500;transition:color var(--t-fast);"><i class="fa-solid fa-paw" style="font-size:0.8rem;color:var(--primary);"></i> Browse Pets</a></li>
+                <li><a href="${ROUTES.services}" style="display:flex;align-items:center;gap:8px;color:var(--muted);text-decoration:none;font-weight:500;transition:color var(--t-fast);"><i class="fa-solid fa-heart" style="font-size:0.8rem;color:var(--primary);"></i> Services</a></li>
+                <li><a href="${ROUTES.blog}" style="display:flex;align-items:center;gap:8px;color:var(--muted);text-decoration:none;font-weight:500;transition:color var(--t-fast);"><i class="fa-solid fa-newspaper" style="font-size:0.8rem;color:var(--primary);"></i> Blog & Stories</a></li>
+                <li><a href="${ROUTES.about}" style="display:flex;align-items:center;gap:8px;color:var(--muted);text-decoration:none;font-weight:500;transition:color var(--t-fast);"><i class="fa-solid fa-info-circle" style="font-size:0.8rem;color:var(--primary);"></i> About Us</a></li>
               </ul>
             </div>
 
-            <div class="card card-pad">
-              <h3 class="footer-title">Legal</h3>
-              <ul class="footer-list">
-                <li><a href="${ROUTES.privacy}">Privacy Policy</a></li>
-                <li><a href="${ROUTES.terms}">Terms & Conditions</a></li>
-                <li><a href="${ROUTES.contact}">Report Misuse</a></li>
+            <div class="footer-section">
+              <h4 style="margin:0 0 20px;font-weight:900;color:var(--text);display:flex;align-items:center;gap:8px;">
+                <i class="fa-solid fa-life-ring" style="color:var(--primary-2);font-size:0.9rem;"></i>
+                Support
+              </h4>
+              <ul style="list-style:none;padding:0;margin:0;display:grid;gap:12px;">
+                <li><a href="${ROUTES.contact}" style="display:flex;align-items:center;gap:8px;color:var(--muted);text-decoration:none;font-weight:500;transition:color var(--t-fast);"><i class="fa-solid fa-envelope" style="font-size:0.8rem;color:var(--primary-2);"></i> Contact Us</a></li>
+                <li><a href="${ROUTES.privacy}" style="display:flex;align-items:center;gap:8px;color:var(--muted);text-decoration:none;font-weight:500;transition:color var(--t-fast);"><i class="fa-solid fa-shield-alt" style="font-size:0.8rem;color:var(--primary-2);"></i> Privacy Policy</a></li>
+                <li><a href="${ROUTES.terms}" style="display:flex;align-items:center;gap:8px;color:var(--muted);text-decoration:none;font-weight:500;transition:color var(--t-fast);"><i class="fa-solid fa-file-contract" style="font-size:0.8rem;color:var(--primary-2);"></i> Terms of Service</a></li>
+                <li><a href="#" style="display:flex;align-items:center;gap:8px;color:var(--muted);text-decoration:none;font-weight:500;transition:color var(--t-fast);"><i class="fa-solid fa-question-circle" style="font-size:0.8rem;color:var(--primary-2);"></i> FAQ</a></li>
+                <li><a href="#" style="display:flex;align-items:center;gap:8px;color:var(--muted);text-decoration:none;font-weight:500;transition:color var(--t-fast);"><i class="fa-solid fa-headset" style="font-size:0.8rem;color:var(--primary-2);"></i> Get Help</a></li>
               </ul>
             </div>
 
-            <div class="card card-pad">
-              <h3 class="footer-title">Contact</h3>
-              <ul class="footer-list">
-                <li><span><i class="fa-solid fa-envelope"></i> support@petportal.org</span></li>
-                <li><span><i class="fa-solid fa-phone"></i> +1 (555) 901-2277</span></li>
-                <li><span><i class="fa-solid fa-location-dot"></i> Community-first adoption network</span></li>
-              </ul>
+            <div class="footer-section">
+              <h4 style="margin:0 0 20px;font-weight:900;color:var(--text);display:flex;align-items:center;gap:8px;">
+                <i class="fa-solid fa-bell" style="color:var(--warning);font-size:0.9rem;"></i>
+                Stay Connected
+              </h4>
+              <p style="color:var(--muted);font-weight:500;line-height:1.6;margin-bottom:16px;">
+                Get updates about new pets, adoption tips, and heartwarming stories delivered to your inbox.
+              </p>
+              <div class="newsletter-form" style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-md);padding:16px;">
+                <form style="display:flex;flex-direction:column;gap:12px;">
+                  <input type="email" placeholder="Your email address" style="flex:1;padding:12px;border:1px solid var(--border);border-radius:var(--radius-sm);font-family:inherit;font-size:0.9rem;background:var(--surface-strong);color:var(--text);">
+                  <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;font-weight:600;">
+                    <i class="fa-solid fa-paper-plane"></i> Subscribe
+                  </button>
+                </form>
+                <p style="font-size:0.8rem;color:var(--muted);margin:8px 0 0;text-align:center;">
+                  Join 50,000+ pet lovers. No spam, ever.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="footer-middle">
+            <div class="footer-features">
+              <div style="display:flex;align-items:center;gap:12px;">
+                <i class="fa-solid fa-shield-heart" style="color:var(--primary);font-size:1.2rem;"></i>
+                <div>
+                  <div style="font-weight:700;color:var(--text);margin-bottom:2px;">Verified Shelters</div>
+                  <div style="font-size:0.85rem;color:var(--muted);font-weight:500;">All partner shelters are thoroughly vetted</div>
+                </div>
+              </div>
+              <div style="display:flex;align-items:center;gap:12px;">
+                <i class="fa-solid fa-hand-holding-heart" style="color:var(--primary-2);font-size:1.2rem;"></i>
+                <div>
+                  <div style="font-weight:700;color:var(--text);margin-bottom:2px;">Responsible Adoption</div>
+                  <div style="font-size:0.85rem;color:var(--muted);font-weight:500;">We ensure safe and loving homes</div>
+                </div>
+              </div>
+              <div style="display:flex;align-items:center;gap:12px;">
+                <i class="fa-solid fa-clock" style="color:var(--warning);font-size:1.2rem;"></i>
+                <div>
+                  <div style="font-weight:700;color:var(--text);margin-bottom:2px;">24/7 Support</div>
+                  <div style="font-size:0.85rem;color:var(--muted);font-weight:500;">Always here to help you and your pet</div>
+                </div>
+              </div>
             </div>
           </div>
 
           <div class="footer-bottom">
-            <span>© ${new Date().getFullYear()} Pet Adoption Portal. All rights reserved.</span>
-            <span>Adopt responsibly • Verify home readiness • Respect shelter policies</span>
+            <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;">
+              <div style="color:var(--muted);font-weight:500;font-size:0.9rem;">
+                © ${new Date().getFullYear()} Pet Adoption Portal. Made with <i class="fa-solid fa-heart" style="color:var(--danger);"></i> for pets and families.
+              </div>
+              <div style="display:flex;gap:16px;align-items:center;">
+                <span style="color:var(--muted);font-weight:500;font-size:0.85rem;">Payment methods:</span>
+                <div style="display:flex;gap:8px;">
+                  <i class="fa-brands fa-cc-visa" style="color:var(--muted);font-size:1.2rem;"></i>
+                  <i class="fa-brands fa-cc-mastercard" style="color:var(--muted);font-size:1.2rem;"></i>
+                  <i class="fa-brands fa-cc-amex" style="color:var(--muted);font-size:1.2rem;"></i>
+                  <i class="fa-brands fa-cc-paypal" style="color:var(--muted);font-size:1.2rem;"></i>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </footer>
     `;
 
     const navLinks = $('#navLinks');
-    const toggle = $('#mobileToggle');
-
-    if (toggle && navLinks) {
-      toggle.addEventListener('click', () => navLinks.classList.toggle('open'));
-      $$('a', navLinks).forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
-      document.addEventListener('click', (e) => {
-        if (!navLinks.classList.contains('open')) return;
-        if (e.target.closest('#navLinks') || e.target.closest('#mobileToggle')) return;
-        navLinks.classList.remove('open');
+    const mobileToggle = $('#mobileToggle');
+    if (mobileToggle && navLinks) {
+      mobileToggle.addEventListener('click', () => {
+        navLinks.classList.toggle('open');
+        mobileToggle.classList.toggle('active');
+        // Prevent background scroll when menu is open
+        document.body.style.overflow = navLinks.classList.contains('open') ? 'hidden' : '';
       });
     }
 
-    // Dropdown functionality
-    const dropdowns = $$('[data-dropdown]');
-    dropdowns.forEach(dropdown => {
-      const toggle = dropdown.querySelector('.dropdown-toggle');
-      const menu = dropdown.querySelector('.dropdown-menu');
-      
-      if (toggle && menu) {
-        // Click to toggle
-        toggle.addEventListener('click', (e) => {
-          e.preventDefault();
-          e.stopPropagation();
-          
-          // Close other dropdowns
-          dropdowns.forEach(other => {
-            if (other !== dropdown) other.classList.remove('open');
-          });
-          
-          dropdown.classList.toggle('open');
-        });
-        
-        // Close on outside click
-        document.addEventListener('click', (e) => {
-          if (!dropdown.contains(e.target)) {
-            dropdown.classList.remove('open');
-          }
-        });
-        
-        // Close on escape key
-        document.addEventListener('keydown', (e) => {
-          if (e.key === 'Escape') {
-            dropdown.classList.remove('open');
-          }
-        });
-      }
-    });
+    // Logout logic for both buttons
+    const handleLogout = () => {
+      logout();
+      location.href = ROUTES.home;
+    };
 
     const logoutBtn = $('#logoutBtn');
-    if (logoutBtn) {
-      logoutBtn.addEventListener('click', () => {
-        logout();
-        showModal('Logged out', 'You have been safely logged out.');
-        setTimeout(() => (location.href = ROUTES.home), 650);
-      });
-    }
+    if (logoutBtn) logoutBtn.addEventListener('click', handleLogout);
 
-    // Theme toggle functionality
-    const themeToggle = $('#themeToggle');
-    const themeIcon = $('#themeIcon');
-    
-    // Load saved theme or default to light
-    const savedTheme = localStorage.getItem('pap_theme') || 'light';
-    document.documentElement.setAttribute('data-theme', savedTheme);
-    updateThemeIcon(savedTheme);
-    
-    if (themeToggle && themeIcon) {
-      themeToggle.addEventListener('click', () => {
-        const currentTheme = document.documentElement.getAttribute('data-theme');
-        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-        
-        document.documentElement.setAttribute('data-theme', newTheme);
-        localStorage.setItem('pap_theme', newTheme);
-        updateThemeIcon(newTheme);
-      });
-    }
-    
-    function updateThemeIcon(theme) {
-      if (themeIcon) {
-        themeIcon.className = theme === 'dark' ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
-      }
-    }
+    const mobileLogoutBtn = $('#mobileLogoutBtn');
+    if (mobileLogoutBtn) mobileLogoutBtn.addEventListener('click', handleLogout);
+
   }
+
 
   /* -------------------- Media fallbacks -------------------- */
 
@@ -763,7 +798,7 @@
   function initIndex() {
     const featured = $('#featuredPets');
     if (featured) {
-      featured.innerHTML = listPets({}).slice(0, 3).map(petCard).join('');
+      featured.innerHTML = listPets({}).slice(0, 4).map(petCard).join('');
     }
 
     const stats = $('#heroStats');
@@ -1162,8 +1197,8 @@
             </thead>
             <tbody>
               ${apps.length ? apps.slice().reverse().map(a => {
-                const s = shelters.find(x => x.id === a.shelterId);
-                return `
+      const s = shelters.find(x => x.id === a.shelterId);
+      return `
                   <tr>
                     <td>${escapeHtml(a.id)}</td>
                     <td>${escapeHtml(a.petName)}</td>
@@ -1173,7 +1208,7 @@
                     <td><a class="btn btn-secondary" href="${ROUTES.pet}?id=${encodeURIComponent(a.petId)}"><i class="fa-solid fa-circle-info"></i> View Pet</a></td>
                   </tr>
                 `;
-              }).join('') : `
+    }).join('') : `
                 <tr><td colspan="6" style="color:var(--muted);font-weight:850;">No applications yet. Browse pets and apply when you’re ready.</td></tr>
               `}
             </tbody>
@@ -1237,9 +1272,9 @@
           </div>
           <div class="hero-stats">
             <div class="stat-card"><strong>${myPets.length}</strong><span>Listed pets</span></div>
-            <div class="stat-card"><strong>${myApps.filter(a=>a.status==='pending').length}</strong><span>Pending apps</span></div>
-            <div class="stat-card"><strong>${myApps.filter(a=>a.status==='approved').length}</strong><span>Approved</span></div>
-            <div class="stat-card"><strong>${myApps.filter(a=>a.status==='rejected').length}</strong><span>Rejected</span></div>
+            <div class="stat-card"><strong>${myApps.filter(a => a.status === 'pending').length}</strong><span>Pending apps</span></div>
+            <div class="stat-card"><strong>${myApps.filter(a => a.status === 'approved').length}</strong><span>Approved</span></div>
+            <div class="stat-card"><strong>${myApps.filter(a => a.status === 'rejected').length}</strong><span>Rejected</span></div>
           </div>
         </div>
       </div>
@@ -1606,9 +1641,9 @@
             </thead>
             <tbody>
               ${apps.length ? apps.slice().reverse().map(a => {
-                const u = users.find(x => x.id === a.userId);
-                const s = shelters.find(x => x.id === a.shelterId);
-                return `
+      const u = users.find(x => x.id === a.userId);
+      const s = shelters.find(x => x.id === a.shelterId);
+      return `
                   <tr>
                     <td>${escapeHtml(a.id)}</td>
                     <td>${escapeHtml(a.petName)}</td>
@@ -1618,7 +1653,7 @@
                     <td>${escapeHtml(new Date(a.createdAt).toLocaleString())}</td>
                   </tr>
                 `;
-              }).join('') : `<tr><td colspan="6" style="color:var(--muted);font-weight:850;">No applications recorded yet.</td></tr>`}
+    }).join('') : `<tr><td colspan="6" style="color:var(--muted);font-weight:850;">No applications recorded yet.</td></tr>`}
             </tbody>
           </table>
         </div>
@@ -1705,14 +1740,17 @@
     const carousel = $('#featuredCarousel');
     const prevBtn = $('#carouselPrev');
     const nextBtn = $('#carouselNext');
-    
+
     if (carousel && prevBtn && nextBtn) {
-      const pets = listPets({}).slice(0, 6);
+      // Reverse the list to show different pets/order than the main home page
+      const pets = listPets({}).reverse().slice(0, 6);
+
       carousel.innerHTML = pets.map(pet => `
         <div class="carousel-item">
           <div class="pet-card">
             <div class="pet-media">
-              <img src="${normalizeImageUrl(pet.images?.[0] || '')}" alt="${escapeHtml(pet.name)}" />
+              <!-- Use 2nd image for variety if available -->
+              <img src="${normalizeImageUrl(pet.images?.[1] || pet.images?.[0] || '')}" alt="${escapeHtml(pet.name)}" />
             </div>
             <div class="pet-body">
               <div class="pet-title">
@@ -1731,35 +1769,35 @@
           </div>
         </div>
       `).join('');
-      
+
       let currentIndex = 0;
       const itemWidth = 316; // 300px + 16px gap
       const visibleItems = Math.floor(carousel.parentElement.offsetWidth / itemWidth);
       const maxIndex = Math.max(0, pets.length - visibleItems);
-      
+
       const updateCarousel = () => {
         carousel.style.transform = `translateX(-${currentIndex * itemWidth}px)`;
         prevBtn.style.opacity = currentIndex === 0 ? '0.5' : '1';
         nextBtn.style.opacity = currentIndex >= maxIndex ? '0.5' : '1';
       };
-      
+
       prevBtn.addEventListener('click', () => {
         if (currentIndex > 0) {
           currentIndex--;
           updateCarousel();
         }
       });
-      
+
       nextBtn.addEventListener('click', () => {
         if (currentIndex < maxIndex) {
           currentIndex++;
           updateCarousel();
         }
       });
-      
+
       updateCarousel();
     }
-    
+
     // Initialize newsletter form
     const newsletterForm = $('#newsletterForm');
     if (newsletterForm) {
@@ -1800,35 +1838,49 @@
   }
 
   function initBackToTop() {
-    // Create back to top button
-    const backToTop = document.createElement('button');
-    backToTop.className = 'back-to-top';
-    backToTop.setAttribute('aria-label', 'Back to top');
-    backToTop.innerHTML = '<i class="fa-solid fa-arrow-up"></i>';
-    document.body.appendChild(backToTop);
+    let btn = $('.back-to-top');
+    if (!btn) {
+      btn = document.createElement('button');
+      btn.className = 'back-to-top';
+      btn.innerHTML = '<i class="fa-solid fa-arrow-up"></i>';
+      btn.setAttribute('aria-label', 'Back to top');
+      document.body.appendChild(btn);
+    }
 
-    // Show/hide button based on scroll position
-    const toggleBackToTop = () => {
-      if (window.pageYOffset > 300) {
-        backToTop.classList.add('visible');
-      } else {
-        backToTop.classList.remove('visible');
-      }
-    };
-
-    // Scroll to top when clicked
-    backToTop.addEventListener('click', () => {
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
+    window.addEventListener('scroll', () => {
+      if (window.pageYOffset > 300) btn.classList.add('visible');
+      else btn.classList.remove('visible');
     });
 
-    // Listen for scroll events
-    window.addEventListener('scroll', toggleBackToTop);
-    
-    // Initial check
-    toggleBackToTop();
+    btn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+
+  function initThemeToggle() {
+    const btn = $('#themeToggle');
+    if (!btn) return;
+
+    const saved = localStorage.getItem('pap_theme') || 'light';
+    document.documentElement.setAttribute('data-theme', saved);
+    updateThemeIcon(saved);
+
+    btn.addEventListener('click', () => {
+      const current = document.documentElement.getAttribute('data-theme');
+      const next = current === 'light' ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme', next);
+      localStorage.setItem('pap_theme', next);
+      updateThemeIcon(next);
+    });
+  }
+
+  function updateThemeIcon(theme) {
+    const btn = $('#themeToggle');
+    if (!btn) return;
+    const icon = btn.querySelector('i');
+    if (icon) {
+      icon.className = theme === 'light' ? 'fa-solid fa-moon' : 'fa-solid fa-sun';
+    }
   }
 
   function initRoute() {
@@ -1853,63 +1905,101 @@
     initButtonPulse();
     initThemeToggle();
     initBackToTop();
+    setupCustomSelects();
+  }
+
+  function setupCustomSelects() {
+    const selects = document.querySelectorAll('.field select:not(.replaced)');
+
+    selects.forEach(select => {
+      // Create DOM structure
+      const wrapper = document.createElement('div');
+      wrapper.className = 'custom-select-container';
+
+      const trigger = document.createElement('div');
+      trigger.className = 'custom-select-trigger';
+      // Set initial text
+      const selectedOption = select.options[select.selectedIndex];
+      trigger.textContent = selectedOption ? selectedOption.textContent : 'Select';
+
+      const optionsList = document.createElement('div');
+      optionsList.className = 'custom-select-options';
+
+      // Populate options
+      Array.from(select.options).forEach(opt => {
+        const el = document.createElement('div');
+        el.className = 'custom-select-option';
+        if (opt.selected) el.classList.add('selected');
+        el.textContent = opt.textContent;
+        el.dataset.value = opt.value;
+
+        el.addEventListener('click', (e) => {
+          e.stopPropagation();
+
+          // Update visual
+          trigger.textContent = opt.textContent;
+          wrapper.classList.remove('open');
+
+          // Update styles
+          wrapper.querySelectorAll('.custom-select-option').forEach(o => o.classList.remove('selected'));
+          el.classList.add('selected');
+
+          // Update original select and trigger change
+          if (select.value !== opt.value) {
+            select.value = opt.value;
+            select.dispatchEvent(new Event('change', { bubbles: true }));
+          }
+        });
+
+        optionsList.appendChild(el);
+      });
+
+      // Toggle logic
+      trigger.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const isOpen = wrapper.classList.contains('open');
+
+        // Close all others
+        document.querySelectorAll('.custom-select-container.open').forEach(c => {
+          c.classList.remove('open');
+          c.classList.remove('open-up'); // Also remove open-up from others
+        });
+
+        if (!isOpen) {
+          // Viewport collision detection
+          const rect = wrapper.getBoundingClientRect();
+          const spaceBelow = window.innerHeight - rect.bottom;
+          // If less than 250px space below, open upwards
+          if (spaceBelow < 250) {
+            wrapper.classList.add('open-up');
+          } else {
+            wrapper.classList.remove('open-up');
+          }
+
+          wrapper.classList.add('open');
+        }
+      });
+
+      // Insert into DOM
+      select.parentNode.insertBefore(wrapper, select);
+      wrapper.appendChild(select);
+      select.classList.add('replaced');
+      wrapper.appendChild(trigger);
+      wrapper.appendChild(optionsList);
+    });
+
+    // Close on outside click
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('.custom-select-container')) {
+        document.querySelectorAll('.custom-select-container.open').forEach(c => {
+          c.classList.remove('open');
+          c.classList.remove('open-up'); // Also remove open-up when closing on outside click
+        });
+      }
+    });
   }
 
   document.addEventListener('DOMContentLoaded', boot);
-
-  // Theme toggle functionality
-  function initThemeToggle() {
-    const themeToggle = $('#themeToggle');
-    if (!themeToggle) return;
-
-    // Load saved theme or default to light
-    const savedTheme = localStorage.getItem('theme') || 'light';
-    document.documentElement.setAttribute('data-theme', savedTheme);
-    updateThemeIcon(savedTheme);
-
-    themeToggle.addEventListener('click', () => {
-      const currentTheme = document.documentElement.getAttribute('data-theme');
-      const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-      
-      document.documentElement.setAttribute('data-theme', newTheme);
-      localStorage.setItem('theme', newTheme);
-      updateThemeIcon(newTheme);
-    });
-  }
-
-  function updateThemeIcon(theme) {
-    const themeToggle = $('#themeToggle');
-    if (!themeToggle) return;
-    
-    const icon = themeToggle.querySelector('i');
-    if (icon) {
-      icon.className = theme === 'light' ? 'fa-solid fa-moon' : 'fa-solid fa-sun';
-    }
-  }
-
-  // Back to top button functionality
-  function initBackToTop() {
-    const backToTopBtn = document.createElement('button');
-    backToTopBtn.className = 'back-to-top hidden';
-    backToTopBtn.innerHTML = '<i class="fa-solid fa-arrow-up"></i>';
-    backToTopBtn.setAttribute('aria-label', 'Back to top');
-    document.body.appendChild(backToTopBtn);
-
-    window.addEventListener('scroll', () => {
-      if (window.pageYOffset > 300) {
-        backToTopBtn.classList.remove('hidden');
-      } else {
-        backToTopBtn.classList.add('hidden');
-      }
-    });
-
-    backToTopBtn.addEventListener('click', () => {
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
-    });
-  }
 
   // Minimal public API
   window.PetPortal = {

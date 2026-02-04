@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Browse Pets - Pet Adoption Portal</title>
-  <meta name="description" content="Browse pets available for adoption. Filter by species and location, search by name or breed, and apply online." />
+  <meta name="description"
+    content="Browse pets available for adoption. Filter by species and location, search by name or breed, and apply online." />
 
   <!-- Favicon for all devices -->
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
@@ -13,9 +15,13 @@
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
   <link rel="manifest" href="site.webmanifest" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Nunito:wght@700;800;900;1000&display=swap" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Nunito:wght@700;800;900;1000&display=swap"
+    rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="custom-select.css" />
 </head>
+
 <body>
   <div id="siteHeader"></div>
 
@@ -24,7 +30,8 @@
       <section class="section">
         <div class="section-header" style="text-align: center;">
           <h1 class="section-title">Browse Pets</h1>
-          <p class="section-subtitle">Filter and search verified adoption profiles. Total available: <strong id="petCount">0</strong></p>
+          <p class="section-subtitle">Filter and search verified adoption profiles. Total available: <strong
+              id="petCount">0</strong></p>
         </div>
 
         <div class="card card-pad">
@@ -53,7 +60,8 @@
             </div>
           </div>
 
-          <p class="helper" style="margin-top:10px;">Tip: Click <strong>Details</strong> to see full temperament notes and care information before applying.</p>
+          <p class="helper" style="margin-top:10px;">Tip: Click <strong>Details</strong> to see full temperament notes
+            and care information before applying.</p>
         </div>
 
         <div style="height:16px;"></div>
@@ -70,15 +78,21 @@
         <div class="grid grid-3" style="text-align: center;">
           <div class="card card-pad">
             <span class="badge"><i class="fa-solid fa-id-card"></i> Verify identity</span>
-            <p style="margin:10px 0 0;color:var(--muted);font-weight:750;">Meet only at verified shelters. Avoid third-party handoffs and suspicious payment requests.</p>
+            <p style="margin:10px auto 0;color:var(--muted);font-weight:750;max-width:400px;">Meet only at verified
+              shelters. Avoid
+              third-party handoffs and suspicious payment requests.</p>
           </div>
           <div class="card card-pad">
             <span class="badge"><i class="fa-solid fa-house"></i> Home check</span>
-            <p style="margin:10px 0 0;color:var(--muted);font-weight:750;">Ensure your home environment and housing rules are compatible with the pet before applying.</p>
+            <p style="margin:10px auto 0;color:var(--muted);font-weight:750;max-width:400px;">Ensure your home
+              environment and housing
+              rules are compatible with the pet before applying.</p>
           </div>
           <div class="card card-pad">
             <span class="badge"><i class="fa-solid fa-stethoscope"></i> Ongoing care</span>
-            <p style="margin:10px 0 0;color:var(--muted);font-weight:750;">Budget for vet visits, nutrition, grooming, training, and emergency medical needs.</p>
+            <p style="margin:10px auto 0;color:var(--muted);font-weight:750;max-width:400px;">Budget for vet visits,
+              nutrition, grooming,
+              training, and emergency medical needs.</p>
           </div>
         </div>
       </section>
@@ -96,7 +110,9 @@
               <i class="fa-solid fa-search"></i>
             </div>
             <h3 style="margin:10px 0 6px;font-family:var(--font-display);font-weight:1000;">Find Your Match</h3>
-            <p style="margin:0;color:var(--muted);font-weight:750;">Research breeds that match your lifestyle and living situation</p>
+            <p style="margin:0 auto;color:var(--muted);font-weight:750;max-width:300px;">Research breeds that match your
+              lifestyle and living
+              situation</p>
             <div style="margin-top: 12px;">
               <span class="badge" style="font-size: 0.75rem;">🏠 Space check</span>
               <span class="badge" style="font-size: 0.75rem;">⏰ Time commitment</span>
@@ -108,7 +124,9 @@
               <i class="fa-solid fa-filter"></i>
             </div>
             <h3 style="margin:10px 0 6px;font-family:var(--font-display);font-weight:1000;">Use Filters</h3>
-            <p style="margin:0;color:var(--muted);font-weight:750;">Narrow down options by species, age, location, and traits</p>
+            <p style="margin:0 auto;color:var(--muted);font-weight:750;max-width:300px;">Narrow down options by species,
+              age, location, and
+              traits</p>
             <div style="margin-top: 12px;">
               <span class="badge" style="font-size: 0.75rem;">🐕 Species filter</span>
               <span class="badge" style="font-size: 0.75rem;">📍 Location search</span>
@@ -120,7 +138,9 @@
               <i class="fa-solid fa-heart"></i>
             </div>
             <h3 style="margin:10px 0 6px;font-family:var(--font-display);font-weight:1000;">Read Profiles</h3>
-            <p style="margin:0;color:var(--muted);font-weight:750;">Review temperament, health, and care requirements</p>
+            <p style="margin:0 auto;color:var(--muted);font-weight:750;max-width:300px;">Review temperament, health, and
+              care requirements
+            </p>
             <div style="margin-top: 12px;">
               <span class="badge" style="font-size: 0.75rem;">📋 Complete info</span>
               <span class="badge" style="font-size: 0.75rem;">🏥 Health status</span>
@@ -136,15 +156,17 @@
           <p class="section-subtitle">From application to bringing your pet home</p>
         </div>
 
-        <div class="card card-pad" style="background: linear-gradient(135deg, var(--primary-light), var(--secondary-light));">
+        <div class="card card-pad"
+          style="background: linear-gradient(135deg, var(--primary-light), var(--secondary-light));">
           <div style="text-align: center; margin-bottom: 20px;">
             <div style="font-size: 3rem; color: var(--primary); margin-bottom: 12px;">
               <i class="fa-solid fa-file-alt"></i>
             </div>
             <h3 style="margin:0;font-family:var(--font-display);font-weight:1000;">Simple 3-Step Process</h3>
-            <p style="margin:8px 0 0;color:var(--muted);font-weight:750;">Complete application → Meet your pet → Welcome home!</p>
+            <p style="margin:8px 0 0;color:var(--muted);font-weight:750;">Complete application → Meet your pet → Welcome
+              home!</p>
           </div>
-          
+
           <div class="grid grid-3" style="text-align: center;">
             <div>
               <div style="font-size: 2rem; color: var(--secondary); margin-bottom: 8px;">
@@ -158,7 +180,8 @@
                 <i class="fa-solid fa-comments"></i>
               </div>
               <h4 style="margin:0;font-family:var(--font-display);font-weight:900;">Shelter Review</h4>
-              <p style="margin:4px 0 0;color:var(--muted);font-weight:750; font-size: 0.85rem;">Best match evaluation</p>
+              <p style="margin:4px 0 0;color:var(--muted);font-weight:750; font-size: 0.85rem;">Best match evaluation
+              </p>
             </div>
             <div>
               <div style="font-size: 2rem; color: var(--secondary); margin-bottom: 8px;">
@@ -180,46 +203,57 @@
 
         <div class="grid grid-2">
           <div class="card card-pad">
-            <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 16px;">
-              <div style="font-size: 2rem; color: var(--primary); background: var(--primary-light); width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+            <div
+              style="display: flex; flex-direction: column; align-items: center; gap: 12px; margin-bottom: 16px; text-align: center;">
+              <div
+                style="font-size: 2rem; color: var(--primary); background: var(--primary-light); width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
                 <i class="fa-solid fa-home"></i>
               </div>
               <div>
                 <h3 style="margin:0;font-family:var(--font-display);font-weight:1000;">Home Setup</h3>
-                <p style="margin:4px 0 0;color:var(--muted);font-weight:750; font-size: 0.9rem;">Create a safe, welcoming space</p>
+                <p style="margin:4px 0 0;color:var(--muted);font-weight:750; font-size: 0.9rem;">Create a safe,
+                  welcoming space</p>
               </div>
             </div>
-            <div style="display: flex; flex-wrap: wrap; gap: 8px;">
-              <span class="badge" style="font-size: 0.75rem;">🔒 Pet-proof home</span>
-              <span class="badge" style="font-size: 0.75rem;">🛏️ Essential supplies</span>
-              <span class="badge" style="font-size: 0.75rem;">🏥 Vet ready</span>
-              <span class="badge" style="font-size: 0.75rem;">🛌️ Cozy spot</span>
+            <div
+              style="display: flex; flex-wrap: nowrap; gap: 6px; justify-content: center; overflow-x: auto; max-width: 100%;">
+              <span class="badge" style="font-size: 0.75rem; white-space: nowrap;">🔒 Pet-proof home</span>
+              <span class="badge" style="font-size: 0.75rem; white-space: nowrap;">🛏️ Essential supplies</span>
+              <span class="badge" style="font-size: 0.75rem; white-space: nowrap;">🏥 Vet ready</span>
+              <span class="badge" style="font-size: 0.75rem; white-space: nowrap;">🛌️ Cozy spot</span>
             </div>
           </div>
 
           <div class="card card-pad">
-            <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 16px;">
-              <div style="font-size: 2rem; color: var(--primary); background: var(--primary-light); width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+            <div
+              style="display: flex; flex-direction: column; align-items: center; gap: 12px; margin-bottom: 16px; text-align: center;">
+              <div
+                style="font-size: 2rem; color: var(--primary); background: var(--primary-light); width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
                 <i class="fa-solid fa-hospital"></i>
               </div>
               <div>
                 <h3 style="margin:0;font-family:var(--font-display);font-weight:1000;">Health Planning</h3>
-                <p style="margin:4px 0 0;color:var(--muted);font-weight:750; font-size: 0.9rem;">Establish veterinary care</p>
+                <p style="margin:4px 0 0;color:var(--muted);font-weight:750; font-size: 0.9rem;">Establish veterinary
+                  care</p>
               </div>
             </div>
-            <div style="display: flex; flex-wrap: wrap; gap: 8px;">
-              <span class="badge" style="font-size: 0.75rem;">📅 First week checkup</span>
-              <span class="badge" style="font-size: 0.75rem;">💊 Vaccination schedule</span>
-              <span class="badge" style="font-size: 0.75rem;">🛡️ Pet insurance</span>
-              <span class="badge" style="font-size: 0.75rem;">📋 Emergency contacts</span>
+            <div
+              style="display: flex; flex-wrap: nowrap; gap: 6px; justify-content: center; overflow-x: auto; max-width: 100%;">
+              <span class="badge" style="font-size: 0.75rem; white-space: nowrap;">📅 First week checkup</span>
+              <span class="badge" style="font-size: 0.75rem; white-space: nowrap;">💊 Vaccination schedule</span>
+              <span class="badge" style="font-size: 0.75rem; white-space: nowrap;">🛡️ Pet insurance</span>
+              <span class="badge" style="font-size: 0.75rem; white-space: nowrap;">📋 Emergency contacts</span>
             </div>
           </div>
         </div>
 
-        <div class="card card-pad" style="margin-top: 16px; text-align: center; background: linear-gradient(135deg, #fff3cd, #ffeaa7);">
+        <div class="card card-pad"
+          style="margin-top: 16px; text-align: center; background: linear-gradient(135deg, #fff3cd, #ffeaa7);">
           <div style="font-size: 2rem; margin-bottom: 12px;">💡</div>
           <h3 style="margin:0;font-family:var(--font-display);font-weight:1000;">Pro Preparation Tip</h3>
-          <p style="margin:8px 0 0;color:var(--muted);font-weight:750;">Schedule time off work for the first week. This investment pays off with a smoother transition!</p>
+          <p style="margin:8px auto 0;color:var(--muted);font-weight:750;max-width:280px;">Schedule time off work for
+            the first week. This
+            investment pays off with a smoother transition!</p>
         </div>
       </section>
 
@@ -276,29 +310,33 @@
           <p class="section-subtitle">Real stories from families who found their perfect companions</p>
         </div>
 
-        <div class="card card-pad" style="background: linear-gradient(135deg, var(--secondary-light), var(--primary-light));">
+        <div class="card card-pad"
+          style="background: linear-gradient(135deg, var(--secondary-light), var(--primary-light));">
           <div style="text-align: center; margin-bottom: 20px;">
             <div style="font-size: 3rem; color: var(--primary); margin-bottom: 12px;">
               <i class="fa-solid fa-star"></i>
             </div>
             <h3 style="margin:0;font-family:var(--font-display);font-weight:1000;">Life-Changing Adoptions</h3>
-            <p style="margin:8px 0 0;color:var(--muted);font-weight:750;">Every adoption creates ripples of joy and love</p>
+            <p style="margin:8px 0 0;color:var(--muted);font-weight:750;">Every adoption creates ripples of joy and love
+            </p>
           </div>
-          
+
           <div class="grid grid-2" style="text-align: center;">
             <div>
               <div style="font-size: 2rem; color: var(--secondary); margin-bottom: 8px;">
                 👨‍👩‍👧‍👦
               </div>
               <h4 style="margin:0;font-family:var(--font-display);font-weight:900;">Thompson Family</h4>
-              <p style="margin:4px 0 0;color:var(--muted);font-weight:750; font-size: 0.85rem;">Bonded senior cats brought family closer</p>
+              <p style="margin:4px 0 0;color:var(--muted);font-weight:750; font-size: 0.85rem;">Bonded senior cats
+                brought family closer</p>
             </div>
             <div>
               <div style="font-size: 2rem; color: var(--secondary); margin-bottom: 8px;">
                 👴
               </div>
               <h4 style="margin:0;font-family:var(--font-display);font-weight:900;">Robert & Max</h4>
-              <p style="margin:4px 0 0;color:var(--muted);font-weight:750; font-size: 0.85rem;">Retired teacher found new purpose</p>
+              <p style="margin:4px 0 0;color:var(--muted);font-weight:750; font-size: 0.85rem;">Retired teacher found
+                new purpose</p>
             </div>
           </div>
         </div>
@@ -310,4 +348,5 @@
 
   <script src="script.js"></script>
 </body>
+
 </html>
