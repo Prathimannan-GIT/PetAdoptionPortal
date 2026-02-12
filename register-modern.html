@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Register - PetAdopt</title>
+  <meta name="description"
+    content="Register as a user or shelter. Shelters require admin approval before publishing pets." />
+
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+  <link rel="manifest" href="site.webmanifest" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Nunito:wght@700;800;900;1000&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body class="auth-modern">
+  <div class="auth-container">
+    <div class="auth-wrapper">
+      <!-- Left Panel -->
+      <div class="auth-left">
+        <div class="auth-brand-modern">
+          <a href="index.html" class="brand" aria-label="PetAdopt">
+            <span class="brand-badge"><i class="fa-solid fa-paw"></i></span>
+            <span>PetAdopt</span>
+          </a>
+        </div>
+
+        <div class="auth-welcome">
+          <h2>Join Our Community</h2>
+          <p>Start your journey to find the perfect companion or help pets find their forever homes.</p>
+        </div>
+
+        <div class="auth-features">
+          <div class="auth-feature">
+            <i class="fa-solid fa-user-plus"></i>
+            <div class="auth-feature-content">
+              <h3>Quick Registration</h3>
+              <p>Sign up in minutes and start browsing immediately</p>
+            </div>
+          </div>
+          <div class="auth-feature">
+            <i class="fa-solid fa-building"></i>
+            <div class="auth-feature-content">
+              <h3>Shelter Partners</h3>
+              <p>Register your shelter and reach thousands of potential adopters</p>
+            </div>
+          </div>
+          <div class="auth-feature">
+            <i class="fa-solid fa-lock"></i>
+            <div class="auth-feature-content">
+              <h3>Secure Platform</h3>
+              <p>Your data is protected with industry-standard security</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Panel -->
+      <div class="auth-right">
+        <div class="auth-brand-modern in-card-mobile">
+          <a href="index.html" class="brand" aria-label="PetAdopt">
+            <span class="brand-badge"><i class="fa-solid fa-paw"></i></span>
+            <span>PetAdopt</span>
+          </a>
+        </div>
+
+        <div class="auth-header">
+          <h2>Create Account</h2>
+          <p>Choose your account type to get started</p>
+        </div>
+
+        <div class="register-tabs">
+          <button type="button" class="register-tab active" id="tabUser">
+            <i class="fa-solid fa-user"></i>
+            User Account
+          </button>
+          <button type="button" class="register-tab" id="tabShelter">
+            <i class="fa-solid fa-building"></i>
+            Shelter Account
+          </button>
+        </div>
+
+        <!-- User Registration Form -->
+        <form class="auth-form" id="registerUserForm" novalidate>
+          <div class="auth-grid-2">
+            <div class="auth-field">
+              <label for="userName">Full Name</label>
+              <input id="userName" name="name" required placeholder="Enter your full name" />
+            </div>
+            <div class="auth-field">
+              <label for="userCity">City</label>
+              <input id="userCity" name="city" required placeholder="Your city" />
+            </div>
+          </div>
+
+          <div class="auth-grid-2">
+            <div class="auth-field">
+              <label for="userEmail">Email Address</label>
+              <input id="userEmail" name="email" type="email" required placeholder="you@example.com" />
+            </div>
+            <div class="auth-field">
+              <label for="userPhone">Phone Number</label>
+              <input id="userPhone" name="phone" required placeholder="+1 (555) 000-0000" />
+            </div>
+          </div>
+
+          <div class="auth-field">
+            <label for="userPassword">Password</label>
+            <input id="userPassword" name="password" type="password" required placeholder="Create a strong password" />
+          </div>
+
+          <div class="auth-field">
+            <label for="userConfirm">Confirm Password</label>
+            <input id="userConfirm" name="confirmPassword" type="password" required
+              placeholder="Repeat your password" />
+          </div>
+
+          <div class="auth-actions">
+            <a href="login.html" class="btn btn-secondary">
+              <i class="fa-solid fa-right-to-bracket"></i>
+              Login
+            </a>
+            <button type="submit" class="btn btn-primary">
+              <i class="fa-solid fa-check"></i>
+              Create Account
+            </button>
+          </div>
+        </form>
+
+        <!-- Shelter Registration Form (Hidden by default) -->
+        <form class="auth-form" id="registerShelterForm" novalidate style="display: none;">
+          <div class="auth-grid-2">
+            <div class="auth-field">
+              <label for="shelterName">Shelter Name</label>
+              <input id="shelterName" name="name" required placeholder="Enter shelter name" />
+            </div>
+            <div class="auth-field">
+              <label for="shelterCity">City</label>
+              <input id="shelterCity" name="city" required placeholder="City location" />
+            </div>
+          </div>
+
+          <div class="auth-grid-2">
+            <div class="auth-field">
+              <label for="shelterEmail">Email Address</label>
+              <input id="shelterEmail" name="email" type="email" required placeholder="shelter@example.com" />
+            </div>
+            <div class="auth-field">
+              <label for="shelterPhone">Phone Number</label>
+              <input id="shelterPhone" name="phone" required placeholder="+1 (555) 000-0000" />
+            </div>
+          </div>
+
+          <div class="auth-field">
+            <label for="shelterPassword">Password</label>
+            <input id="shelterPassword" name="password" type="password" required
+              placeholder="Create a strong password" />
+          </div>
+
+          <div class="auth-field">
+            <label for="shelterConfirm">Confirm Password</label>
+            <input id="shelterConfirm" name="confirmPassword" type="password" required
+              placeholder="Repeat your password" />
+          </div>
+
+          <div class="auth-note">
+            <h4><i class="fa-solid fa-circle-check"></i> Approval Required</h4>
+            <p>Shelter registrations require admin approval before you can login and manage pet listings. You'll receive
+              an email once your account is approved.</p>
+          </div>
+
+          <div class="auth-actions">
+            <a href="login.html" class="btn btn-secondary">
+              <i class="fa-solid fa-right-to-bracket"></i>
+              Login
+            </a>
+            <button type="submit" class="btn btn-primary">
+              <i class="fa-solid fa-paper-plane"></i>
+              Submit for Approval
+            </button>
+          </div>
+        </form>
+
+        <div class="auth-footer">
+          <p>Already have an account? <a href="login.html">Sign in here</a></p>
+          <p style="margin-top: 8px;"><a href="adopt.html">Browse pets without registration</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+
+</html>

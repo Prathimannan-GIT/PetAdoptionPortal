@@ -1,5 +1,5 @@
 /*
- Pet Adoption Portal (HTML/CSS/JS only)
+ PetAdopt (HTML/CSS/JS only)
  - No backend: roles + data simulated with localStorage
  - Modules: user, shelter, admin
  - Pages: index, login, register, dashboard, adopt, pet-details, apply, shelter-dashboard, admin, about, contact, privacy, terms
@@ -20,7 +20,7 @@
     home: 'index.html',
     home2: 'home2.html',
     login: 'login.html',
-    register: 'register.html',
+    register: 'login.html#register',
     dashboard: 'dashboard.html',
     adopt: 'adopt.html',
     pet: 'pet-details.html',
@@ -103,7 +103,7 @@
 
   function fallbackImageDataUri(type = 'pet') {
     if (type === 'hero') {
-      const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f7fbff"/><stop offset="0.55" stop-color="#f3fff6"/><stop offset="1" stop-color="#f7fbff"/></linearGradient><linearGradient id="a" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#22c55e" stop-opacity="0.85"/><stop offset="1" stop-color="#0ea5e9" stop-opacity="0.85"/></linearGradient></defs><rect width="1200" height="800" fill="url(#g)"/><g opacity="0.18"><path d="M0 560 C 160 480, 360 640, 560 560 S 920 480, 1200 560" fill="none" stroke="url(#a)" stroke-width="14"/></g><g><text x="70" y="130" fill="#0b1b2c" font-family="Inter, Arial, sans-serif" font-size="44" font-weight="900">Pet Adoption Portal</text><text x="70" y="180" fill="#245" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="700" opacity="0.75">Find Your Perfect Companion</text></g></svg>`;
+      const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f7fbff"/><stop offset="0.55" stop-color="#f3fff6"/><stop offset="1" stop-color="#f7fbff"/></linearGradient><linearGradient id="a" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#22c55e" stop-opacity="0.85"/><stop offset="1" stop-color="#0ea5e9" stop-opacity="0.85"/></linearGradient></defs><rect width="1200" height="800" fill="url(#g)"/><g opacity="0.18"><path d="M0 560 C 160 480, 360 640, 560 560 S 920 480, 1200 560" fill="none" stroke="url(#a)" stroke-width="14"/></g><g><text x="70" y="130" fill="#0b1b2c" font-family="Inter, Arial, sans-serif" font-size="44" font-weight="900">PetAdopt</text><text x="70" y="180" fill="#245" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="700" opacity="0.75">Find Your Perfect Companion</text></g></svg>`;
       return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
     } else {
       const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f7fbff"/><stop offset="0.55" stop-color="#f3fff6"/><stop offset="1" stop-color="#f7fbff"/></linearGradient></defs><rect width="400" height="300" fill="url(#g)"/><g transform="translate(50 80)"><rect x="0" y="0" width="300" height="140" rx="20" fill="#ffffff" opacity="0.86" stroke="#0ea5e9" stroke-opacity="0.25"/><g transform="translate(40 35)" fill="none" stroke="#0b1b2c" stroke-opacity="0.7" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"><path d="M60 80c-9 5-15 14-15 25 0 17 17 31 40 31s40-14 40-31c0-11-6-20-15-25-7-4-14-2-25 4-11-6-18-8-25-4z"/><circle cx="60" cy="33" r="10"/><circle cx="87" cy="23" r="10"/><circle cx="114" cy="23" r="10"/><circle cx="141" cy="33" r="10"/></g></g></svg>`;
@@ -199,7 +199,13 @@
     const p = document.createElement('p');
     p.className = 'error-text';
     p.textContent = msg;
-    field.insertAdjacentElement('afterend', p);
+
+    // For checkboxes in a flex container (like auth-checkbox), put error after the container
+    if (field.type === 'checkbox' && field.parentElement.classList.contains('auth-checkbox')) {
+      field.parentElement.insertAdjacentElement('afterend', p);
+    } else {
+      field.insertAdjacentElement('afterend', p);
+    }
   }
 
   function validateForm(form) {
@@ -207,10 +213,17 @@
     let ok = true;
 
     $$('[required]', form).forEach(field => {
-      const v = String(field.value || '').trim();
-      if (!v) {
-        ok = false;
-        setError(field, 'This field is required.');
+      if (field.type === 'checkbox') {
+        if (!field.checked) {
+          ok = false;
+          setError(field, 'You must agree to the Terms & Conditions.');
+        }
+      } else {
+        const v = String(field.value || '').trim();
+        if (!v) {
+          ok = false;
+          setError(field, 'This field is required.');
+        }
       }
     });
 
@@ -420,11 +433,11 @@
           id: 'pet-105',
           name: 'Kiwi',
           species: 'Dog',
-          breed: 'Border Collie',
+          breed: 'Australian Shepherd',
           gender: 'Male',
           ageMonths: 14,
           size: 'Medium',
-          color: 'Black',
+          color: 'Brown',
           vaccinated: true,
           neutered: true,
           energy: 'High',
@@ -436,8 +449,7 @@
           story: 'Kiwi is smart and driven. He does best with active adopters who enjoy training and structured play.',
           traits: ['Loves puzzles', 'Fast learner', 'Needs exercise'],
           images: [
-            'https://images.unsplash.com/photo-1517849845537-4d257902454a',
-            'https://images.unsplash.com/photo-1507146426996-ef05306b995a'
+            'https://media.istockphoto.com/id/636475496/photo/portrait-of-brown-puppy-with-bokeh-background.jpg?s=612x612&w=0&k=20&c=Ot63dQOYplm0kLJdlSVWbtKGwGkuZfnfdwH5ry9a6EQ='
           ],
           createdAt: isoNow()
         },
@@ -447,6 +459,16 @@
 
     // Auto-fix: Remove Bella (p-106) if she exists (cleanup)
     const currentPets = read(LS.PETS, []);
+
+    // Auto-fix: Update Kiwi's image if it exists (for existing users)
+    const kiwi = currentPets.find(p => p.id === 'pet-105' || p.name === 'Kiwi');
+    if (kiwi) {
+      kiwi.images = ['https://media.istockphoto.com/id/636475496/photo/portrait-of-brown-puppy-with-bokeh-background.jpg?s=612x612&w=0&k=20&c=Ot63dQOYplm0kLJdlSVWbtKGwGkuZfnfdwH5ry9a6EQ='];
+      kiwi.color = 'Brown';
+      kiwi.breed = 'Australian Shepherd';
+      write(LS.PETS, currentPets);
+    }
+
     const bellaIndex = currentPets.findIndex(p => p.id === 'pet-106');
     if (bellaIndex !== -1) {
       currentPets.splice(bellaIndex, 1);
@@ -469,8 +491,8 @@
     if (!headerHost || !footerHost) return;
 
     const path = currentFile();
-    // Hide header and footer on login page as per request
-    if (path === ROUTES.login) {
+    // Hide header and footer on auth pages as per request
+    if (path === ROUTES.login || path === ROUTES.register) {
       headerHost.innerHTML = '';
       footerHost.innerHTML = '';
       return;
@@ -494,9 +516,9 @@
       <header class="site-header">
         <div class="container">
           <div class="navbar">
-            <a class="brand" href="${ROUTES.home}" aria-label="Pet Adoption Portal">
+            <a class="brand" href="${ROUTES.home}" aria-label="PetAdopt">
               <span class="brand-badge"><i class="fa-solid fa-paw"></i></span>
-              <span style="font-family: var(--font-display); font-weight: 1000;">Pet Adoption Portal</span>
+              <span style="font-family: var(--font-display); font-weight: 1000;">PetAdopt</span>
             </a>
 
             <nav class="nav-links" id="navLinks" aria-label="Primary">
@@ -516,11 +538,8 @@
                     <i class="fa-solid fa-right-from-bracket"></i> Logout
                   </button>
                 ` : `
-                  <a href="${ROUTES.login}" class="btn btn-secondary" style="width: 100%; justify-content: center;">
-                    <i class="fa-solid fa-right-to-bracket"></i> Login
-                  </a>
-                  <a href="${ROUTES.register}" class="btn btn-primary" style="width: 100%; justify-content: center;">
-                    <i class="fa-solid fa-user-plus"></i> Register
+                  <a href="${ROUTES.login}" class="btn btn-primary" style="width: 100%; justify-content: center;">
+                    <i class="fa-solid fa-user-plus"></i> Join Now
                   </a>
                 `}
               </div>
@@ -534,8 +553,9 @@
                 </span>
                 <button id="logoutBtn" class="btn btn-secondary btn-sm">Logout</button>
               ` : `
-                <a href="${ROUTES.login}" class="btn btn-secondary">Login</a>
-                <a href="${ROUTES.register}" class="btn btn-primary">Register</a>
+                <a href="${ROUTES.login}" class="btn btn-primary">
+                  <i class="fa-solid fa-user-plus"></i> Join Now
+                </a>
               `}
               <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
                 <i class="fa-solid fa-moon"></i>
@@ -554,9 +574,9 @@
         <div class="container">
           <div class="footer-top">
             <div class="footer-brand">
-              <div style="display:flex;align-items:center;gap:12px;margin-bottom:20px;">
-                <span class="brand-badge" style="background: linear-gradient(135deg, var(--primary), var(--primary-2));"><i class="fa-solid fa-paw"></i></span>
-                <h3 style="margin:0;font-weight:1000;color:var(--text);">Pet Adoption Portal</h3>
+              <div style="display:flex;align-items:center;gap:12px;margin-bottom:24px;">
+                <span class="brand-badge"><i class="fa-solid fa-paw"></i></span>
+                <span style="font-family: var(--font-display); font-weight: 1000; font-size: 1.5rem; color: var(--text);">PetAdopt</span>
               </div>
               <p style="color:var(--muted);font-weight:500;line-height:1.6;margin-bottom:24px;">
                 Connecting loving families with pets in need. Every adoption creates a forever home and changes a life forever.
@@ -676,7 +696,7 @@
           <div class="footer-bottom">
             <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;">
               <div style="color:var(--muted);font-weight:500;font-size:0.9rem;">
-                © ${new Date().getFullYear()} Pet Adoption Portal. Made with <i class="fa-solid fa-heart" style="color:var(--danger);"></i> for pets and families.
+                © ${new Date().getFullYear()} PetAdopt. Made with <i class="fa-solid fa-heart" style="color:var(--danger);"></i> for pets and families.
               </div>
               <div style="display:flex;gap:16px;align-items:center;">
                 <span style="color:var(--muted);font-weight:500;font-size:0.85rem;">Payment methods:</span>
@@ -997,15 +1017,53 @@
 
   function initLogin() {
     const form = $('#loginForm');
-    if (!form) return;
+    const registerForm = $('#registerUserForm');
+    if (!form && !registerForm) return;
+
+    const loginView = $('#loginView');
+    const registerView = $('#registerView');
+    const tabLogin = $('#tabLoginBtn');
+    const tabRegister = $('#tabRegisterBtn');
+
+    if (tabLogin && tabRegister) {
+      const showLogin = () => {
+        tabLogin.classList.add('active');
+        tabRegister.classList.remove('active');
+        loginView.classList.add('active');
+        registerView.classList.remove('active');
+      };
+
+      const showRegister = () => {
+        tabRegister.classList.add('active');
+        tabLogin.classList.remove('active');
+        registerView.classList.add('active');
+        loginView.classList.remove('active');
+      };
+
+      tabLogin.addEventListener('click', showLogin);
+      tabRegister.addEventListener('click', showRegister);
+
+      // Check initial hash
+      if (location.hash === '#register') {
+        showRegister();
+      }
+    }
 
     const next = qs('next');
 
-    $('#demoUser')?.addEventListener('click', () => showModal('Demo User', 'Email: aarav@petportal-mail.com\nPassword: User@1234'));
-    $('#demoShelter')?.addEventListener('click', () => showModal('Demo Shelter', 'Email: greenpaws@shelter.org\nPassword: Shelter@123'));
-    $('#demoAdmin')?.addEventListener('click', () => showModal('Demo Admin', 'Email: admin@petportal.org\nPassword: Admin@123'));
+    $('#demoUser')?.addEventListener('click', () => {
+      form.email.value = 'aarav@petportal-mail.com';
+      form.password.value = 'User@1234';
+      showModal('Demo User', 'Credentials auto-filled!');
+    });
 
-    form.addEventListener('submit', (e) => {
+    $('#demoAdmin')?.addEventListener('click', () => {
+      form.email.value = 'admin@petportal.org';
+      form.password.value = 'Admin@123';
+      showModal('Demo Admin', 'Credentials auto-filled!');
+    });
+
+    form?.addEventListener('submit', (e) => {
       e.preventDefault();
       if (!validateForm(form)) return;
 
@@ -1040,6 +1098,38 @@
 
       const target = next ? decodeURIComponent(next) : ROUTES.dashboard;
       setTimeout(() => (location.href = target), 650);
+    });
+
+    registerForm?.addEventListener('submit', (e) => {
+      e.preventDefault();
+      if (!validateForm(registerForm)) return;
+
+      const email = registerForm.email.value.trim().toLowerCase();
+      if (findAccountByEmail(email)) {
+        showModal('Email in use', 'An account with this email already exists. Please login instead.');
+        return;
+      }
+
+      const users = read(LS.USERS, []);
+      const u = {
+        id: uid('user'),
+        role: 'user',
+        name: registerForm.name.value.trim(),
+        email,
+        phone: registerForm.phone.value.trim(),
+        city: registerForm.city.value.trim(),
+        password: registerForm.password.value,
+        blocked: false,
+        createdAt: isoNow()
+      };
+
+      users.push(u);
+      write(LS.USERS, users);
+      setAuth({ id: u.id, role: 'user', name: u.name, email: u.email });
+
+      showModal('Registration complete', 'Your user account is ready. Welcome to PetAdopt!');
+      registerForm.reset();
+      setTimeout(() => (location.href = ROUTES.dashboard), 850);
     });
   }
 
@@ -1771,11 +1861,20 @@
       `).join('');
 
       let currentIndex = 0;
-      const itemWidth = 316; // 300px + 16px gap
-      const visibleItems = Math.floor(carousel.parentElement.offsetWidth / itemWidth);
-      const maxIndex = Math.max(0, pets.length - visibleItems);
+
+      const getCarouselStats = () => {
+        const item = carousel.querySelector('.carousel-item');
+        if (!item) return { itemWidth: 316, maxIndex: 0 };
+        const itemWidth = item.offsetWidth + 16;
+        const containerWidth = carousel.parentElement.offsetWidth;
+        const visibleItems = Math.floor(containerWidth / itemWidth) || 1;
+        const maxIndex = Math.max(0, pets.length - visibleItems);
+        return { itemWidth, maxIndex };
+      };
 
       const updateCarousel = () => {
+        const { itemWidth, maxIndex } = getCarouselStats();
+        if (currentIndex > maxIndex) currentIndex = maxIndex;
         carousel.style.transform = `translateX(-${currentIndex * itemWidth}px)`;
         prevBtn.style.opacity = currentIndex === 0 ? '0.5' : '1';
         nextBtn.style.opacity = currentIndex >= maxIndex ? '0.5' : '1';
@@ -1789,11 +1888,15 @@
       });
 
       nextBtn.addEventListener('click', () => {
+        const { maxIndex } = getCarouselStats();
         if (currentIndex < maxIndex) {
           currentIndex++;
           updateCarousel();
         }
       });
+
+      window.addEventListener('resize', updateCarousel);
+      setTimeout(updateCarousel, 100);
 
       updateCarousel();
     }
@@ -1999,7 +2102,95 @@
     });
   }
 
-  document.addEventListener('DOMContentLoaded', boot);
+  // Initialize Featured Companions Carousel (for home2.html)
+  function initFeaturedCarousel() {
+    const carouselTrack = $('#featuredCarousel');
+    if (!carouselTrack) return;
+
+    // Correctly fetch pets from local storage
+    const pets = read(LS.PETS, []);
+
+    // Define 4 featured pets with custom images
+    const featuredPetIds = ['pet-101', 'pet-102', 'pet-103', 'pet-104'];
+    const customImages = [
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVYmvH2GzqRbPbcJ3tShBQCDGgQvZ700rA4w&s',
+      'https://icdn.isrgrajan.com/in/2021/01/Guinea-Pigs-playing-pet-animals.jpg',
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvmOOBSFn1Y9Z101MXACWdA8QABuaKbG-cew&s',
+      'https://media.hswstatic.com/eyJidWNrZXQiOiJjb250ZW50Lmhzd3N0YXRpYy5jb20iLCJrZXkiOiJnaWZcL2dldHR5aW1hZ2VzLTE0MTc5NTY1MDMuanBnIiwiZWRpdHMiOnsicmVzaXplIjp7IndpZHRoIjo4Mjh9fX0='
+    ];
+
+    // Get the first 4 available pets and update their images
+    const featured = pets
+      .filter(p => p.status === 'available')
+      .slice(0, 4)
+      .map((pet, index) => {
+        // Create a copy of the pet with custom image
+        return {
+          ...pet,
+          images: [customImages[index] || pet.images[0]]
+        };
+      });
+
+    if (featured.length === 0) {
+      carouselTrack.innerHTML = `
+        <div style="text-align:center;padding:40px;width:100%;">
+          <p style="color:var(--muted);font-weight:700;">No pets available at the moment. Check back soon!</p>
+        </div>
+      `;
+      return;
+    }
+
+    carouselTrack.innerHTML = featured.map(pet => petCard(pet)).join('');
+  }
+
+  // Initialize Back to Top Button (Global except Login/Register)
+  function initBackToTop() {
+    const file = currentFile();
+    // Exclude login/register pages
+    if (file === 'login.html' || file === 'register.html' || location.href.includes('login') || location.href.includes('register')) {
+      return;
+    }
+
+    // Check if button already exists
+    if (document.getElementById('backToTop')) return;
+
+    // Create button
+    const btn = document.createElement('button');
+    btn.id = 'backToTop';
+    btn.className = 'back-to-top';
+    btn.setAttribute('aria-label', 'Back to top');
+    btn.innerHTML = '<i class="fa-solid fa-arrow-up"></i>';
+    document.body.appendChild(btn);
+
+    const toggleButton = () => {
+      const scrollInput = window.scrollY || document.documentElement.scrollTop || document.body.scrollTop || 0;
+      if (scrollInput > 100) {
+        btn.classList.add('visible');
+      } else {
+        btn.classList.remove('visible');
+      }
+    };
+
+    window.addEventListener('scroll', toggleButton, { passive: true });
+    document.body.addEventListener('scroll', toggleButton, { passive: true });
+    
+    // Periodically check for scroll state (robustness)
+    setInterval(toggleButton, 1000);
+
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+    
+    // Initial check
+    toggleButton();
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    boot();
+    initFeaturedCarousel();
+    initBackToTop();
+  });
 
   // Minimal public API
   window.PetPortal = {

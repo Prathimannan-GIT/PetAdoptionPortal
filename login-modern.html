@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login - PetAdopt</title>
+  <meta name="description"
+    content="Secure login for users, shelters, and admins. Role-based dashboard simulation using JavaScript." />
+
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+  <link rel="manifest" href="site.webmanifest" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Nunito:wght@700;800;900;1000&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body class="auth-modern">
+  <div class="auth-container">
+    <div class="auth-wrapper">
+      <!-- Left Panel -->
+      <div class="auth-left">
+        <div class="auth-brand-modern">
+          <a href="index.html" class="brand" aria-label="PetAdopt">
+            <span class="brand-badge"><i class="fa-solid fa-paw"></i></span>
+            <span>PetAdopt</span>
+          </a>
+        </div>
+
+        <div class="auth-welcome">
+          <h2>Welcome Back!</h2>
+          <p>Connect with loving pets and find your perfect companion. Your journey starts here.</p>
+        </div>
+
+        <div class="auth-features">
+          <div class="auth-feature">
+            <i class="fa-solid fa-heart"></i>
+            <div class="auth-feature-content">
+              <h3>Find Your Match</h3>
+              <p>Browse hundreds of adorable pets waiting for loving homes</p>
+            </div>
+          </div>
+          <div class="auth-feature">
+            <i class="fa-solid fa-shield-heart"></i>
+            <div class="auth-feature-content">
+              <h3>Safe & Secure</h3>
+              <p>Verified shelters and secure adoption process</p>
+            </div>
+          </div>
+          <div class="auth-feature">
+            <i class="fa-solid fa-users"></i>
+            <div class="auth-feature-content">
+              <h3>Join Community</h3>
+              <p>Connect with pet lovers and adoption experts</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Panel -->
+      <div class="auth-right">
+        <div class="auth-brand-modern in-card-mobile">
+          <a href="index.html" class="brand" aria-label="PetAdopt">
+            <span class="brand-badge"><i class="fa-solid fa-paw"></i></span>
+            <span>PetAdopt</span>
+          </a>
+        </div>
+
+        <div class="auth-header">
+          <h2>Login to Your Account</h2>
+          <p>Choose your preferred method to continue</p>
+        </div>
+
+        <form class="auth-form" id="loginForm" novalidate>
+          <div class="auth-social">
+            <button type="button" class="auth-social-btn google">
+              <i class="fa-brands fa-google"></i>
+              <span>Google</span>
+            </button>
+            <button type="button" class="auth-social-btn facebook">
+              <i class="fa-brands fa-facebook-f"></i>
+              <span>Facebook</span>
+            </button>
+            <button type="button" class="auth-social-btn apple">
+              <i class="fa-brands fa-apple"></i>
+              <span>Apple</span>
+            </button>
+          </div>
+
+          <div class="auth-divider">
+            <span>OR CONTINUE WITH EMAIL</span>
+          </div>
+
+          <div class="auth-field">
+            <label for="loginEmail">Email Address</label>
+            <input id="loginEmail" name="email" type="email" required placeholder="Enter your email" />
+          </div>
+
+          <div class="auth-field">
+            <label for="loginPassword">Password</label>
+            <input id="loginPassword" name="password" type="password" required placeholder="Enter your password" />
+          </div>
+
+          <div class="auth-actions">
+            <a href="register.html" class="btn btn-secondary">
+              <i class="fa-solid fa-user-plus"></i>
+              Register
+            </a>
+            <button type="submit" class="btn btn-primary">
+              <i class="fa-solid fa-right-to-bracket"></i>
+              Login
+            </button>
+          </div>
+        </form>
+
+        <div class="auth-note">
+          <h4><i class="fa-solid fa-flask"></i> Demo Access Available</h4>
+          <p>Try our demo credentials to explore the platform without registration. Click the demo buttons below to test
+            different user roles.</p>
+        </div>
+
+        <div class="auth-actions">
+          <button type="button" class="btn btn-secondary" id="demoUser">
+            <i class="fa-solid fa-user"></i>
+            Demo User
+          </button>
+          <button type="button" class="btn btn-secondary" id="demoShelter">
+            <i class="fa-solid fa-building"></i>
+            Demo Shelter
+          </button>
+          <button type="button" class="btn btn-secondary" id="demoAdmin">
+            <i class="fa-solid fa-shield"></i>
+            Demo Admin
+          </button>
+        </div>
+
+        <div class="auth-footer">
+          <p>Don't have an account? <a href="register.html">Sign up now</a></p>
+          <p style="margin-top: 8px;"><a href="adopt.html">Browse pets without login</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+
+</html>

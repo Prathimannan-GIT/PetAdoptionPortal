@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Updated Auth Design Test</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+    }
+    .test-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    .test-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    .test-header h1 {
+      color: #333;
+      margin-bottom: 10px;
+    }
+    .test-links {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin-bottom: 40px;
+    }
+    .test-link {
+      display: flex;
+      flex-direction: column;
+      padding: 20px;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      text-decoration: none;
+      transition: transform 0.2s;
+    }
+    .test-link:hover {
+      transform: translateY(-2px);
+    }
+    .test-link.primary {
+      background: linear-gradient(135deg, #0ea5e9, #22c55e);
+      color: white;
+    }
+    .test-link.secondary {
+      background: #64748b;
+      color: white;
+    }
+    .test-link h3 {
+      margin: 0 0 8px;
+      font-size: 1.1rem;
+    }
+    .test-link p {
+      margin: 0;
+      font-size: 0.9rem;
+      opacity: 0.8;
+    }
+    .test-info {
+      margin-top: 40px;
+      padding: 20px;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    .design-comparison {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-top: 20px;
+    }
+    .design-card {
+      padding: 15px;
+      border-radius: 8px;
+      border: 1px solid #e5e7eb;
+    }
+    .design-card h4 {
+      margin: 0 0 10px;
+      color: #333;
+    }
+    .design-card ul {
+      margin: 0;
+      padding-left: 20px;
+    }
+    .design-card li {
+      margin-bottom: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="test-container">
+    <div class="test-header">
+      <h1>🐾 Updated Auth Design Test</h1>
+      <p>Test the new login and register pages based on your example design</p>
+    </div>
+    
+    <div class="test-links">
+      <a href="login-new.html" class="test-link primary">
+        <h3><i class="fa-solid fa-right-to-bracket"></i> Updated Login</h3>
+        <p>New split-screen design matching your example</p>
+      </a>
+      <a href="register-new.html" class="test-link primary">
+        <h3><i class="fa-solid fa-user-plus"></i> Updated Register</h3>
+        <p>Modern registration with tabbed interface</p>
+      </a>
+      <a href="login-modern.html" class="test-link secondary">
+        <h3><i class="fa-solid fa-arrow-left"></i> Previous Modern</h3>
+        <p>Earlier modern design version</p>
+      </a>
+      <a href="login.html" class="test-link secondary">
+        <h3><i class="fa-solid fa-arrow-left"></i> Original Login</h3>
+        <p>Original login page design</p>
+      </a>
+    </div>
+    
+    <div class="test-info">
+      <h3>✨ Updated Design Features:</h3>
+      <div class="design-comparison">
+        <div class="design-card">
+          <h4>🎨 Visual Design</h4>
+          <ul>
+            <li>Split-screen layout with gradient left panel</li>
+            <li>Large headline "Your Journey to..."</li>
+            <li>Security badges (Secure Platform, Verified Shelters)</li>
+            <li>Clean white right panel with centered form</li>
+            <li>Professional typography and spacing</li>
+          </ul>
+        </div>
+        <div class="design-card">
+          <h4>🚀 Form Features</h4>
+          <ul>
+            <li>"Welcome Back" header</li>
+            <li>Email and Password fields</li>
+            <li>"Remember me for 30 days" checkbox</li>
+            <li>"Forgot Password?" link</li>
+            <li>Social login (Google & Apple)</li>
+            <li>Demo access section</li>
+            <li>"New patient? Create an account" footer</li>
+          </ul>
+        </div>
+      </div>
+      
+      <h3 style="margin-top: 30px;">📱 Responsive Design:</h3>
+      <ul>
+        <li><strong>Desktop:</strong> Full split-screen experience</li>
+        <li><strong>Tablet:</strong> Single column with centered layout</li>
+        <li><strong>Mobile:</strong> Compact design with vertical stacking</li>
+      </ul>
+      
+      <h3 style="margin-top: 20px;">🔧 Technical Details:</h3>
+      <ul>
+        <li>Preserved original colors (Primary: #0ea5e9, Primary-2: #22c55e)</li>
+        <li>Maintained logo and "Pet Adoption Portal" branding</li>
+        <li>All original functionality intact</li>
+        <li>Clean, semantic HTML structure</li>
+        <li>Enhanced CSS with modern techniques</li>
+      </ul>
+    </div>
+  </div>
+</body>
+</html>

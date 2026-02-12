@@ -1,110 +1,611 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Login - Pet Adoption Portal</title>
-  <meta name="description" content="Secure login for users, shelters, and admins. Role-based dashboard simulation using JavaScript." />
+  <title>Login & Register - PetAdopt</title>
+  <meta name="description"
+    content="Access your PetAdopt account. Find your perfect companion and manage your adoptions." />
 
-  <!-- Favicon for all devices -->
+  <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
-  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png" />
-  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png" />
-  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
-  <link rel="manifest" href="site.webmanifest" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Nunito:wght@700;800;900;1000&display=swap" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap"
+    rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
+
+  <style>
+    :root {
+      --auth-primary: #0ea5e9;
+      --auth-primary-hover: #0284c7;
+      --auth-bg-gradient: linear-gradient(135deg, #f7fbff 0%, #f3fff6 100%);
+      --glass-bg: rgba(255, 255, 255, 0.85);
+      --glass-border: rgba(255, 255, 255, 0.5);
+      --auth-text: #0b1b2c;
+      --auth-text-muted: rgba(11, 27, 44, 0.7);
+    }
+
+    [data-theme="dark"] {
+      --auth-primary: #38bdf8;
+      --auth-primary-hover: #0ea5e9;
+      --auth-bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      --glass-bg: rgba(30, 41, 59, 0.75);
+      --glass-border: rgba(255, 255, 255, 0.1);
+      --auth-text: #f1f5f9;
+      --auth-text-muted: rgba(203, 213, 225, 0.9);
+    }
+
+    body.auth-page {
+      margin: 0;
+      padding: 40px 20px;
+      font-family: 'Inter', sans-serif;
+      background: var(--auth-bg-gradient);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      /* FIXED: Was row by default */
+      align-items: center;
+      justify-content: center;
+      overflow-x: hidden;
+      position: relative;
+      box-sizing: border-box;
+    }
+
+    /* Isolated brand styles to avoid style.css conflicts */
+    .auth-brand {
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      gap: 14px !important;
+      text-decoration: none !important;
+      margin-bottom: 40px !important;
+      animation: fadeInDown 0.8s ease-out;
+    }
+
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .auth-brand-badge {
+      width: 44px;
+      height: 44px;
+      background: linear-gradient(135deg, var(--primary, #0ea5e9), var(--primary-2, #22c55e));
+      color: white;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      box-shadow: 0 8px 20px rgba(14, 165, 233, 0.2);
+    }
+
+    .auth-brand-name {
+      font-size: clamp(1.4rem, 5vw, 1.8rem);
+      font-weight: 1000;
+      letter-spacing: -0.5px;
+      color: var(--text, #0b1b2c);
+      font-family: var(--font-display, 'Nunito', sans-serif);
+    }
+
+    .mobile-brand {
+      display: none !important;
+    }
+
+    @media (max-width: 1024px) {
+      .desktop-brand {
+        display: none !important;
+      }
+
+      .mobile-brand {
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        width: 100% !important;
+        margin: 0 0 24px 0 !important;
+        padding: 0 !important;
+        gap: 12px !important;
+      }
+
+      .mobile-brand .auth-brand-name {
+        font-size: 1.5rem !important;
+      }
+
+      .auth-brand {
+        margin-bottom: 24px !important;
+        gap: 10px !important;
+      }
+
+      body.auth-page {
+        padding: 20px;
+      }
+    }
+
+    .auth-card-container {
+      width: 100%;
+      max-width: 460px;
+      position: relative;
+      z-index: 10;
+      animation: zoomIn 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @keyframes zoomIn {
+      from {
+        opacity: 0;
+        transform: scale(0.95) translateY(10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+    }
+
+    .auth-card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid var(--glass-border);
+      border-radius: 32px;
+      padding: 40px;
+      box-shadow: 0 25px 60px -12px rgba(0, 0, 0, 0.18);
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .auth-tabs {
+      background: rgba(0, 0, 0, 0.05);
+      padding: 6px;
+      border-radius: 20px;
+      display: flex;
+      gap: 4px;
+      margin-bottom: 32px;
+    }
+
+    [data-theme="dark"] .auth-tabs {
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .auth-tab {
+      flex: 1;
+      padding: 12px;
+      border: none;
+      background: transparent;
+      color: var(--auth-text-muted);
+      font-weight: 700;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border-radius: 16px;
+      font-family: inherit;
+    }
+
+    .auth-tab.active {
+      color: white;
+      background: var(--auth-primary);
+      box-shadow: 0 4px 12px rgba(14, 165, 233, 0.3);
+    }
+
+    .auth-view {
+      display: none;
+    }
+
+    .auth-view.active {
+      display: block;
+      animation: slideFade 0.4s ease-out;
+    }
+
+    @keyframes slideFade {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .auth-title {
+      font-size: 1.6rem;
+      font-weight: 1000;
+      margin: 0 0 10px;
+      color: var(--auth-text);
+      text-align: center;
+      font-family: 'Nunito', sans-serif;
+    }
+
+    .auth-subtitle {
+      font-size: 0.95rem;
+      color: var(--auth-text-muted);
+      margin: 0 0 30px;
+      text-align: center;
+      line-height: 1.5;
+    }
+
+    .demo-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .demo-btn {
+      padding: 12px;
+      background: rgba(14, 165, 233, 0.08);
+      border: 1px solid rgba(14, 165, 233, 0.15);
+      border-radius: 14px;
+      color: var(--auth-primary);
+      font-size: 0.85rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+      font-family: inherit;
+    }
+
+    .demo-btn:hover {
+      background: var(--auth-primary);
+      color: white;
+      transform: translateY(-2px);
+    }
+
+    .auth-divider {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin: 24px 0;
+      color: var(--auth-text-muted);
+      font-size: 0.75rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+    }
+
+    .auth-divider::before,
+    .auth-divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+      opacity: 0.5;
+    }
+
+    .form-field {
+      margin-bottom: 22px;
+    }
+
+    .form-field label {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--auth-text);
+      padding-left: 4px;
+    }
+
+    .input-control {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .input-control i {
+      position: absolute;
+      left: 18px;
+      color: var(--auth-text-muted);
+      font-size: 1rem;
+      transition: color 0.3s ease;
+    }
+
+    .input-control input {
+      width: 100%;
+      padding: 14px 18px 14px 50px;
+      background: rgba(0, 0, 0, 0.03);
+      border: 2px solid transparent;
+      border-radius: 18px;
+      font-family: inherit;
+      font-size: 0.95rem;
+      color: var(--auth-text);
+      transition: all 0.3s ease;
+      box-sizing: border-box;
+    }
+
+    [data-theme="dark"] .input-control input {
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .input-control input:focus {
+      outline: none;
+      background: white;
+      border-color: var(--auth-primary);
+      box-shadow: 0 0 0 4px rgba(14, 165, 233, 0.1);
+    }
+
+    [data-theme="dark"] .input-control input:focus {
+      background: #1e293b;
+    }
+
+    .input-control input:focus+i {
+      color: var(--auth-primary);
+    }
+
+    .submit-btn {
+      width: 100%;
+      padding: 16px;
+      background: var(--auth-primary);
+      color: white;
+      border: none;
+      border-radius: 18px;
+      font-size: 1.05rem;
+      font-weight: 800;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 10px;
+      box-shadow: 0 10px 20px rgba(14, 165, 233, 0.25);
+      font-family: inherit;
+    }
+
+    .submit-btn:hover {
+      background: var(--auth-primary-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 15px 30px rgba(14, 165, 233, 0.35);
+    }
+
+    .auth-footer {
+      margin-top: 32px;
+      text-align: center;
+    }
+
+    .auth-footer a {
+      color: var(--auth-primary);
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.95rem;
+      transition: all 0.2s ease;
+    }
+
+    .auth-footer a:hover {
+      opacity: 0.8;
+      text-decoration: underline;
+    }
+
+    .auth-checkbox {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 24px;
+      cursor: pointer;
+      user-select: none;
+      padding-left: 4px;
+    }
+
+    .auth-checkbox input {
+      width: 20px;
+      height: 20px;
+      accent-color: var(--auth-primary);
+      cursor: pointer;
+    }
+
+    .auth-checkbox label {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--auth-text-muted);
+      cursor: pointer;
+    }
+
+    .auth-checkbox label a {
+      color: var(--auth-primary);
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    /* Isolated grid for register */
+    .register-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    /* Fixed paw background to be very subtle */
+    .paw-bg {
+      position: fixed;
+      inset: 0;
+      opacity: 0.03;
+      pointer-events: none;
+      z-index: 1;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cpath d='M30.3 35.8c-2.4-1.2-5.3-2.1-7.8-1.5-2.6.5-4.6 2.5-5.3 5-1.1 3.5.5 8.1 3.9 10 2.2 1.2 5 1.4 7.4.9s4.8-2 6.1-4c1.3-2 1.6-4.6 1.1-6.9-.5-1.4-2.8-2.1-5.4-3.5zm39.4 0c2.4-1.2 5.3-2.1 7.8-1.5 2.6.5 4.6 2.5-5.3 5 1.1 3.5-.5 8.1-3.9 10-2.2 1.2-5 1.4-7.4.9s-4.8-2-6.1-4c-1.3-2-1.6-4.6-1.1-6.9.5-1.4 2.8-2.1 5.4-3.5zM40.5 20.8c.1-3-.6-6.1-2.4-8.5-1.8-2.3-4.7-3.8-7.6-3.8-4 0-8.2 2.8-9.4 6.7-1.1 3.9.5 8.2 3.8 10.7 2.3 1.8 5.6 2.4 8.5 1.8s5.5-2.4 6.6-5.2c.5-1.1.5-2 .5-2.7v-2.0001zm19 0c-.1-3 .6-6.1 2.4-8.5 1.8-2.3 4.7-3.8 7.6-3.8 4 0 8.2 2.8 9.4 6.7 1.1 3.9-.5 8.2-3.8 10.7-2.3 1.8-5.6 2.4-8.5 1.8s-5.5-2.4-6.6-5.2c-.5-1.1-.5-2-.5-2.7v-2.0001zM49.2 46c-7.9 0-14.8.8-19.1 8s-3.7 18 1.6 24.6c5.3 6.6 13.9 9.3 22.3 8.1 4.2-.6 8.3-2.2 11.6-4.8s5.8-6.1 7.2-10c1.4-3.9 1.6-8.2.3-12.2s-4-7.6-7.8-9.8c-4.4-2.6-10.1-4.1-16.1-3.9z' fill='%230ea5e9'/%3E%3C/svg%3E");
+    }
+
+    @media (max-width: 500px) {
+      .auth-card {
+        padding: 32px 20px;
+      }
+
+      .register-row {
+        grid-template-columns: 1fr;
+        gap: 0;
+      }
+    }
+  </style>
 </head>
-<body class="login-page">
-  <main class="main">
-    <div class="container">
-      <section class="section">
-        <div class="section-header">
-          <div class="login-brand">
-            <a href="index.html" class="brand" aria-label="Pet Adoption Portal">
-              <span class="brand-badge"><i class="fa-solid fa-paw"></i></span>
-              <span>Pet Adoption Portal</span>
-            </a>
-          </div>
-          <h1 class="section-title">Login</h1>
-          <p class="section-subtitle">Access your role-based dashboard (User / Shelter / Admin). No backend — simulated securely via localStorage.</p>
+
+<body class="auth-page">
+  <div class="paw-bg"></div>
+
+  <div class="auth-card-container">
+    <!-- Brand outside for desktop -->
+    <a href="index.html" class="auth-brand desktop-brand">
+      <div class="auth-brand-badge"><i class="fa-solid fa-paw"></i></div>
+      <div class="auth-brand-name">PetAdopt</div>
+    </a>
+
+    <main class="auth-card">
+      <!-- Brand inside for mobile/tablet -->
+      <a href="index.html" class="auth-brand mobile-brand">
+        <div class="auth-brand-badge"><i class="fa-solid fa-paw"></i></div>
+        <div class="auth-brand-name">PetAdopt</div>
+      </a>
+
+      <div class="auth-tabs">
+        <button class="auth-tab active" id="tabLoginBtn">Login</button>
+        <button class="auth-tab" id="tabRegisterBtn">Register</button>
+      </div>
+
+      <!-- Login Section -->
+      <section id="loginView" class="auth-view active">
+        <h2 class="auth-title">Welcome Back</h2>
+        <p class="auth-subtitle">Log in to manage your adoptions or explore new pets waiting for a home.</p>
+
+        <div class="demo-grid">
+          <button class="demo-btn" type="button" id="demoUser">
+            <i class="fa-solid fa-user"></i> Demo User
+          </button>
+          <button class="demo-btn" type="button" id="demoAdmin">
+            <i class="fa-solid fa-shield"></i> Demo Admin
+          </button>
         </div>
 
-        <div class="grid grid-2">
-          <div class="card card-pad">
-            <span class="badge"><i class="fa-solid fa-right-to-bracket"></i> Sign in</span>
-            <h2 style="margin:10px 0 6px;font-family:var(--font-display);font-weight:1000;">Welcome back</h2>
-            <p style="margin:0;color:var(--muted);font-weight:750;">Enter your email and password. Password rules apply for registered accounts.</p>
+        <div class="auth-divider">Or Email Account</div>
 
-            <div style="height:14px;"></div>
-
-            <!-- Social Login Buttons -->
-            <div class="social-login">
-              <button class="btn btn-social btn-google" type="button">
-                <i class="fa-brands fa-google"></i> Continue with Google
-              </button>
-              <button class="btn btn-social btn-facebook" type="button">
-                <i class="fa-brands fa-facebook-f"></i> Continue with Facebook
-              </button>
-              <button class="btn btn-social btn-apple" type="button">
-                <i class="fa-brands fa-apple"></i> Continue with Apple
-              </button>
-            </div>
-
-            <div class="divider">
-              <span>OR</span>
-            </div>
-
-            <form class="form" id="loginForm" novalidate>
-              <div class="field">
-                <label for="loginEmail">Email *</label>
-                <input id="loginEmail" name="email" type="email" required placeholder="you@example.com" />
-              </div>
-
-              <div class="field">
-                <label for="loginPassword">Password *</label>
-                <input id="loginPassword" name="password" type="password" required placeholder="Your password" />
-                <p class="helper">Password must match your registration. Demo passwords are provided for testing.</p>
-              </div>
-
-              <div class="button-group">
-                <a class="btn btn-secondary" href="register.html"><i class="fa-solid fa-user-plus"></i> Register</a>
-                <button class="btn btn-primary" type="submit"><i class="fa-solid fa-lock"></i> Login</button>
-              </div>
-            </form>
-          </div>
-
-          <div class="card card-pad">
-            <span class="badge"><i class="fa-solid fa-flask"></i> Demo access</span>
-            <h2 style="margin:10px 0 6px;font-family:var(--font-display);font-weight:1000;">Use demo credentials</h2>
-            <p style="margin:0;color:var(--muted);font-weight:750;">Click a demo button to view ready-made credentials.</p>
-
-            <div style="height:14px;"></div>
-
-            <div class="grid" style="gap:12px;">
-              <button class="btn btn-secondary" type="button" id="demoUser"><i class="fa-solid fa-user"></i> Demo User</button>
-              <button class="btn btn-secondary" type="button" id="demoShelter"><i class="fa-solid fa-building"></i> Demo Shelter</button>
-              <button class="btn btn-secondary" type="button" id="demoAdmin"><i class="fa-solid fa-shield"></i> Demo Admin</button>
-            </div>
-
-            <div style="height:16px;"></div>
-
-            <div class="card" style="padding:14px;border-radius:16px;box-shadow:none;">
-              <span class="badge"><i class="fa-solid fa-shield-heart"></i> Safety note</span>
-              <p style="margin:10px 0 0;color:var(--muted);font-weight:750;">This is a frontend-only simulation. In a real production platform, passwords are hashed and sessions are server-managed.</p>
-            </div>
-
-            <div class="button-group">
-              <a class="btn btn-primary" href="adopt.html"><i class="fa-solid fa-paw"></i> Browse Pets</a>
-              <a class="btn btn-secondary" href="contact.html"><i class="fa-solid fa-headset"></i> Support</a>
+        <form id="loginForm" novalidate>
+          <div class="form-field">
+            <label for="loginEmail">Email Address</label>
+            <div class="input-control">
+              <input type="email" id="loginEmail" name="email" required placeholder="name@example.com" />
+              <i class="fa-solid fa-envelope"></i>
             </div>
           </div>
-        </div>
+
+          <div class="form-field">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+              <label for="loginPassword" style="margin-bottom: 0;">Password</label>
+              <a href="#"
+                style="font-size: 0.8rem; color: var(--auth-primary); text-decoration: none; font-weight: 700;">Forgot
+                Password?</a>
+            </div>
+            <div class="input-control">
+              <input type="password" id="loginPassword" name="password" required placeholder="••••••••" />
+              <i class="fa-solid fa-lock"></i>
+            </div>
+          </div>
+
+          <button type="submit" class="submit-btn" style="margin-bottom: 24px;">
+            <span>Secure Login</span>
+            <i class="fa-solid fa-arrow-right-to-bracket"></i>
+          </button>
+
+          <div class="auth-divider">Or Sign in with</div>
+
+          <div style="display: flex; gap: 12px;">
+            <button type="button" class="demo-btn"
+              style="flex: 1; background: #fff; border: 1px solid #e2e8f0; color: #1e293b;">
+              <i class="fa-brands fa-google" style="color: #ea4335;"></i> Google
+            </button>
+            <button type="button" class="demo-btn"
+              style="flex: 1; background: #fff; border: 1px solid #e2e8f0; color: #1e293b;">
+              <i class="fa-brands fa-facebook" style="color: #1877f2;"></i> Facebook
+            </button>
+          </div>
+        </form>
       </section>
-    </div>
-  </main>
+
+      <!-- Register Section -->
+      <section id="registerView" class="auth-view">
+        <h2 class="auth-title">Create Account</h2>
+        <p class="auth-subtitle">Join us to find your perfect companion. It is quick and forever free.</p>
+
+        <form id="registerUserForm" novalidate>
+          <div class="form-field">
+            <label for="userName">Full Name</label>
+            <div class="input-control">
+              <input type="text" id="userName" name="name" required placeholder="John Doe" />
+              <i class="fa-solid fa-user"></i>
+            </div>
+          </div>
+
+          <div class="form-field">
+            <label for="userEmail">Email Address</label>
+            <div class="input-control">
+              <input type="email" id="userEmail" name="email" required placeholder="john@example.com" />
+              <i class="fa-solid fa-envelope"></i>
+            </div>
+          </div>
+
+          <div class="register-row">
+            <div class="form-field">
+              <label for="userCity">City</label>
+              <div class="input-control">
+                <input type="text" id="userCity" name="city" required placeholder="Riverdale" />
+                <i class="fa-solid fa-location-dot"></i>
+              </div>
+            </div>
+            <div class="form-field">
+              <label for="userPhone">Phone</label>
+              <div class="input-control">
+                <input type="tel" id="userPhone" name="phone" required placeholder="+1 (555) 000" />
+                <i class="fa-solid fa-phone"></i>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-field">
+            <label for="userPassword">Password</label>
+            <div class="input-control">
+              <input type="password" id="userPassword" name="password" required placeholder="Minimum 8 characters" />
+              <i class="fa-solid fa-lock"></i>
+            </div>
+          </div>
+
+          <div class="auth-checkbox">
+            <input type="checkbox" id="userTerms" name="agreeTerms" required />
+            <label for="userTerms">I agree to the <a href="terms.html">Terms & Conditions</a></label>
+          </div>
+
+          <button type="submit" class="submit-btn" style="margin-bottom: 24px;">
+            <span>Create Account</span>
+            <i class="fa-solid fa-user-plus"></i>
+          </button>
+
+          <div class="auth-divider">Or Register with</div>
+
+          <div style="display: flex; gap: 12px;">
+            <button type="button" class="demo-btn"
+              style="flex: 1; background: #fff; border: 1px solid #e2e8f0; color: #1e293b;">
+              <i class="fa-brands fa-google" style="color: #ea4335;"></i> Google
+            </button>
+            <button type="button" class="demo-btn"
+              style="flex: 1; background: #fff; border: 1px solid #e2e8f0; color: #1e293b;">
+              <i class="fa-brands fa-facebook" style="color: #1877f2;"></i> Facebook
+            </button>
+          </div>
+        </form>
+      </section>
+
+      <div class="auth-footer">
+        <a href="adopt.html"><i class="fa-solid fa-paw"></i> Find pets without logging in</a>
+      </div>
+    </main>
+  </div>
 
   <script src="script.js"></script>
 </body>
+
 </html>
