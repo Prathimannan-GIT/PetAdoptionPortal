@@ -1,4 +1,44 @@
-﻿/* Pet Adoption Portal - Global Styles */
+﻿/* Center all h1 tags across all pages */
+h1 {
+    text-align: center !important;
+}
+
+/* Center all content in hero sections */
+.hero {
+    text-align: center !important;
+}
+
+.hero .badge,
+.hero p,
+.hero .hero-actions {
+    text-align: center !important;
+    justify-content: center !important;
+}
+
+.hero .hero-actions {
+    display: flex !important;
+    gap: 12px !important;
+}
+
+/* Desktop hero centering for 1024px and above */
+@media (min-width: 1024px) {
+    .hero-inner {
+        display: flex !important;
+        flex-direction: column !important;
+        text-align: center !important;
+        justify-content: center !important;
+        align-items: center !important;
+        grid-template-columns: 1fr !important;
+    }
+    
+    .hero-inner > div {
+        text-align: center !important;
+        max-width: 800px !important;
+        margin: 0 auto !important;
+    }
+}
+
+/* Pet Adoption Portal - Global Styles */
 
 :root {
     --bg-0: #f7fbff;
@@ -2768,7 +2808,7 @@ tr:hover td {
 
 .featured-grid {
     display: grid;
-    grid-template-columns: 2fr 1fr;
+    grid-template-columns: 1.5fr 1fr;
     gap: 32px;
     margin-bottom: 60px;
 }
@@ -2782,7 +2822,7 @@ tr:hover td {
 
 .featured-image {
     position: relative;
-    height: 300px;
+    height: 350px;
     overflow: hidden;
 }
 
@@ -2917,8 +2957,8 @@ tr:hover td {
 }
 
 .featured-post.side .featured-image {
-    width: 120px;
-    height: 120px;
+    width: 160px;
+    height: 160px;
     flex-shrink: 0;
 }
 
@@ -3467,7 +3507,6 @@ tr:hover td {
     }
 
     .pricing-grid,
-    .membership-grid {
         grid-template-columns: 1fr;
     }
 
@@ -3485,7 +3524,7 @@ tr:hover td {
 
     .featured-post.side .featured-image {
         width: 100%;
-        height: 200px;
+        height: 280px;
     }
 
     .blog-grid {
@@ -4999,5 +5038,12 @@ textarea {
 
     .auth-welcome p {
         font-size: 1rem;
+    }
+}
+
+/* Mobile view for 360x800 resolution - Center buttons in about page */
+@media (max-width: 360px) {
+    .about-page .card.card-pad div[style*="display:flex;gap:12px;flex-wrap:wrap;"] {
+        justify-content: center !important;
     }
 }
