@@ -15,199 +15,278 @@
     rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
   <style>
-    .register-brand-mobile {
-      display: none !important;
-      text-decoration: none;
-      color: var(--text);
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
-      margin-bottom: 24px;
+    :root {
+      --auth-primary: #0ea5e9;
+      --auth-primary-hover: #0284c7;
+      --auth-bg-gradient: linear-gradient(135deg, #f7fbff 0%, #f3fff6 100%);
+      --glass-bg: rgba(255, 255, 255, 0.85);
+      --glass-border: rgba(255, 255, 255, 0.5);
+      --auth-text: #0b1b2c;
+      --auth-text-muted: rgba(11, 27, 44, 0.7);
     }
 
-    .register-brand-mobile .auth-brand-badge {
-      width: 44px;
-      height: 44px;
-      background: linear-gradient(135deg, var(--primary), var(--primary-2));
+    [data-theme="dark"] {
+      --auth-primary: #38bdf8;
+      --auth-primary-hover: #0ea5e9;
+      --auth-bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      --glass-bg: rgba(30, 41, 59, 0.75);
+      --glass-border: rgba(255, 255, 255, 0.1);
+      --auth-text: #f1f5f9;
+      --auth-text-muted: rgba(203, 213, 225, 0.9);
+    }
+
+    body.auth-page {
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', sans-serif;
+      background: var(--auth-bg-gradient);
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+      box-sizing: border-box;
+    }
+
+    .register-container {
+      width: 100%;
+      max-width: 440px;
+      margin: 0 auto;
+      z-index: 10;
+      padding: 0;
+      animation: zoomIn 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @keyframes zoomIn {
+      from {
+        opacity: 0;
+        transform: scale(0.95) translateY(10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+    }
+
+    .register-brand-unified {
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      gap: 10px;
+      margin-bottom: 20px;
+      text-decoration: none;
+    }
+
+    .register-brand-unified .auth-brand-badge {
+      width: 38px;
+      height: 38px;
+      background: linear-gradient(135deg, #0ea5e9, #22c55e);
       color: white;
-      border-radius: 12px;
+      border-radius: 10px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.3rem;
+      font-size: 1.2rem;
     }
 
-    .register-brand-mobile .auth-brand-name {
-      font-size: 1.6rem;
+    .register-brand-unified .auth-brand-name {
+      font-size: 1.5rem;
       font-weight: 1000;
-      font-family: var(--font-display);
+      color: var(--auth-text);
+      font-family: 'Nunito', sans-serif;
+    }
+
+    .section-title {
+      font-size: 1.3rem !important;
+      font-weight: 1000 !important;
+      margin-bottom: 2px !important;
+      color: var(--auth-text) !important;
+      text-align: center;
+    }
+
+    .section-subtitle {
+      font-size: 0.8rem !important;
+      margin-bottom: 15px !important;
+      color: var(--auth-text-muted) !important;
+      text-align: center;
+    }
+
+    .card.card-pad {
+      padding: 24px !important;
+      background: var(--glass-bg);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid var(--glass-border);
+      border-radius: 28px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+    }
+
+    .field {
+      margin-bottom: 10px !important;
+    }
+
+    .field label {
+      display: block;
+      margin-bottom: 4px !important;
+      font-size: 0.8rem !important;
+      font-weight: 700;
+      color: var(--auth-text);
+    }
+
+    .field input,
+    .field select {
+      padding: 10px 14px !important;
+      font-size: 0.85rem !important;
+      border-radius: 12px !important;
+      background: rgba(0, 0, 0, 0.03) !important;
+      border: 1px solid transparent !important;
+      width: 100%;
+      box-sizing: border-box;
+      transition: all 0.3s ease;
+    }
+
+    [data-theme="dark"] .field input,
+    [data-theme="dark"] .field select {
+      background: rgba(255, 255, 255, 0.03) !important;
+      color: white;
+    }
+
+    .btn {
+      padding: 10px 16px !important;
+      font-size: 0.85rem !important;
+      border-radius: 12px !important;
+      font-weight: 700;
+    }
+
+    .field-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .helper {
+      font-size: 0.7rem !important;
+      margin-top: 2px !important;
+      color: var(--auth-text-muted);
+    }
+
+    @media (max-height: 850px) {
+      .register-container {
+        transform: scale(0.95);
+        transform-origin: center;
+      }
     }
 
     @media (max-width: 1024px) {
-      .register-brand-mobile {
-        display: flex !important;
+      body.auth-page {
+        overflow-y: auto;
+        height: auto;
+        padding: 20px 0;
       }
 
-      .section-header {
-        margin-top: 20px !important;
+      .grid-2 {
+        grid-template-columns: 1fr;
+      }
+
+      .register-container {
+        transform: none !important;
       }
     }
   </style>
 </head>
 
 <body class="auth-page">
-  <div id="siteHeader"></div>
+  <div class="paw-bg"></div>
 
   <main class="main">
-    <div class="container">
-      <div style="height: 20px;" class="mobile-only"></div>
+    <div class="register-container">
+      <section class="section card card-pad">
+        <!-- Unified Brand inside card area -->
+        <a href="index.html" class="register-brand-unified">
+          <div class="auth-brand-badge"><i class="fa-solid fa-paw"></i></div>
+          <div class="auth-brand-name">PetAdopt</div>
+        </a>
 
-      <!-- Mobile Brand inside card area -->
-      <a href="index.html" class="register-brand-mobile">
-        <div class="auth-brand-badge"><i class="fa-solid fa-paw"></i></div>
-        <div class="auth-brand-name">PetAdopt</div>
-      </a>
-
-      <section class="section">
         <div class="section-header">
           <h1 class="section-title">Register</h1>
-          <p class="section-subtitle">Create a User account to apply for pets, or register a Shelter to manage pet
-            listings and applications.</p>
+          <p class="section-subtitle">Join us to find your perfect companion.</p>
         </div>
 
-        <div class="card card-pad" style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center;">
-          <button class="btn btn-secondary active" type="button" id="tabUser"><i class="fa-solid fa-user"></i> User
-            Registration</button>
-          <button class="btn btn-secondary" type="button" id="tabShelter"><i class="fa-solid fa-building"></i> Shelter
-            Registration</button>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center;">
+          <button class="btn btn-secondary active" type="button" id="tabUser"><i class="fa-solid fa-user"></i>
+            User</button>
+          <button class="btn btn-secondary" type="button" id="tabShelter"><i class="fa-solid fa-building"></i>
+            Shelter</button>
         </div>
 
-        <div style="height:16px;"></div>
-
-        <div class="grid grid-2">
-          <div class="card card-pad">
-            <span class="badge"><i class="fa-solid fa-user-plus"></i> User account</span>
-            <h2 style="margin:10px 0 6px;font-family:var(--font-display);font-weight:1000;">Adopt as a verified user
-            </h2>
-            <p style="margin:0;color:var(--muted);font-weight:750;">Users can browse pets, apply, and track status.
-              Required fields prevent incomplete submissions.</p>
-
-            <div style="height:14px;"></div>
-
+        <div style="margin-top: 15px;">
+          <!-- User Form Area -->
+          <div id="registerUserArea">
+            <h2
+              style="margin:0 0 10px;font-family:var(--font-display);font-weight:1000;font-size:1.1rem;text-align:center;">
+              User Registration</h2>
             <form class="form" id="registerUserForm" novalidate>
-              <div class="grid grid-2">
-                <div class="field">
-                  <label for="userName">Full Name *</label>
-                  <input id="userName" name="name" required placeholder="Your full name" />
-                </div>
-                <div class="field">
-                  <label for="userCity">City *</label>
-                  <input id="userCity" name="city" required placeholder="Your city" />
-                </div>
+              <div class="field-row">
+                <div class="field"><label>Full Name *</label><input name="name" required placeholder="Name" /></div>
+                <div class="field"><label>City *</label><input name="city" required placeholder="City" /></div>
               </div>
-
-              <div class="grid grid-2">
-                <div class="field">
-                  <label for="userEmail">Email *</label>
-                  <input id="userEmail" name="email" type="email" required placeholder="you@example.com" />
-                </div>
-                <div class="field">
-                  <label for="userPhone">Phone *</label>
-                  <input id="userPhone" name="phone" required placeholder="+1 (555) 000-0000" />
-                </div>
+              <div class="field-row">
+                <div class="field"><label>Email *</label><input name="email" type="email" required
+                    placeholder="Email" /></div>
+                <div class="field"><label>Phone *</label><input name="phone" required placeholder="Phone" /></div>
               </div>
-
-              <div class="field">
-                <label for="userPassword">Password *</label>
-                <input id="userPassword" name="password" type="password" required
-                  placeholder="Create a strong password" />
-                <p class="helper">Password must be 8+ chars with upper/lower, number, and symbol.</p>
+              <div class="field-row">
+                <div class="field"><label>Password *</label><input name="password" type="password" required
+                    placeholder="Password" /></div>
+                <div class="field"><label>Confirm *</label><input name="confirmPassword" type="password" required
+                    placeholder="Repeat" /></div>
               </div>
-
-              <div class="field">
-                <label for="userConfirm">Confirm Password *</label>
-                <input id="userConfirm" name="confirmPassword" type="password" required placeholder="Repeat password" />
-              </div>
-
-              <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end;">
+              <div style="display:flex;gap:10px;justify-content:center;margin-top:10px;">
                 <a class="btn btn-secondary" href="login.html"><i class="fa-solid fa-right-to-bracket"></i> Login</a>
-                <button class="btn btn-primary" type="submit"><i class="fa-solid fa-check"></i> Create User</button>
+                <button class="btn btn-primary" type="submit"><i class="fa-solid fa-check"></i> Register User</button>
               </div>
             </form>
           </div>
 
-          <div class="card card-pad">
-            <span class="badge"><i class="fa-solid fa-building"></i> Shelter account</span>
-            <h2 style="margin:10px 0 6px;font-family:var(--font-display);font-weight:1000;">Register a shelter</h2>
-            <p style="margin:0;color:var(--muted);font-weight:750;">Shelter accounts must be approved by an admin before
-              they can login and publish pets.</p>
-
-            <div style="height:14px;"></div>
-
+          <!-- Shelter Form Area -->
+          <div id="registerShelterArea" style="display:none;">
+            <h2
+              style="margin:0 0 10px;font-family:var(--font-display);font-weight:1000;font-size:1.1rem;text-align:center;">
+              Shelter Registration</h2>
             <form class="form" id="registerShelterForm" novalidate>
-              <div class="grid grid-2">
-                <div class="field">
-                  <label for="shelterName">Shelter Name *</label>
-                  <input id="shelterName" name="name" required placeholder="Shelter name" />
-                </div>
-                <div class="field">
-                  <label for="shelterCity">City *</label>
-                  <input id="shelterCity" name="city" required placeholder="City" />
-                </div>
+              <div class="field-row">
+                <div class="field"><label>Shelter Name *</label><input name="name" required placeholder="Name" /></div>
+                <div class="field"><label>City *</label><input name="city" required placeholder="City" /></div>
               </div>
-
-              <div class="grid grid-2">
-                <div class="field">
-                  <label for="shelterEmail">Email *</label>
-                  <input id="shelterEmail" name="email" type="email" required placeholder="shelter@example.com" />
-                </div>
-                <div class="field">
-                  <label for="shelterPhone">Phone *</label>
-                  <input id="shelterPhone" name="phone" required placeholder="+1 (555) 000-0000" />
-                </div>
+              <div class="field-row">
+                <div class="field"><label>Email *</label><input name="email" type="email" required
+                    placeholder="Email" /></div>
+                <div class="field"><label>Phone *</label><input name="phone" required placeholder="Phone" /></div>
               </div>
-
-              <div class="field">
-                <label for="shelterPassword">Password *</label>
-                <input id="shelterPassword" name="password" type="password" required
-                  placeholder="Create a strong password" />
+              <div class="field-row">
+                <div class="field"><label>Password *</label><input name="password" type="password" required
+                    placeholder="Password" /></div>
+                <div class="field"><label>Confirm *</label><input name="confirmPassword" type="password" required
+                    placeholder="Repeat" /></div>
               </div>
-
-              <div class="field">
-                <label for="shelterConfirm">Confirm Password *</label>
-                <input id="shelterConfirm" name="confirmPassword" type="password" required
-                  placeholder="Repeat password" />
-              </div>
-
-              <div class="card" style="padding:14px;border-radius:16px;box-shadow:none;">
-                <span class="badge"><i class="fa-solid fa-circle-check"></i> Approval requirement</span>
-                <p style="margin:10px 0 0;color:var(--muted);font-weight:750;">After submitting, an admin reviews your
-                  shelter registration. Once approved, you can login and manage pets.</p>
-              </div>
-
-              <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end;">
+              <div style="display:flex;gap:10px;justify-content:center;margin-top:10px;">
                 <a class="btn btn-secondary" href="login.html"><i class="fa-solid fa-right-to-bracket"></i> Login</a>
-                <button class="btn btn-primary" type="submit"><i class="fa-solid fa-paper-plane"></i> Submit
-                  Shelter</button>
+                <button class="btn btn-primary" type="submit"><i class="fa-solid fa-paper-plane"></i> Submit</button>
               </div>
             </form>
           </div>
         </div>
 
-        <div style="height:16px;"></div>
-
-        <div class="card card-pad">
-          <span class="badge"><i class="fa-solid fa-lock"></i> Data usage</span>
-          <p style="margin:10px 0 0;color:var(--muted);font-weight:750;">Your information is used only to process
-            adoption applications and ensure safe placements. Read our <a href="privacy.html"
-              style="text-decoration:underline;">Privacy Policy</a> and <a href="terms.html"
-              style="text-decoration:underline;">Terms</a>.</p>
+        <div
+          style="margin-top: 15px; border-top: 1px solid var(--glass-border); padding-top: 10px; font-size: 0.75rem; color: var(--auth-text-muted); text-align: center;">
+          <p style="margin:0;">By registering, you agree to our <a href="privacy.html">Privacy Policy</a>.</p>
         </div>
       </section>
     </div>
   </main>
-
-  <div id="siteFooter"></div>
 
   <script src="script.js"></script>
 </body>

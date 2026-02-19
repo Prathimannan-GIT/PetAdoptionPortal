@@ -492,7 +492,7 @@
 
     const path = currentFile();
     // Hide header and footer on auth pages as per request
-    if (path === ROUTES.login || path === ROUTES.register) {
+    if (path === ROUTES.login || path === ROUTES.register || path === 'register.html') {
       headerHost.innerHTML = '';
       footerHost.innerHTML = '';
       return;
@@ -501,13 +501,13 @@
     const auth = getAuth();
 
     const nav = [
-      { href: ROUTES.home, label: 'Home 1', icon: 'fa-house' },
-      { href: ROUTES.home2, label: 'Home 2', icon: 'fa-star' },
-      { href: ROUTES.adopt, label: 'Adopt', icon: 'fa-paw' },
-      { href: ROUTES.services, label: 'Services', icon: 'fa-heart' },
-      { href: ROUTES.blog, label: 'Blog', icon: 'fa-newspaper' },
-      { href: ROUTES.about, label: 'About', icon: 'fa-info-circle' },
-      { href: ROUTES.contact, label: 'Contact', icon: 'fa-envelope' }
+      { href: ROUTES.home, label: 'Home 1' },
+      { href: ROUTES.home2, label: 'Home 2' },
+      { href: ROUTES.adopt, label: 'Adopt' },
+      { href: ROUTES.services, label: 'Services' },
+      { href: ROUTES.blog, label: 'Blog' },
+      { href: ROUTES.about, label: 'About' },
+      { href: ROUTES.contact, label: 'Contact' }
     ];
 
     const isActive = (href) => path === href.toLowerCase();
@@ -516,53 +516,59 @@
       <header class="site-header">
         <div class="container">
           <div class="navbar">
-            <a class="brand" href="${ROUTES.home}" aria-label="PetAdopt">
-              <span class="brand-badge"><i class="fa-solid fa-paw"></i></span>
-              <span style="font-family: var(--font-display); font-weight: 1000;">PetAdopt</span>
-            </a>
+            <div class="navbar-left">
+              <a class="brand" href="${ROUTES.home}" aria-label="PetAdopt">
+                <span class="brand-badge"><i class="fa-solid fa-paw"></i></span>
+                <span style="font-family: var(--font-display); font-weight: 1000;">PetAdopt</span>
+              </a>
+            </div>
 
-            <nav class="nav-links" id="navLinks" aria-label="Primary">
-              ${nav.map(l => `
-                <a href="${l.href}" class="${isActive(l.href) ? 'active' : ''}">
-                  <i class="fa-solid ${l.icon}"></i> ${l.label}
-                </a>
-              `).join('')}
-              
-              <!-- Mobile-only Auth Section -->
-              <div class="mobile-only-auth" style="margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--border); display: flex; flex-direction: column; gap: 12px;">
-                ${auth ? `
-                  <a href="${ROUTES.dashboard}" class="${isActive(ROUTES.dashboard) ? 'active' : ''}">
-                    <i class="fa-solid fa-gauge"></i> Dashboard
+            <div class="navbar-center">
+              <nav class="nav-links" id="navLinks" aria-label="Primary">
+                ${nav.map(l => `
+                  <a href="${l.href}" class="${isActive(l.href) ? 'active' : ''}">
+                    ${l.label}
                   </a>
-                  <button id="mobileLogoutBtn" class="btn btn-secondary" style="width: 100%; justify-content: center;">
-                    <i class="fa-solid fa-right-from-bracket"></i> Logout
-                  </button>
+                `).join('')}
+                
+                <!-- Mobile-only Auth Section -->
+                <div class="mobile-only-auth" style="margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--border); display: flex; flex-direction: column; gap: 12px;">
+                  ${auth ? `
+                    <a href="${ROUTES.dashboard}" class="${isActive(ROUTES.dashboard) ? 'active' : ''}">
+                      <i class="fa-solid fa-gauge"></i> Dashboard
+                    </a>
+                    <button id="mobileLogoutBtn" class="btn btn-secondary" style="width: 100%; justify-content: center;">
+                      <i class="fa-solid fa-right-from-bracket"></i> Logout
+                    </button>
+                  ` : `
+                    <a href="${ROUTES.login}" class="btn btn-primary" style="width: 100%; justify-content: center;">
+                      <i class="fa-solid fa-user-plus"></i> Join Now
+                    </a>
+                  `}
+                </div>
+              </nav>
+            </div>
+
+            <div class="navbar-right">
+              <div class="nav-actions">
+                ${auth ? `
+                  <span class="badge" title="Logged in">
+                    <i class="fa-solid fa-user"></i>
+                    ${escapeHtml(auth.name || 'Account')}
+                  </span>
+                  <button id="logoutBtn" class="btn btn-secondary btn-sm">Logout</button>
                 ` : `
-                  <a href="${ROUTES.login}" class="btn btn-primary" style="width: 100%; justify-content: center;">
+                  <a href="${ROUTES.login}" class="btn btn-primary">
                     <i class="fa-solid fa-user-plus"></i> Join Now
                   </a>
                 `}
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                  <i class="fa-solid fa-moon"></i>
+                </button>
+                <button class="mobile-toggle" id="mobileToggle" aria-label="Open menu">
+                  <span></span><span></span><span></span>
+                </button>
               </div>
-            </nav>
-
-            <div class="nav-actions">
-              ${auth ? `
-                <span class="badge" title="Logged in">
-                  <i class="fa-solid fa-user"></i>
-                  ${escapeHtml(auth.name || 'Account')}
-                </span>
-                <button id="logoutBtn" class="btn btn-secondary btn-sm">Logout</button>
-              ` : `
-                <a href="${ROUTES.login}" class="btn btn-primary">
-                  <i class="fa-solid fa-user-plus"></i> Join Now
-                </a>
-              `}
-              <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
-                <i class="fa-solid fa-moon"></i>
-              </button>
-              <button class="mobile-toggle" id="mobileToggle" aria-label="Open menu">
-                <span></span><span></span><span></span>
-              </button>
             </div>
           </div>
         </div>
@@ -1141,11 +1147,14 @@
     const tabUser = $('#tabUser');
     const tabShelter = $('#tabShelter');
 
+    const userArea = $('#registerUserArea');
+    const shelterArea = $('#registerShelterArea');
+
     function show(which) {
       tabUser?.classList.toggle('active', which === 'user');
       tabShelter?.classList.toggle('active', which === 'shelter');
-      if (userForm) userForm.style.display = which === 'user' ? '' : 'none';
-      if (shelterForm) shelterForm.style.display = which === 'shelter' ? '' : 'none';
+      if (userArea) userArea.style.display = which === 'user' ? '' : 'none';
+      if (shelterArea) shelterArea.style.display = which === 'shelter' ? '' : 'none';
     }
 
     tabUser?.addEventListener('click', () => show('user'));
@@ -2173,7 +2182,7 @@
 
     window.addEventListener('scroll', toggleButton, { passive: true });
     document.body.addEventListener('scroll', toggleButton, { passive: true });
-    
+
     // Periodically check for scroll state (robustness)
     setInterval(toggleButton, 1000);
 
@@ -2181,7 +2190,7 @@
       e.preventDefault();
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
-    
+
     // Initial check
     toggleButton();
   }
